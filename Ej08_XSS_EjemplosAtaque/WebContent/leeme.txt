@@ -1,0 +1,38 @@
+Este proyecto esta relacionado con el siguiente
+XSS_Cookies_Indeseables que tambien deberemos de tener desplegado
+
+El objetivo de este ejemplo es ver los riegos y lo que nos pueden hacer
+inyectandonos javascript
+Este ejemplo tiene todos los ejemplos del ejemplo 04 para usar la sesión
+de la mejor manera posible. Lo unico diferente para ver los ejemplos
+es que el OyenteContexto esta puesto que 
+scf.setHttpOnly(false);
+Para que la cookie de session pueda ser leida por js
+Tapoco se senean las entradas para poder inyectar js
+
+El ejemplo es parecido al de la inyeccion html (ej06_inyeccionHTML) pero 
+vamos a inyectar js, el punto de entrada es login.html
+
+Tenemos varios script en formularioArticulo.jsp que iremos probando de uno 
+en uno. Ojo cuando copiemos los script en este ejemplo que les suele faltar
+la '<' de la etiqueta script
+
+El primer ejemplo consistiria en logarnos con el usuario a, meter la primera inyeccion
+de js desde el alta de noticias y deslogarnos. Luego vendría el usuario b, se meteria
+en las noticias y ya automaticamente se nos mandaria su cookie. Por lo que el usuario
+'a' a conseguido la id de session del usuario 'b' y podra usarla
+La aplicacion que recibe la cookie es XSS_Cookies_Indeseables qeu simula ser
+un dominio creado por el usuario 'a'
+Para usarla no tendriamos más que ir al entradaConCookieRobada.jsp de dicho proyecto
+
+En la segunda inyeccion seria algo parecido pero esta vez nos descargamos un
+ajax del servidor cookies_indeseables 
+
+En la tercera inyeccion seria para capturar del teclado todo lo que escriba nuestros
+usuarios
+
+La cuarta inyeccion sería para generar un nuevo login para engañar al usuario y que
+nos mande su usuario y su password
+
+La quinta inyeccion es igual pero esta vez nos traemos un html entero del servidor
+falso

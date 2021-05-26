@@ -1,0 +1,10 @@
+Este ejemplo busca automatizar el saneamiento de atributos de una clase 
+cuando creamos un objeto con ayuda de etiquetas
+Puede ser util en aplicaciones donde no vemos los parametros o ni siquiera
+la request o no podamos aplicar filtros de una manera sencilla
+
+Este ejemplo es una replica del anterior pero con anotaciones en la
+clase pelicula que sanearan el codigo
+
+Las anotaciones estan hechas por nosotros y estan en el paquete
+com.curso.xss

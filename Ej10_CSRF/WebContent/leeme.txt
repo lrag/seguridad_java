@@ -1,0 +1,37 @@
+CSRF  Cross-site request forgery o falsificación de petición en sitios cruzados
+
+Es un tipo de exploit malicioso de un sitio web en el que comandos no autorizados 
+son transmitidos por un usuario en el cual el sitio web confía. 
+Esta vulnerabilidad es conocida también por otros nombres como XSRF, 
+enlace hostil, ataque de un click, cabalgamiento de sesión, y ataque automático.
+
+Un ejemplo muy clásico se da cuando un sitio web, llamemoslo "example1.com", posee 
+un sistema de administración de usuarios. En dicho sistema, cuando un administrador 
+se conecta y ejecuta el siguiente REQUEST GET, elimina al usuario de 
+ID: "63": http://example1.com/usuarios/eliminar/63
+
+Una forma de ejecutar la vulnerabilidad CSRF, se daría si otro sitio web, 
+llamemos "example2.com", en su sitio web añade el siguiente código 
+HTML: <img src="http://example1.com/usuarios/eliminar/63">
+
+Cuando el usuario administrador (conectado en example1.com) navegue por este 
+sitio atacante, su navegador web intentará buscar una imagen en la URL y al 
+realizarse el REQUEST GET hacia esa URL eliminará al usuario 63. Si pide
+cookies tambien lo haría, ya que las cookies se mandan automaticamente
+
+Este ejemplo tiene los filtros de session y el de cache
+
+Simula transferencias que hace un cliente a una cuenta, empezamos en login.html
+
+Este ejemplo se base en la problematica de tener varías pestañas abiertas en el 
+navegador cuando hacemos cosas importantes, así mientras tenemos el ejemplo del
+banco abierto (estando logados) tambien abriremos el paginaEnlacesPeliculas.jsp 
+del proyecto Ej08_CSRF_Indeseables y pulsamos el boton 'gana pasta'
+En ese momento se accederia desde esa web al banco y efectuaria una transferencia
+
+El problema reside en que las cookies son compartidas por todas las pestañas
+del navegador y por todas las instancias del navegador (a no ser que sea de incognito)
+
+La manera de solucionar esta problematica es crear un token y pasarselo a la pagina
+buena, de esta manera toda petición que nos hagan tendra que incluir el token
+para darla por valida

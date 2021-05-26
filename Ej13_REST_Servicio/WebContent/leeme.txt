@@ -1,0 +1,55 @@
+los servicios web en java generalmente se hacen con jaxrs o con spring
+Este ejercicio esta hecho con jax-rs (jersey) que es la especificación
+
+Lo que diferencia un servicio rest de otros servicios (soap) es que los mensajes
+van sobre http para intercambiar datos y utiliza los verbos para las diferentes 
+acciones
+
+Otras caracteriscitcas
+Es un protocolo cliente/servidor sin estado: cada mensaje HTTP contiene toda la 
+información necesaria para comprender la petición. Como resultado, ni el 
+cliente ni el servidor necesitan recordar ningún estado de las comunicaciones 
+entre mensajes
+Operaciones bien definidas, que son los verbos http (get,post,put,delete, etc)
+que añaden semantica a la operacion
+
+Una sintaxis universal para identificar los recursos. En un sistema REST, 
+cada recurso es direccionable únicamente a través de su URI.
+
+Un concepto importante en REST es la existencia de recursos 
+(elementos de información), que pueden ser accedidos utilizando un 
+identificador global (un Identificador Uniforme de Recurso o URI)
+Segun la accion que hagamos sobre un recurso, haremos una cosa u otra
+(accion=verbo http)
+
+En este ejemplo la aplicacion cliente va a consumir el servicio rest que basicamente
+hace un CRUD
+
+Como primera prueba podemos ver como accedemos tranquilamente desde el cliente
+al servicio rest(peliculas.jsp del cliente), desplegando los dos en el servidor.
+
+Para securizarla utilizaremos la basic autentication de JEE que esta en 
+el fichero web.xml. la autenticacion basica consiste en que en las cabeceras
+del protocolo http van a venir el usuario y el password, si no existieran
+se devolveria un 403. Debemos descomentar el codigo que hay en el web.xml
+
+Quedaria el tema de los usuarios y es aqui donde la seguridad de jee comienza a
+hacer aguas. Los usuarios estan en este caso en el 
+servers/Tomcat7.0/tomcat-users.xml
+Se tiene que ir a ese archivo para descomentarlos
+
+Para probar esto se puede hacer sin el cliente, poniendo automaticamente
+la url para obtener las peliculas y ver como te piden los datos para entrar el 
+mismo navegador
+Si hiceramos lo mismo desde el cliente, no nos cargaría las peliculas y nos
+pediría la autenticación, si metemos un usuario, entonces nos cargaría las
+peliculas (pero claro, estaría mal)
+Lo que habría que hacer es incluir las credenciales en la cabecera de la petición 
+ajax al servidor, por lo que tendríamos que descomentar ciertas partes del codigo
+(linea 72 peliculas.jsp del cliente). 
+Si hacemos esto, esta vez no nos pediría el login y el password
+
+Luego podemos ver un cliente stand alone tambien en el proyecto del cliente,
+clienteServicioPeliculas.java, que es un cliente hecho con jersey, implementación
+de referencia de jersey. Simplemente le pedimos la lista de peliculas al servidor
+y las mostramos

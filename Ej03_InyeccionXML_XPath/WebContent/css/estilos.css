@@ -1,0 +1,42 @@
+/*Cascade Style Sheet*/
+
+@CHARSET "ISO-8859-1";
+
+body {
+	font-family: Verdana;	
+}
+
+h1 {
+	color: lightGreen;	
+}
+
+table {
+	width: 500px;
+	border: 1px;
+	border-style: solid;	
+}
+
+th {
+	background-color: orange;
+	color: white;
+}
+
+.botonera {
+	width: 500px;
+	border: 1px;
+	border-style: solid;	
+	text-align: center;
+}
+
+.contenedor{
+	text-align: center;	
+}
+
+
+
+
+
+
+
+
+

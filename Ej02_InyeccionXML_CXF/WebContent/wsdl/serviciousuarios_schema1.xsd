@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:tns="http://servicio.modelo.curso.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://servicio.modelo.curso.com/" version="1.0">
+<xs:element name="modificarUsuario" type="tns:modificarUsuario"/>
+<xs:element name="modificarUsuarioResponse" type="tns:modificarUsuarioResponse"/>
+<xs:element name="usuarioDTO" type="tns:UsuarioDTO"/>
+<xs:complexType name="modificarUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:UsuarioDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="UsuarioDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="login" type="xs:string"/>
+      <xs:element minOccurs="0" name="pw" type="xs:string"/>
+      <xs:element minOccurs="0" name="rol" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="modificarUsuarioResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
