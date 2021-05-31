@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,7 @@
 </head>
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" nonce="${nonce}">
 
 let headers = null
 let url = 'http://localhost:8081/Ej14_JWT/servicios/seguro/peliculas';
@@ -146,7 +148,7 @@ function modoSeleccion(){
 
 function salir(){
 	sessionStorage.clear();
-	window.location= "login.html"
+	window.location= "login.jsp"
 }
 
 $(inicializar);
@@ -168,7 +170,7 @@ function inicializar(){
 
     <div class="text-center page-header">
         <h1>
-            GestiÃ³n de Peliculas   
+            Gestión de Peliculas   
         </h1>
     </div>
 
@@ -188,7 +190,7 @@ function inicializar(){
                 
             <div class="form-horizontal" id="formulario">
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="nombre">TÃ­tulo</label>
+                    <label class="control-label col-xs-2" for="nombre">Título</label>
                     <div class="col-xs-8">
                         <input type="text" id="titulo" class="form-control" />
                     </div>
@@ -200,13 +202,13 @@ function inicializar(){
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="password">GÃ©nero</label>
+                    <label class="control-label col-xs-2" for="password">Género</label>
                     <div class="col-xs-8">
                         <input type="text" id="genero" class="form-control" />
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="password">AÃ±o</label>
+                    <label class="control-label col-xs-2" for="password">Año</label>
                     <div class="col-xs-8">
                         <input type="text" id="year" class="form-control" />
                     </div>
@@ -218,10 +220,10 @@ function inicializar(){
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>TÃ­tulo</th>
+                        <th>Título</th>
                         <th>Director</th>
-                        <th>GÃ©nero</th>
-                        <th>AÃ±o</th>
+                        <th>Género</th>
+                        <th>Año</th>
                     </tr>
                 </thead>
                 <tbody id="tablaPeliculas">
@@ -235,3 +237,4 @@ function inicializar(){
 </body>
 </html>
 
+    

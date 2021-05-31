@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 </head>
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" nonce="${nonce}">
 
 function login(){	
 	let parametros = "username="+$("#username").val()+"&password="+$("#password").val()
@@ -31,17 +32,17 @@ function loginExito(authorization){
 	//console.log(authorization)
 	//podemos ver el token en www.jwt.io
 	sessionStorage.setItem("jwt",authorization)
-	window.location = "cliente_js.html"
+	window.location = "peliculas.jsp"
 }
 
 function loginFallo(){
 	$("#mensaje").show()
 }
 
-
 $(inicializar);
 
 function inicializar(){
+	$("#mensaje").hide();
     $("#btnEntrar").click(login);
 }
 
@@ -52,7 +53,7 @@ function inicializar(){
 
     <div class="text-center page-header">
         <h1>
-            Login   
+            ${nonce} - Login   
         </h1>
     </div>
 
@@ -84,9 +85,11 @@ function inicializar(){
 	              <input type="button" value="Entrar" id="btnEntrar"/>
 	            </div>
 	          </div>   
+	          
 	        
-	          <div style="display:none" id="mensaje" class="alert alert-danger">Credenciales incorrectas</div>
-	        	        
+	          <div id="mensaje" class="alert alert-danger">Credenciales incorrectas</div>
+	        	          
+        
 	        </div> <!--formulario-->
 	      </div>
 	    </div>
@@ -98,3 +101,4 @@ function inicializar(){
 </body>
 </html>
 
+    

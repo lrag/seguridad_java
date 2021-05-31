@@ -13,7 +13,7 @@
 <script type="text/javascript" nonce="${nonce}">
 
 function saludar(){
-	alert("Mensaje")
+	alert("Bienvenido a la web")
 }
 
 saludar()
@@ -24,7 +24,7 @@ saludar()
 
 	<h1 align="center">
 		<font color="green">
-			Pagina de inicio. Usuario: ${usuario.nombre}
+			${nonce} -Pagina de inicio. Usuario: ${usuario.nombre}
 		</font>
 	</h1>
 		
@@ -47,10 +47,6 @@ saludar()
 	<p align="center">
 		&lt;script type="application/javascript">alert("HOLA")&lt;/script>
 	</p>
-	
-	<p align="center">
-		&lt;script type="text/javascript" src="http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/keyLogger.js">&lt;/script>
-	</p>	
 	
 	<%
 	String criterio  = (String) request.getAttribute("criterio");

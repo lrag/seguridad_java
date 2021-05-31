@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 //El objetivo de este filtro sería sanear los parametros de entrada
 
-//@WebFilter("/SVPeliculas")
+@WebFilter("/SVPeliculas")
 public class FiltroXSS implements Filter {
 
 	public void init(FilterConfig filterConfig) throws ServletException {

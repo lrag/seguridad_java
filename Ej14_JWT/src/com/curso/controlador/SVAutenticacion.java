@@ -61,7 +61,7 @@ public class SVAutenticacion extends HttpServlet {
 	            String token = Jwts.builder()
 	                .signWith(Keys.hmacShaKeyFor(clave), SignatureAlgorithm.HS512)
 	                .setHeaderParam("typ", "JWT")
-	                .setIssuer("secure-api")
+	                .setIssuer("servicio-peliculas")
 	                .setAudience("secure-app")
 	                .setSubject(usuario.getLogin())
 	                .setExpiration(new Date(System.currentTimeMillis() + 864000000)) //Un día

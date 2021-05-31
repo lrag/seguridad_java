@@ -40,7 +40,5 @@
 
 <role rolename="manager-gui"/>
 <user password="s3cret" roles="manager-gui" username="tomcat"/>
-<user password="aaa" roles="admin" username="aaa"/>
-<user password="bbb" roles="usr" username="bbb"/>
 
 </tomcat-users>

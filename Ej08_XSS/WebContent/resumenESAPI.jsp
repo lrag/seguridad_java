@@ -37,7 +37,7 @@
 			<tr>
 				<td>Nodo de texto en html</td>
 				<td>
-					<b>${textoHtml}</b><!-- Solo admito texto html -->
+					<b>${textoHtml}</b><!-- Solo admito un nodo de texto -->
 				</td>
 			</tr>
 			<tr>

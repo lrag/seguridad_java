@@ -30,6 +30,7 @@ public class SVESAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			//MAL
+			/*
 			String textoHtml    = request.getParameter("textoHtml");
 			String atributo     = request.getParameter("atributo");
 			String css          = request.getParameter("css");
@@ -37,7 +38,6 @@ public class SVESAPI extends HttpServlet {
 			String url          = request.getParameter("url");
 			String javascript   = request.getParameter("javascript");
 			String html         = request.getParameter("html");
-			/*
 			*/
 
 			//Aqui empiezan los encoder, descomentar para aplicar
@@ -46,7 +46,7 @@ public class SVESAPI extends HttpServlet {
 			//por ejemplo en encoderForHTML nos garantiza que vamos a poder poner
 			//ese el codigo devuelto en un html sin que suframos una inyeccion html
 			
-			/*
+			
 			System.out.println("ESAPI");
 			//Los encoders sirven apra sustituir caracteres en su equivalente
 			//Este permite caracteres, letras, etc. Pero si se encuentran
@@ -68,6 +68,7 @@ public class SVESAPI extends HttpServlet {
 			} catch (EncodingException e) {
 				e.printStackTrace();
 			}
+			
 			
 			//El primer paremetro para el contexto de validación que queremos, luego la url
 			//El tercer parametro el tipo que queremos validar, el cuarto la longitud maxima
@@ -107,7 +108,7 @@ public class SVESAPI extends HttpServlet {
 			System.out.println("parametroUrl:\n" + parametroUrl);
 			System.out.println("url:\n" + url);
 			System.out.println("javascript:\n" + javascript);
-			*/
+			
 		
 			HttpSession sesion = request.getSession(true);
 			sesion.setAttribute("textoHtml",textoHtml);

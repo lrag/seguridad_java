@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
 </head>
 
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -35,9 +34,9 @@
 							${n.titulo}
 						</font>
 					</h2>
-					<p style="text-align : justify;">
+					<div style="text-align : justify;">
 						${n.texto}
-					</p>		
+					</div>		
 				</div>
 				
 			</c:forEach>	
@@ -67,7 +66,8 @@
 		            <input type="submit" id="btnInsertar" class="btn btn-primary" value="Enviar"/>
 		        </div>
 			
-				<p style="text-align:justify;width:100%">
+				<div style="text-align:justify;width:100%">
+				
 					&lt;form action="http://www.paginapirataamasnopoder.com">
 						&lt;table border="1" align="center">
 							&lt;tr>
@@ -89,7 +89,8 @@
 							&lt;/tr>	
 						&lt;/table>
 					&lt;/form>
-				</p>
+					
+				</div>
 			
 			</form>
 

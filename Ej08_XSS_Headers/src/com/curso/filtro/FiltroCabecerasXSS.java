@@ -30,7 +30,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebFilter(urlPatterns = "/*" )
+@WebFilter(urlPatterns = "/*" )
 public class FiltroCabecerasXSS implements Filter {
 
     @Override
@@ -52,6 +52,8 @@ public class FiltroCabecerasXSS implements Filter {
         //-frames
         //-css
         //-...
+        //Tambien limita los sitios a los que se pueden envíar peticiones ajax
+        //connect-src
         
         System.out.println("Cabeceras XSS");
         
@@ -68,13 +70,13 @@ public class FiltroCabecerasXSS implements Filter {
 
         
         //Nonces
-        /*
+        
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
         String nonce = randomString(20);
         rq.getSession().setAttribute("nonce", nonce);
         
         response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
-        */
+        
         
         filterChain.doFilter(servletRequest, response);
     }
