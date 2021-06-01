@@ -16,19 +16,18 @@ public class AppInitializer implements WebApplicationInitializer {
 	
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-    	//Referencia al contenedor de Spring
     	WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
-        
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/expedientesx/*");
-
+        
         servletContext.addFilter("springSecurityFilterChain", 
-    		new DelegatingFilterProxy("springSecurityFilterChain"))
-    			.addMappingForUrlPatterns(null, false, "/*");  
-               
+        		new DelegatingFilterProxy("springSecurityFilterChain"))
+        			.addMappingForUrlPatterns(null, false, "/*"); 
+        
     }
+    
 
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();

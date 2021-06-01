@@ -60,7 +60,7 @@ public class FiltroCabecerasXSS implements Filter {
         //response.setHeader("Content-Security-Policy", "default-src 'self';");
         
         //Específicando el src para los js y las imágenes (se supondrían distintos de 'self')
-        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; img-src 'self';");
+        //response.setHeader("Content-Security-Policy", "default-src 'self otro_dominio y_otro'; script-src 'self'; img-src 'self';");
         
         //Específicando más de un origen para javascript
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro y_otro';");
