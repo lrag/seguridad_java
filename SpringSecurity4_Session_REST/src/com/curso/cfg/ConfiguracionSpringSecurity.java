@@ -1,9 +1,6 @@
 package com.curso.cfg;
-import java.util.Properties;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,11 +8,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -35,13 +31,7 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public UserDetailsService userDetailsService(){
-        Properties usuarios = new Properties();
-		usuarios.put("Fernando","$2a$10$SMPYtil7Hs2.cV7nrMjrM.dRAkuoLdYM8NdVrF.GeHfs/MrzcQ/zi,ROLE_AGENTE,enabled");
-		usuarios.put("Mulder"  ,"$2a$10$M2JRRHUHTfv4uMR4NWmCLebk1r9DyWSwCMZmuq4LKbImOkfhGFAIa,ROLE_AGENTE_ESPECIAL,enabled");
-		usuarios.put("Scully"  ,"$2a$10$cbF5xp0grCOGcI6jZvPhA.asgmILATW1hNbM2MEqGJEFnRhhQd3ba,ROLE_AGENTE_ESPECIAL,enabled");
-		usuarios.put("Skinner" ,"$2a$10$ZFtPIULMcxPe3r/5VunbVujMD7Lw8hkqAmJlxmK5Y1TK3L1bf8ULG,ROLE_DIRECTOR,enabled");
-        
-		return new InMemoryUserDetailsManager(usuarios);
+		return new UsuarioDetailsService();
 	}	
 	
 	@Override
@@ -50,18 +40,26 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 		//Necesitamos el CSRF Token
 		//http
 		//	.csrf().disable();
+		
+		http
+			.csrf()
+			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 			
 		http
 			.authorizeRequests()
 			.antMatchers("/css/*").permitAll()
 			.antMatchers("/js/*").permitAll()
 			.antMatchers("/*.html").permitAll()
-			.antMatchers("/*.jsp").permitAll()
 			.antMatchers(HttpMethod.POST, "/servicios/login").permitAll()
+						
+			.antMatchers(HttpMethod.POST, "/servicios/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+			.antMatchers(HttpMethod.PUT, "/servicios/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+			.antMatchers(HttpMethod.DELETE, "/servicios/peliculas/*").hasRole("DIRECTOR")
+						
+			//.antMatchers("/**").authenticated().and() //Esta línea es equivalente a la siguiente
 			.anyRequest().authenticated().and()
 				.addFilter(new SessionAuthenticationFilter(authenticationManager()))
 				.addFilter(new SessionAuthorizationFilter(authenticationManager()));	
-		
 	}
 		
 	

@@ -35,7 +35,7 @@ public class CORSFilter implements Filter {
         //-Peticiones con los métodos:
         //	GET, HEAD y POST
         //-Que incluyan solo los headers:
-        //	User-Agent, Accept, Accept-Language, Content-Language
+        //	User-Agent, Accept, Accept-Language, Content-Language (estas las ponen los navegadores porque les da la gana)
         //  Content-Type
         //-Y además para content type solo con los valores
 	    //  application/x-www-form-urlencoded
@@ -43,7 +43,7 @@ public class CORSFilter implements Filter {
 	    //  text/plain  
         
         // Autorizamos a cualquier dominio a consumir nuestros recursos        
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
+        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*"); //El * es muy peligroso
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST, DELETE");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");

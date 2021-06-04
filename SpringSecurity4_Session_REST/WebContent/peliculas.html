@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +15,14 @@
 let headers = null
 let url = 'http://localhost:8080/SpringSecurity4_Session_REST/servicios/peliculas';
 let peliculaSel;
+let csrfToken;
+
+function getXSRF_TOKEN(){	  
+    var match = document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'));
+    if (match) {
+      csrfToken = match[2];
+    }
+}
 
 function listarPeliculas(){
 	
@@ -89,7 +94,8 @@ function insertarPelicula(){
     });
     
     //$.post
-    $.ajax( { 'url'         : url+"?${_csrf.parameterName}=${_csrf.token}",			  
+    //$.ajax( { 'url'         : url+"?${_csrf.parameterName}=${_csrf.token}",			  
+    $.ajax( { 'url'         : url+"?_csrf="+csrfToken,			  
               'success'     : listarPeliculas,
               'error'       : procesarError,
               'type'        : 'post',
@@ -106,7 +112,7 @@ function modificarPelicula(){
     });
     pelicula.id = peliculaSel.id;
     
-    $.ajax( { 'url'         : url+"/"+peliculaSel.id+"?${_csrf.parameterName}=${_csrf.token}",
+    $.ajax( { 'url'         : url+"/"+peliculaSel.id+"?_csrf="+csrfToken,
               'success'     : listarPeliculas,
               'error'       : procesarError,
               'type'        : 'put',
@@ -116,7 +122,7 @@ function modificarPelicula(){
 }
 
 function borrarPelicula(){
-    $.ajax( { 'url'     : url+"/"+peliculaSel.id+"?${_csrf.parameterName}=${_csrf.token}",
+    $.ajax( { 'url'     : url+"/"+peliculaSel.id+"?_csrf="+csrfToken,
               'success' : listarPeliculas,
               'error'   : procesarError,
               'type'    : 'delete'
@@ -141,7 +147,8 @@ function modoSeleccion(){
 }
 
 function salir(){
-	window.location="login.jsp"
+	//Falta llamar para invalidar la sesi√≥n
+	window.location="login.html"
 }
 
 $(inicializar);
@@ -153,7 +160,8 @@ function inicializar(){
     $("#btnVaciar").click(vaciarFormulario);
     $("#btnSalir").click(salir);
     modoInsercion();
-    listarPeliculas(); 
+    listarPeliculas();
+    getXSRF_TOKEN();
 }
 
 </script>
@@ -163,7 +171,7 @@ function inicializar(){
 
     <div class="text-center page-header">
         <h1>
-            GestiÛn de Peliculas - Spring Security - Rest y HttpSession 
+            Gesti√≥n de Pel√≠culas - Spring Security - Rest y HttpSession 
         </h1>
     </div>
 
@@ -183,7 +191,7 @@ function inicializar(){
                 
             <div class="form-horizontal" id="formulario">
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="nombre">TÌtulo</label>
+                    <label class="control-label col-xs-2" for="nombre">T√≠tulo</label>
                     <div class="col-xs-8">
                         <input type="text" id="titulo" class="form-control" />
                     </div>
@@ -195,13 +203,13 @@ function inicializar(){
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="password">GÈnero</label>
+                    <label class="control-label col-xs-2" for="password">G√©nero</label>
                     <div class="col-xs-8">
                         <input type="text" id="genero" class="form-control" />
                     </div>
                 </div> 
                 <div class="form-group">
-                    <label class="control-label col-xs-2" for="password">AÒo</label>
+                    <label class="control-label col-xs-2" for="password">A√±o</label>
                     <div class="col-xs-8">
                         <input type="text" id="year" class="form-control" />
                     </div>
@@ -213,10 +221,10 @@ function inicializar(){
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>TÌtulo</th>
+                        <th>T√≠tulo</th>
                         <th>Director</th>
-                        <th>GÈnero</th>
-                        <th>AÒo</th>
+                        <th>G√©nero</th>
+                        <th>A√±o</th>
                     </tr>
                 </thead>
                 <tbody id="tablaPeliculas">

@@ -33,7 +33,7 @@ function loginExito(authorization){
 	//console.log(authorization)
 	//podemos ver el token en www.jwt.io
 	sessionStorage.setItem("jwt",authorization)
-	window.location = "peliculas.jsp"
+	//window.location = "peliculas.jsp"
 }
 
 function loginFallo(){

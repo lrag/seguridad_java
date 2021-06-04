@@ -16,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -30,6 +31,13 @@ public class SessionAuthenticationFilter extends UsernamePasswordAuthenticationF
         setFilterProcessesUrl("/servicios/login");
     }
 
+    /*
+    POST /servicios/login
+    CT: application/x-www-form-urlencoded
+    -------------------------------------
+    username=aaa&password=bbb
+    */
+    
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -54,7 +62,8 @@ public class SessionAuthenticationFilter extends UsernamePasswordAuthenticationF
         
         if(request.getSession(false)!=null) {
         	request.getSession().invalidate();
-        }        
+        }   
+        
         request.getSession().setAttribute("authentication", authentication);  
     }
 }

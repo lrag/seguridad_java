@@ -13,7 +13,7 @@
 <script type="text/javascript">
 
 let headers = null
-let url = 'http://localhost:8080/SpringSecurity4_JWT/servicios/peliculas';
+let url = 'http://localhost:8080/SpringSecurity4_JWT_REST/servicios/peliculas';
 let peliculaSel;
 
 function crearHeaders(){
@@ -23,16 +23,14 @@ function crearHeaders(){
 	console.log(headers)
 }
 
-function listarPeliculas(){
-	
+function listarPeliculas(){	
     $.ajax(
     	{ 
     		'url'     : url,
     		'headers' : headers
     	}).
     done( rellenarTablaPeliculas ).
-    fail( procesarError );
-    
+    fail( procesarError );    
 }
 
 function procesarError(error){
@@ -112,7 +110,7 @@ function modificarPelicula(){
     });
     pelicula.id = peliculaSel.id;
     
-    $.ajax( { 'url'         : url,
+    $.ajax( { 'url'         : url+"/"+peliculaSel.id,
      		  'headers'     : headers,
               'success'     : listarPeliculas,
               'error'       : procesarError,

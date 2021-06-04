@@ -36,10 +36,10 @@ public class SVTransferencias extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		/*
-		HttpSession sesion = request.getSession(false);
 		String CSRFTokenFormulario = request.getParameter("CSRFToken");
+		HttpSession sesion = request.getSession(false);
 		String CSRFTokenSesion = (String) sesion.getAttribute("CSRFToken");
 		//Sacamos el token que en
 		System.out.println("CSRFTokenFormulario" + CSRFTokenFormulario);
@@ -53,7 +53,8 @@ public class SVTransferencias extends HttpServlet {
 			response.sendRedirect("../login.html");
 			return;
 		}
-		 */
+		*/
+		 
 			
 		String cuenta = request.getParameter("cuenta");
 		String cantidad = request.getParameter("cantidad");

@@ -22,7 +22,7 @@ public class OyenteSesion implements HttpSessionListener, HttpSessionAttributeLi
 
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		System.out.println(event.getName()+", "+event.getValue());
+		System.out.println("ATRIBUTO AÑADIDO A LA SESION: "+event.getName()+", "+event.getValue());
 		
 	}
 

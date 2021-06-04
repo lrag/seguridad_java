@@ -29,8 +29,8 @@
 
 	<form name="formulario" action="SVTransferencias" method="post">
 		<!-- 
-		<input type="text" name="CSRFToken" value="${CSRFToken}"/>
 		-->
+		<input type="text" name="CSRFToken" value="${CSRFToken}"/>
 
 		<div class="row">
 			

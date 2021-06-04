@@ -32,9 +32,6 @@ public class PeliculasRest {
 	
 	@PostMapping(/*path="peliculas",*/
 				 consumes=MediaType.APPLICATION_JSON_VALUE)
-	//@RequestMapping(path="peliculas",
-	//				method=RequestMethod.POST,
-	//				consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
 
 		gestorPeliculas.insertar(peliculaDto.asPelicula());
@@ -51,28 +48,25 @@ public class PeliculasRest {
 		*/
 	}
 
-	@PutMapping(/*path="peliculas",*/
+	@PutMapping(path="/{id}",
 			    consumes=MediaType.APPLICATION_JSON_VALUE)
-	//@RequestMapping(path="peliculas",
-	//				method=RequestMethod.PUT,
-	//				consumes=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> modificar(@RequestBody PeliculaDto peliculaDto){
+	public ResponseEntity<String> modificar(@RequestBody PeliculaDto peliculaDto, @PathVariable("id") Integer id){
+		
+		peliculaDto.setId(id);
 		try {
 			gestorPeliculas.modificar(peliculaDto.asPelicula());
-			return new ResponseEntity<String>("La pelicula se modific�", HttpStatus.CREATED);
+			return new ResponseEntity<String>("La pelicula se ha modificado", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("Error al insertar:"+e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@DeleteMapping(path="{id}")
-	//@RequestMapping(path="peliculas/{id}",
-	//				method=RequestMethod.DELETE)
-	public ResponseEntity<String> modificar(@PathVariable("id") Integer id){
+	@DeleteMapping(path="/{id}")
+	public ResponseEntity<String> borrar(@PathVariable("id") Integer id){
 		try {
 			gestorPeliculas.borrar(new Pelicula(id));
-			return new ResponseEntity<String>("La pelicula se modific�", HttpStatus.CREATED);
+			return new ResponseEntity<String>("La pelicula ha borrado", HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("Error al insertar:"+e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -81,9 +75,6 @@ public class PeliculasRest {
 	
 	@GetMapping(path="{id}", 
 			    produces=MediaType.APPLICATION_JSON_VALUE)
-	//@RequestMapping(path="peliculas/{id}",
-	//				  method=RequestMethod.GET,
-	//				  produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PeliculaDto> buscar(@PathVariable("id") Integer id){
 		Pelicula p = gestorPeliculas.buscar(id);
 		if(p==null){
@@ -94,23 +85,11 @@ public class PeliculasRest {
 	
 	//get peliculas?director=XXX&genero=YYY
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	//@RequestMapping(path="peliculas",
-	//				  method=RequestMethod.GET,
-	//				  produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<PeliculaDto> listar(/*@RequestParam("director") String director, @RequestParam("genero") String genero*/) throws Exception{
-		/*
-		List<Pelicula> peliculas = gestorPeliculas.listar();
-		List<PeliculaDto> peliculasDto = new ArrayList<>();
-		for(Pelicula p: peliculas) {
-			peliculasDto.add(new PeliculaDto(p));
-		}
-		return peliculasDto;		
-		*/
-		
 		return gestorPeliculas.listar()
 				.stream()
-					.map( p -> new PeliculaDto(p))
-						.collect(Collectors.toList());
+				.map( p -> new PeliculaDto(p))
+				.collect(Collectors.toList());
 	}
 	
 		

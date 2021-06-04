@@ -41,8 +41,8 @@
 		<jstl.version>1.2</jstl.version>
 
 		<!-- Spring -->
-		<spring-framework.version>4.3.30.RELEASE</spring-framework.version>
-		<springsecurity.version>4.1.0.RELEASE</springsecurity.version>
+		<spring-framework.version>5.3.7</spring-framework.version>
+		<springsecurity.version>5.5.0</springsecurity.version>
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>

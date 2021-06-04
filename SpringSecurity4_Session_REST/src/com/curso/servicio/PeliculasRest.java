@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ public class PeliculasRest {
 	@PutMapping(path="/{id}",
 			    consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> modificar(@RequestBody PeliculaDto peliculaDto, @PathVariable("id") Integer id){
+		peliculaDto.setId(id);
 		try {
 			gestorPeliculas.modificar(peliculaDto.asPelicula());
 			return new ResponseEntity<String>("La pelicula se ha modificado", HttpStatus.OK);
@@ -84,21 +86,11 @@ public class PeliculasRest {
 	//get peliculas?director=XXX&genero=YYY
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<PeliculaDto> listar(/*@RequestParam("director") String director, @RequestParam("genero") String genero*/) throws Exception{
-		/*
-		List<Pelicula> peliculas = gestorPeliculas.listar();
-		List<PeliculaDto> peliculasDto = new ArrayList<>();
-		for(Pelicula p: peliculas) {
-			peliculasDto.add(new PeliculaDto(p));
-		}
-		return peliculasDto;		
-		*/
-		
 		return gestorPeliculas.listar()
 				.stream()
 				.map( p -> new PeliculaDto(p))
 				.collect(Collectors.toList());
-	}
-	
+	}	
 		
 	@ExceptionHandler(value= { Exception.class })
 	public ResponseEntity<Object> procesarError(Exception ex, WebRequest request){

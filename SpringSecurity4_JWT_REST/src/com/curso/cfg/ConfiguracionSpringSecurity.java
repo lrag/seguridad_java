@@ -51,7 +51,7 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		//Deshabilitamos csrf porque el document JWT es en si mismo 
+		//Deshabilitamos csrf 
 		http
 			.csrf().disable();
 			
@@ -66,9 +66,6 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 				.addFilter(new JwtAuthorizationFilter(authenticationManager()));	
 		
 	}
-		
-	
-	
 	
 }
 

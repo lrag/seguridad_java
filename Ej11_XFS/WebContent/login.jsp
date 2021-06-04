@@ -61,7 +61,7 @@ function accederIframes(){
 <h2 align="center"><font color="lightGreen">--disable-web-security</font></h2>
 
 <p align="center">
- 	<iframe id="iframe1" src="http://localhost:8080/Ej04_Sesion/login.html"></iframe>
+ 	<iframe id="iframe1" width="500px" src="http://localhost:8080/Ej04_Sesion/login.html"></iframe>
 	<iframe id="iframe2" src="contenido.html"></iframe>
 </p>
 

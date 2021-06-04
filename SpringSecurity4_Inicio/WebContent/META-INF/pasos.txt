@@ -175,6 +175,8 @@ copiar tcserver.keystore al directorio a la configuracion de Tomcat en el worksp
 ############################################################################################################# 
 # 12.    Control de la concurrencia de sesiones
 #############################################################################################################	
+public class AppInitializer implements WebApplicationInitializer {    
+    
     public void onStartup(ServletContext servletContext) throws ServletException {
 		//...
         servletContext.addListener(new HttpSessionEventPublisher());

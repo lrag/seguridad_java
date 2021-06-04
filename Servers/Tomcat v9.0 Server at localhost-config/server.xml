@@ -61,6 +61,11 @@
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
     <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+    
+    
+	<Connector SSLEnabled="true" acceptCount="100" connectionTimeout="20000" executor="tomcatThreadPool" keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore" keystorePass="changeme" maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1" redirectPort="8443" scheme="https" secure="true"/>    
+    
+    
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -149,7 +154,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Ej13_BasicAuth_REST_Cliente" path="/Ej13_BasicAuth_REST_Cliente" reloadable="true" source="org.eclipse.jst.jee.server:Ej13_BasicAuth_REST_Cliente"/><Context docBase="Ej13_BasicAuth_REST_Servicio" path="/Ej13_BasicAuth_REST_Servicio" reloadable="true" source="org.eclipse.jst.jee.server:Ej13_BasicAuth_REST_Servicio"/></Host>
+      <Context docBase="Ej14_JWT_REST_Cliente" path="/Ej14_JWT_REST_Cliente" reloadable="true" source="org.eclipse.jst.jee.server:Ej14_JWT_REST_Cliente"/></Host>
     </Engine>
   </Service>
 </Server>

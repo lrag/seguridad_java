@@ -1,6 +1,7 @@
 package com.curso.cfg;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -26,7 +27,9 @@ public class SessionAuthorizationFilter extends BasicAuthenticationFilter {
     	System.out.println("SessionAuthorizationFilter");
     	Authentication authentication = ((Authentication) request.getSession().getAttribute("authentication"));
         System.out.println(authentication);
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        
         filterChain.doFilter(request, response);
     }
 

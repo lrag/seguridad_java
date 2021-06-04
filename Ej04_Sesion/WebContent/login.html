@@ -5,7 +5,19 @@
 <meta charset="ISO-8859-1">
 	<title>Session</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+	<style id="antiClickjack">body{display:none !important;}</style>
 </head>
+
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+	   //Sabemos que nos estan atacando
+	   //Enviar una peticion ajax a nuestro servidor para avisar
+       top.location = self.location;
+   }
+</script>
 
 <body>
 

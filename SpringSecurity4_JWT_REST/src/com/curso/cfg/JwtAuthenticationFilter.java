@@ -42,8 +42,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                            FilterChain filterChain, Authentication authentication) {
+    protected void successfulAuthentication(HttpServletRequest request, 
+    		                                HttpServletResponse response,
+                                            FilterChain filterChain, 
+                                            Authentication authentication) {
         UserDetails user = ((User) authentication.getPrincipal());
 
         List<String> roles = user.getAuthorities()
@@ -56,10 +58,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder()
             .signWith(Keys.hmacShaKeyFor(clave), SignatureAlgorithm.HS512)
             .setHeaderParam("typ", "JWT")
-            .setIssuer("secure-api")
-            .setAudience("secure-app")
+            .setIssuer("api-peliculas")
+            .setAudience("aplicacion-web")
             .setSubject(user.getUsername())
-            .setExpiration(new Date(System.currentTimeMillis() + 864000000))
+            .setExpiration(new Date(System.currentTimeMillis() + 1_800_000)) //Media horita
             .claim("rol", roles)
             .compact();
 
