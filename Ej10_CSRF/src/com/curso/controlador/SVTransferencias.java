@@ -1,8 +1,6 @@
 package com.curso.controlador;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -30,6 +28,7 @@ public class SVTransferencias extends HttpServlet {
 		String token = UUID.randomUUID().toString();
 		sesion.setAttribute("CSRFToken", token);
 		*/
+		
 		
 		request.getRequestDispatcher("formularioTransferencias.jsp").forward(request,response);
 		

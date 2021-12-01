@@ -39,6 +39,9 @@ public class FiltroCabecerasXSS implements Filter {
 
     	HttpServletResponse response = (HttpServletResponse) servletResponse;    	
         System.out.println("Cabeceras XSS");        
+        //connect-scr y localhost no funciona bien (al menos en el chrome)
+        //PAra que en este ejemplo se acepte hemos añadido el asterisco al final 
+        //COSA QUE ES TERRIBLE
         response.setHeader("Content-Security-Policy", "default-src 'self'; connect-src http://localhost:8080 *;");
         filterChain.doFilter(servletRequest, response);
     }

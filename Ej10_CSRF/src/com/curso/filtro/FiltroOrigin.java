@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/seguro/*")
+//@WebFilter("/seguro/*")
 public class FiltroOrigin implements Filter {
 
     public FiltroOrigin() {
