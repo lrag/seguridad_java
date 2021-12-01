@@ -1,0 +1,14 @@
+Este ejemplo busca ver como nos pueden hacer inyecciones html en
+nuestra página usuarios malintencionados, por ejemplo esto trata
+de que alguien nos meta en nuestra base de datos un formulario
+de user pass a una direccion que queramos
+ y al cargarlo nosotros en la pagina otros usuarios lo verian y podrian
+ meter su user y su password
+ 
+Este tipo de ataques tambien se utilizan para poner otro tipo de elementos
+html en paginas web, como por ejemplo fotos comprometidas en paginas web de 
+hacienda o de bancos
+
+Esta metido bootstrap
+
+15-20 min
