@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+
+<!-- Este script sería para ponerlo en el login de la pagina buena
+	es decir, en el ejemplo04, ya que previne este tipo de vulnerabilidades
+ -->
+<script>
+
+/*
+//Una manera extendida de evitar que nuestra web caiga dentro de un iframe de manera parcial
+//FALLA SI HAN METIDO NUESTRA WEB EN UN DOBLE IFRAME!!!
+if(top.location != self.location) {
+	//Con este codigo consigo eliminar todos los iframes que hay en la
+	//pagina, de hecho recargo la pagina y la url seria ya la url buena
+	//y no la mala
+	top.location = self.location;
+}
+
+//Manera correcta y (supuestamente) infalible
+
+dentro de <head>
+
+<style id="antiClickjack">body{display:none !important;}</style>
+
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+*/
+</script>
+
+</script>
+
+<body>
+
+	Dato:
+	<input type="text" id="dato"/>
+	<input type="hidden" name="csrfToken" value="123456"/>
+
+</body>
+</html>

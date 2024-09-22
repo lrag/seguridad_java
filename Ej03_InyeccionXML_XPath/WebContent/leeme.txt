@@ -1,0 +1,9 @@
+xpath es el lenguaje que permite recorrer y procesar XMLs
+Permite hacer busquedas en el documento xml
+xpath es a xml lo que sql a las bases de datos
+
+En este ejemplo buscamos evitar que nos inyecten codigo xpath
+de la misma manera que nos inyectaban sql en la bbdd
+
+Empezamos por formularioEmpleado.jsp y tenemos 3 ids a buscar
+'111','222' y '333'

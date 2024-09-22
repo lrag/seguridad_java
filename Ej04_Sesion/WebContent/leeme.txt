@@ -1,0 +1,81 @@
+Este ejemplo trata de la gestion de sesiones y sus vulnerabilidades
+
+Para ello hay que tener claro que el protocolo http es
+un protocolo sin estado, esto es, que no hay manera de relacionar
+una peticion con otra, cada peticion es independiente
+
+El protocolo http tiene distintos verbos (get, post, put, delete, etc)
+
+Las sesiones se usan para dar un contexto a las peticiones http, y de 
+alguna manera identificar a los distintos usuarios de nuestra
+aplicación
+
+Se deben explicar los concetos de HTTP y de como funcionan las sessiones
+en java
+
+En este ejemplo tenemos 2 jsps y un login.html de vistas
+2 controladores 2 filtros y un listener
+
+Cuando queremos add atributos a una session esta controlado por un listener
+que esta escuchando dichos eventos
+
+Hay que tener claro tambien los posibles metodos de robo de la session
+sessio hijacking: cuando nos roban la session, varios metodos
+	fuerza bruta-> El usuario malitencionado va probando sessiones
+	sniffing-> Mediante algun programa de captura de trafico de red
+	propagacion de url-> Por ejemplo, si se manda la session por URL y se guarda en el
+						historial
+session fixation: Metodo especial de robo de session, en la que el usuario mal intencinado
+la establece antes por nosotros
+
+Lo primero que vamos a hacer es recrear lo que se llama 'session fixation',
+es decir, que un usuario consiga robarnos la session 'prefijandola' con antelación
+Nos metemos con el usuario A, con lo que se nos creara una session y entraremos
+en inicio
+Luego el usuario A(que es malintencionado) dara para atras en esa página con el
+navegador, sin darle a logout y coge la cookie del navegador(ver enlace)
+https://superuser.com/questions/244062/how-do-i-view-add-or-edit-cookies-in-google-chrome
+(seguir esa guia, pero pulsar f12 en la pantalla de login de esta aplicacion para 
+establecer la cookie para esa aplicacion)
+Luego llega el usuario B y ve el login, se conecta y se mete dentro de la aplicacion
+Ahora la cookie con la session que creo que usuario A esta siendo reutilizada
+por la aplicacion pero ahora la cookie de session tiene al usuario B
+El usuario A tiene una cookie de session con la cuenta del usuario B(Pillado!!)
+podemos observar esto porque al entrar el usuario A se crea una sesion mostrada
+por la consola, y al entrar el usuario B la session sigue siendo la misma que con
+el usuario A como se muestra en la consola de nuevo
+
+Esto se soluciona destruyendo siempre la session existente antes de crear una
+session nueva, ya que así al meterse el usuario B, destruiría la session del
+usuario A, con lo que la cookie con la session que cogio, ya esta invalidada y
+no le sirve
+
+Luego vemos que podemos establecer el tiempo de vida de la session para mayor
+seguridad, y establcemos un javascript para que avise cuando va a expirar,
+podemos hacerlo a nivel programatico (En el SVlogin.java) o a nivel de
+configuración (en el web.xml)
+
+Luego podemos hacer una prueba de que podemos entrar directamente a
+/seguro/inicio.jsp sin necesidad de pasar por login.html
+Podemos ver que en inicio.jsp tenemos un ejemplo comentado en el que comprobamos
+que el usuario se ha registrado, y ese codigo tendríamos que repetirlo en todos
+los jsps o servlets que quisieramos securizar
+Es aqui donde entran los filtros, en este caso el FiltroSeguridad.java
+El objetivo de este Filtro es securizar todas las peticiones y comprobar
+que el usuario a pasado por el login para registrarse, es decir, obtenemos
+una seguridad perimetral
+
+Por ultimo vamos a hacer un ejemplo de los problema de las caches de navegación
+Si un usuario se autentica, luego va a inicio, y de ahí a clientes y por ultimo 
+hace un logout, pareceria todo correcto, pero un usuario podría darle al back
+del navegador y ver todo lo que estuvo haciendo el usuario original y si no hemos
+invalidado la session, la session seguira activa y el usuario podra seguir haciendo
+todo lo que quiera.
+
+Así que primero descomentamos el código que tenemos en el metodo 'logout' del SVLogin
+Para evitar el cacheo del navegador deberemos desactivarlo con el filtroNoCache.java
+Ojo, la manera de funcionar es si el navegador detecta que ha caducado una pagina, la
+pide al servidor de nuevo, por lo que tendremos que tener el filtro FiltroSeguridad
+activo si no queremos que vuelva a entrar
+
+1:45

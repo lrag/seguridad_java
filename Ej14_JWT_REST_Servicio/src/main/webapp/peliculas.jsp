@@ -1,0 +1,235 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" nonce="${nonce}">
+
+let headers = null
+let url = 'http://localhost:8080/Ej14_JWT_REST_Servicio/servicios/seguro/peliculas';
+let peliculaSel;
+
+function crearHeaders(){
+	headers = {
+		Authorization : sessionStorage.getItem("jwt")
+	}
+	console.log(headers)
+}
+
+function listarPeliculas(){	
+    $.ajax(
+    	{ 
+    		'url'     : url,
+    		'headers' : headers
+    	}).
+    done( rellenarTablaPeliculas ).
+    fail( procesarError );    
+}
+
+function procesarError(error){
+    console.log(error);
+}
+
+function rellenarTablaPeliculas(peliculas){
+
+	modoInsercion();
+	vaciarFormulario();
+	
+    $("#tablaPeliculas").html("");
+
+    for(let a=0; a<peliculas.length; a++){
+        let pelicula = peliculas[a];
+        $("<tr>"+
+			  "<td>"+pelicula.titulo+"</td>"+
+			  "<td>"+pelicula.director+"</td>"+
+			  "<td>"+pelicula.genero+"</td>"+
+			  "<td>"+pelicula.year+"</td>"+
+		  "</tr>").
+		click(function(){
+			seleccionarPelicula(pelicula.id); //<--
+        }).
+        appendTo("#tablaPeliculas");    
+    }
+}
+
+function seleccionarPelicula(id){
+    $.ajax( 
+        { 'url' : url+'/'+id,
+          'success' : rellenarFormulario,
+  		  'headers' : headers } );
+    modoSeleccion();
+}
+
+function rellenarFormulario(pelicula){
+	peliculaSel = pelicula;
+	
+    $("#formulario [type=text]").each(
+        function(){
+            this.value = pelicula[this.id];
+        }
+    );
+    //$("#titulo").val(pelicula.titulo);
+    //$("#director").val(pelicula.director);
+    //$("#genero").val(pelicula.genero);
+    //$("#year").val(pelicula.year);
+}
+
+function insertarPelicula(){
+    let pelicula = {};
+    $("#formulario [type=text]").each(function(){
+        pelicula[this.id] = this.value;
+    });
+    
+    //$.post
+    $.ajax( { 'url'         : url,
+			  'headers'     : headers,
+              'success'     : listarPeliculas,
+              'error'       : procesarError,
+              'type'        : 'post',
+              'contentType' : 'application/json; charset=UTF-8',
+              'data'        : JSON.stringify(pelicula)
+            } );
+}
+
+function modificarPelicula(){
+    let pelicula = {};
+    $("#formulario [type=text]").each(function(){
+        pelicula[this.id] = this.value;
+    });
+    pelicula.id = peliculaSel.id;
+    
+    $.ajax( { 'url'         : url+"/"+peliculaSel.id,
+     		  'headers'     : headers,
+              'success'     : listarPeliculas,
+              'error'       : procesarError,
+              'type'        : 'put',
+              'contentType' : 'application/json; charset=UTF-8',
+              'data'        : JSON.stringify(pelicula)
+            } );
+}
+
+function borrarPelicula(){
+    $.ajax( { 'url'     : url+"/"+peliculaSel.id,
+       		  'headers' : headers,
+              'success' : listarPeliculas,
+              'error'   : procesarError,
+              'type'    : 'delete'
+            } );
+}
+
+function vaciarFormulario(){
+    $("#formulario [type=text]").val("");
+    modoInsercion();	
+}
+
+function modoInsercion(){
+    $("#btnInsertar").prop("disabled", false);
+    $("#btnModificar").prop("disabled", true);
+    $("#btnBorrar").prop("disabled", true);
+}
+
+function modoSeleccion(){
+    $("#btnInsertar").prop("disabled", true);
+    $("#btnModificar").prop("disabled", false);
+    $("#btnBorrar").prop("disabled", false);
+}
+
+function salir(){
+	sessionStorage.clear();
+	window.location= "login.jsp"
+}
+
+$(inicializar);
+
+function inicializar(){
+    $("#btnInsertar").click(insertarPelicula);
+    $("#btnModificar").click(modificarPelicula);
+    $("#btnBorrar").click(borrarPelicula);
+    $("#btnVaciar").click(vaciarFormulario);
+    $("#btnSalir").click(salir);
+    modoInsercion();
+    crearHeaders();
+    listarPeliculas(); 
+}
+
+</script>
+
+<body>
+
+    <div class="text-center page-header">
+        <h1>
+            Gestión de Peliculas - MISMO SERVIDOR  
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-0 col-sm-2"></div>
+        <div class="text-center col-xs-12 col-sm-8">
+            <div>
+                <input class="btn btn-primary" type="button" id="btnInsertar"  value="Insertar"/>
+                <input class="btn btn-primary" type="button" id="btnModificar" value="Modificar"/>
+                <input class="btn btn-danger"  type="button" id="btnBorrar"    value="Borrar"/>
+                <input class="btn btn-primary" type="button" id="btnVaciar"    value="Vaciar"/>
+                |
+                <input class="btn btn-primary" type="button" id="btnSalir"    value="Salir"/>
+            </div>
+
+            <p/>
+                
+            <div class="form-horizontal" id="formulario">
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="nombre">Título</label>
+                    <div class="col-xs-8">
+                        <input type="text" id="titulo" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="login">Director</label>
+                    <div class="col-xs-8">
+                        <input type="text" id="director" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="password">Género</label>
+                    <div class="col-xs-8">
+                        <input type="text" id="genero" class="form-control" />
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="password">Año</label>
+                    <div class="col-xs-8">
+                        <input type="text" id="year" class="form-control" />
+                    </div>
+                </div> 
+            </div>
+
+            <p/>
+                
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Director</th>
+                        <th>Género</th>
+                        <th>Año</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaPeliculas">
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-xs-0 col-sm-2"></div>
+    </div>
+
+</body>
+</html>
+
+    

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ServicioUsuariosService" targetNamespace="http://servicio.modelo.curso.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://servicio.modelo.curso.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://servicio.modelo.curso.com/" schemaLocation="serviciousuarios_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="modificarUsuario">
+    <wsdl:part name="parameters" element="tns:modificarUsuario">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificarUsuarioResponse">
+    <wsdl:part name="parameters" element="tns:modificarUsuarioResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServicioUsuarios">
+    <wsdl:operation name="modificarUsuario">
+      <wsdl:input name="modificarUsuario" message="tns:modificarUsuario">
+    </wsdl:input>
+      <wsdl:output name="modificarUsuarioResponse" message="tns:modificarUsuarioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicioUsuariosServiceSoapBinding" type="tns:ServicioUsuarios">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="modificarUsuario">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modificarUsuario">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="modificarUsuarioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioUsuariosService">
+    <wsdl:port name="ServicioUsuariosPort" binding="tns:ServicioUsuariosServiceSoapBinding">
+      <soap:address location="http://localhost:8081/Ej02_InyeccionXML_CXF/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

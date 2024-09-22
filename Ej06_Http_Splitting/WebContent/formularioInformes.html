@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title>Listado de clientes</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<body>
+
+	%0d%0a%0d%0a%3Cscript%3E%3Calert(123)%3C/script%3E<br/><br/> 
+	
+	%0d%0a<br/>
+	%0d%0a<br/>
+	%3Cscript%3E%3Calert(123)%3C/script%3E<br/> 
+
+    <div class="page-header">
+        <h1 class="text-center">Http splitting</h1> 
+    </div>
+    
+	<form name="formulario" action="SVInformes" method="post">
+
+		<input type="hidden" name="accion"/>
+
+	    <div class="row">
+	        <div class="col-xs-2"></div>  
+	        <div class="text-center col-xs-8">  
+				<input type="submit" value="Crear informe" class="btn btn-primary"/>
+	        </div>
+	        <div class="col-xs-2"></div>  
+	    </div>
+
+		</br>
+	
+	    <div class="row">
+	        <div class="col-xs-2"></div>
+	        <div class="col-xs-8 form-horizontal">
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="tipo">Tipo</label>
+	                <div class="col-xs-8">
+	                    <select name="tipo" class="form-control">
+	                    	<option value="">Seleccione...</option>
+	                    	<option value="1">Facturación</option>
+	                    	<option value="2">Clientes</option>
+	                    	<option value="3">Empleados</option>
+	                    </select>
+	                </div>
+	            </div>  
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="inicio">Inicio</label>
+	                <div class="col-xs-8">
+	                    <input type="text" name="inicio" class="form-control" value=""/>
+	                </div>
+	            </div>  
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="genero">Fin</label>
+	                <div class="col-xs-8">
+	                    <input type="text" name="fin" class="form-control" value=""/>
+	                </div>
+	            </div>  
+	            <div class="form-group">
+	                <label class="control-label col-xs-2" for="tipo">Formato</label>
+	                <div class="col-xs-8">
+	                    <select name="formato" class="form-control">
+	                    	<option value="">Seleccione...</option>
+	                    	<option value="text/html">Html</option>
+	                    	<option value="application/msword">Word .doc</option>
+	                    	<option value="application/vnd.ms-excel">Excel .xls</option>
+	                    	<option value="%0d%0a%0d%0a%3Cscript%3E%3Calert(123)%3C/script%3E">CRLF</option>
+	                    </select>
+	                </div>
+	            </div>  
+	        <div class="col-xs-2"></div>        
+	        </div>
+	    </div>
+
+	</form>
+    
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+Ejemplo de XSS (Cross Site Scripting)
+Este ejmplo busca inyectar java script en una pagina web, que es de los 
+ataques más peligrosos que hay
+
+Primero ver los ejemplos de peliculas para inyectar javascript
+luego los de ESAPI para primero inyectar javascript y luego poner los
+encoders
+
+Si el proyecto esta muy avanzado, se pueden utilizar los filtros, para ello
+ver FiltrosXSS, que hacen un saneamiento de los parametros de entrada
+para todas las peticiones hechas por le formularioPeliculas

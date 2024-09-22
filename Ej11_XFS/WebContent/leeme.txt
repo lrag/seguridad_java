@@ -1,0 +1,26 @@
+XFS o Cross Frame Scripting, puede ser complicado que se de, pero no imposible
+
+Para eso necesitamos una pagina que tenga un login.jsp
+como el ejemplo Ej04_Sesion
+
+El objetivo de este ejemplo que un sitio malicioso que quiera captuar un usuario 
+y un password de una pagina buena. La idea sería que el sitio malo se hiciera pasar
+por el bueno, por ejemplo si el sitio buene fuera www.sitiobueno.com, el sitio
+malo sería www.sitiobueno.es.
+
+El sitio malo incluiría en una pagina 2 iframes, uno con el login de la
+pagina buena y otro con su codigo. La trampa esta en que solo se dejaría ver
+el iframe de la pagina buena y el otro iframe estaría oculto, de tal manera que la
+persona pensaría que esta en la pagina buena. Pues bien, el codigo de la página
+mala estaría leyendo los caracteres que esta escribiendo en su momento el 
+usuario en la pagina de login (con un keylogger por ejemplo), el usuario se 
+logaría normalmente y no notaria que le han quitado el user y el pass
+Este ejemplo (Ej11_XFS) sería el sitio malo que incluye el iframe del sitio bueno (Ej04)
+
+Acualmente esta vulnerabilidad esta muy controlada por los navegadores, ya que 
+Un navegador serio no deja inspeccionar componentes dentro de iFrames
+cuyo source se ha obtenido de otro dominio(por medio de js, por ejemplo). 
+Pero siempre cabria la posibilidad de que nos desabiliten esta opción o que nos 
+alteren el navegador sin que nos enteremos
+
+30 min

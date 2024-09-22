@@ -1,0 +1,23 @@
+Este ejemplo esta hecho con un webservice generado con ApacheCXF y con DTO
+
+Este servicio fue generado a partir del com.curos.modelo.servicio
+solo tiene un metodo publicado, y del UsuarioDTO
+
+El wsdl fue generado automaticamente mediante ApacheCXF
+
+El fichero wsdl es una guia para construir los distintos 
+mensajes SOAP entre el cliente y el servidor
+
+Esta aplicación seria la parte servidora, la parte cliente seria
+el Ej02_InyeccionXML_Cliente_CXF (esta parte la tenemos que desplegar
+en el tomcat, la otra no ya que es una aplicación java normal)
+
+El ejemplo sería de como un usuario conociendo debilidades del sistema
+puede cambiar los permisos de algun otro usuario que no puede
+
+Para arreglarlo debemos de validar el mensaje soap cuando nos llegue
+cambiando el fichero WEB-INF/lib/cxf-beans.xml
+Sino lo hacemos la validacion sera superficial, por lo que podran
+inyectarnos xml
+
+0:30

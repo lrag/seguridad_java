@@ -1,0 +1,23 @@
+CRLF Injection / HTTP Response Splitting
+
+Ejemplo como poder inyectar codigo en las cabeceras HTTP
+
+Esta vulnerabilidad ocurre cuando un atacante es capaz de inyectar datos en 
+una petición a un servidor, debido a la falta de filtrado de datos de entrada 
+por parte del mismo. En este caso, la web afectada permite pasar directamente 
+valores a las cabeceras de respuesta (Referer, Set-Cookie..) sin sanearlos.
+Es decir, cada cabecera viene incluido con un salto de linea, si no hay
+salto de linea, pertenece al valor de la cabecera, pero es posible que
+un ataque mal intencionado nos concatenen saltos de linea y retornos de carro
+para crearnos nuevas cabeceras
+Ademas tambien nos permite diversos tipos de ataque como XSS, o injeccion HTTP, etc
+Aun así, todos los navegadores de hoy en día estan prevenidos contra este ataque
+
+Las siglas CRLF vienen de CR (Carriage return o retorno de carro) y de 
+LF (Line Feed o salto de línea).
+
+Undertow es el nuevo contenedor de servlets de jboss y en sus primeras versiones
+no saneaba la entrada cuando le ponias un setHeader, lo cual era vulnerable
+a este ataque
+
+20 min

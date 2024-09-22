@@ -1,0 +1,41 @@
+En este ejemplo vamos a configurar nuestro tomcat para que acepte peticiones
+https
+Además de eso, tenemos un filtro que no nos deja hacer peticiones que no sean
+https para descomentar
+
+Seguridad en el canal de transporte (HTTPS) - Crear conector SSL en Servidor
+Protocolo igual que el HTTP pero que esta totoalmente encriptado, envuelto
+en un mensaje SSL (HTTP + SSL) 2:00
+Este sistema se basa en clave publica (navegadores) y clave privada (servidor)
+que sera generado en base a un certificado
+La primera petición que se haga a la página, el servidor va a mandar la
+clave publica al navegador (que debera ser validada por una CA)
+El primer paso es configurar el servidor para que acepte peticiones https, que
+dependerá del servidor, para tomcat son las que estan abajo y deben de ser copiadas
+en Servers/Tomcat v7.0/server.xml (linea 79)
+
+	<Connector SSLEnabled="true" acceptCount="100" 
+		connectionTimeout="20000" executor="tomcatThreadPool" 
+		keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore" 
+		keystorePass="changeme" 
+		maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1" 
+		redirectPort="8443" scheme="https" secure="true"/>
+
+
+
+El segundo paso sería crear nuestro certificado, en este ejemplo esta creado en
+tcserver.keystore
+Debemos copiarlo y crearlo dentro del workspace en
+Servers/Tomcat v7.0
+Con esto ya estaria, lo unico que nos faltaría sería mandar el certificado
+a una entidad certificadora (CA) para que valide que nuestro certificado
+es de fiar, esto es, cuando un navegador se contecta por https y se le envia 
+la clave publica, este comprueba en una lista de CA que tiene a ver si efectivamente
+la clave es buena y el certificado es de quien dice ser
+Para generar certificados en java:
+ keytool -genkey -alias Key -keystore PrivateKey.store
+Para generar el archivo que tenemos que mandar a la entidad certificadora:
+ keytool -export -alias Key -file certfile.cer -keystore PrivateKey.store
+Esto nos creara el 'certfile.cer' que es el que tenemos que enviar a la CA
+
+		

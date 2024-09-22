@@ -1,0 +1,31 @@
+
+Este ejemplo busca ver como trabajamos con cookies 
+Tendremos dos cookies, una creada por nosotros y otra creada 
+por la session
+
+Vamos a intentar ver como podemos securizar nuestras cookies para evitar
+que sean leidas por javascript, ya que como hemos visto antes y como veremos
+en otros ejemplos, que nos roben o accedan a la cookie de session puede ser
+un problema de seguridad. Esto lo veremos con inyeccion de javascript
+
+Las cookies por defecto solo se mandaran al dominio que los creo, aunque se
+puede establecer ciertas partes del dominio donde se manden como se ve en los
+ejemplos. Además las cookies pueden ser configuradas para que se envien a otras
+paginas (amazon por ejemplo comparte sus cookies)
+
+La cookie de session por defecto no es visible por javascript, pero podemos
+cambiar esa configuración en el servidor donde estemos, en tomcat es
+servers/tomcat v7.0/context.xmls
+y dentro de ese fichero si ponemos la siguiente configuración
+<Context useHttpOnly="false">
+establecemos que la cookie no va a ser usada solamente por el protocolo http
+por lo que SI podra ser usada por javascript
+
+Primero se puede observar como en pagina privada 1 mostramos las cookies leyendolas
+con un jsp, en la pagina privada 2 podemos hacer lo mismo pero leyendolas de javascript
+
+A veces en el ejemplo pueden salir 2 cookies JSESSION, eso es porque una se 
+puede quedar caducada cuando reiniciamos el servidor cambiando las configuraciones
+de las cookies
+
+35-45 min

@@ -1,0 +1,4 @@
+#Configuración para el servidor Tomcat
+server:
+  port: 8090
+

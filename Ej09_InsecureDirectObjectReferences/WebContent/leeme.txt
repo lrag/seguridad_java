@@ -1,0 +1,25 @@
+Esta aplicación lo que busca es no dar visibilidad directa a determinadas
+ID cuyo valor coincida con el de la Base de datos. En su lugar lo que hara
+es mostrar al cliente unos IDs 'inventados' pero que tengan una correspondencia
+con los IDs reales. De esa manera a los clientes mostraremos los ids inventados
+para que no sepan los reales
+
+Como primera prueba podemos hacer que elegimos algun usuario de la lista
+y vemos como en la petición get se ve el identificador. A partir de aquí podemos
+cambiar el id directamente desde la url y así obtener otros usuarios a los que
+no pudimos ver en la tabla (por ejemplo)
+
+Este ejemplo tiene boostrap e hibernate
+
+Despues de la primera prueba y de dar de alta algun usuario, podemos descomentar
+codigo de SVClientes para utilizar una clase que mapee claves indirectas con 
+claves verdaderas. 
+Empezar por la linea 80 que es cuando mapeamos las claves directas e indirectas
+Luego pasar a la linea 49 que es cuando nos llega una seleccion de la vista y
+tenemos que sacar a partir de la clave indirecta la clave directa
+Luego pasar a la linea 122 para cuando queremos modificar o borrar, lo mismo que antes
+lo que nos llega es la clave indirecta y tenemos que sacar la directa
+
+Tambien habria que tocar las lineas 
+57 de listadoClientes.jsp
+42 de formularioClientes.jsp
