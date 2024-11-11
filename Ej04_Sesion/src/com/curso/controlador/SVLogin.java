@@ -69,11 +69,12 @@ public class SVLogin extends HttpServlet {
 
 				//Esto para evitar session hijacking
 				//si no existe no la crea con false, devuelve null
-				
+
 				s = request.getSession(false);
 				if(s != null){
 					s.invalidate();
 				}
+				
 				//Desde JEE 7:
 				/*
 				request.changeSessionId();
@@ -91,9 +92,13 @@ public class SVLogin extends HttpServlet {
 				//mediante javascript (avisoTimeout.jsp)
 				//el intervalo deber�a de ser mas exigente para los roles
 				//m�s comprometidos (administradores, etc)
-				s.setMaxInactiveInterval(120);
-
-				//Guardamos algo en la sesi�n para marcarla para diferenciarla de aquellas sesiones que se
+				/*
+				 */
+				int segundos = 240;
+				s.setMaxInactiveInterval(segundos);
+				s.setAttribute("segundos", segundos);
+				
+				//Guardamos algo en la sesión para diferenciarla de aquellas que se
 				//hayan podido crear de manera autom�tica
 				Usuario usr = new Usuario(
 						rs.getInt("id"),

@@ -79,7 +79,7 @@ public class JAXPServlet extends HttpServlet {
 			DocumentBuilder builder = dbf.newDocumentBuilder();
 			Document doc = builder.parse(new InputSource(new StringReader(xml)));
 			
-			// raíz
+			// raï¿½z
 			Element element = doc.getDocumentElement();
 			NodeList nodes = element.getChildNodes();
 			Cliente cliente = new Cliente();

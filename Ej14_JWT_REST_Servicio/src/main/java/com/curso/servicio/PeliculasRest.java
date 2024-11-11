@@ -33,7 +33,7 @@ public class PeliculasRest {
 				 consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
 		gestorPeliculas.insertar(peliculaDto.asPelicula());
-		return new ResponseEntity<String>("La pelicula se insertó", HttpStatus.CREATED);
+		return new ResponseEntity<String>("La pelicula se insertï¿½", HttpStatus.CREATED);
 	}
 
 	@PutMapping(path="/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +41,7 @@ public class PeliculasRest {
 		try {
 			peliculaDto.setId(id);
 			gestorPeliculas.modificar(peliculaDto.asPelicula());
-			return new ResponseEntity<String>("La pelicula se modificó", HttpStatus.CREATED);
+			return new ResponseEntity<String>("La pelicula se modificï¿½", HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("Error al insertar:"+e.getMessage(), HttpStatus.BAD_REQUEST);

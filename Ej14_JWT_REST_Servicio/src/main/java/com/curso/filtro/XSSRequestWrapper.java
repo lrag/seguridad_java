@@ -87,7 +87,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         //en vez de esta funcion que limpia javascript que hemos probado
         return stripXSS(value);
     }
-
+    
     @Override
     public String getHeader(String name) {
         String value = super.getHeader(name);

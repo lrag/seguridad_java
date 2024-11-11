@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse; 
  
+//Este hay que colocarlo en el ejercicio 4 de sesiones
 //@WebFilter(urlPatterns = "/*") 
 public class XFrameOptionsFilter implements Filter { 
  

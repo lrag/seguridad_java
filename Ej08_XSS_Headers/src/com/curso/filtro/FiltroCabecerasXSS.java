@@ -50,35 +50,33 @@ public class FiltroCabecerasXSS implements Filter {
         //Indicando el src por defecto para:
         //-js
         //-fuentes
-        //-im�genes
+        //-imágenes
         //-frames
         //-css
         //-...
         //response.setHeader("Content-Security-Policy", "default-src 'self';");
         
         //Específicando el src para los js y las imágenes (serían distintos de 'self')
-        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'otro sitio'; img-src 'otro sitio distinto';");
+        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro-sitio'; img-src 'otro-sitio-distinto';");
         
         //Espec�ficando m�s de un origen para javascript (o para cualquier otra cosa)
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro y_otro';");
         
         //Permitiendo js-inline (no puede prevenir el XSS)
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline';");
-
         
         //
-
         
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
         String nonce = randomString(20);
         rq.getSession().setAttribute("nonce", nonce);
 
         response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
-        
-
+                
         filterChain.doFilter(servletRequest, response);
     }
 
+    /**********************************/
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
     
@@ -88,6 +86,7 @@ public class FiltroCabecerasXSS implements Filter {
     		sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
     	return sb.toString();
     }
+    /**********************************/
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

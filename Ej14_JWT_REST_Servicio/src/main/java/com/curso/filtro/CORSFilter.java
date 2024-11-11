@@ -44,9 +44,8 @@ public class CORSFilter implements Filter {
 	    //  application/x-www-form-urlencoded
 	    //  multipart/form-data
 	    //  text/plain  
-        
         //Autorizamos a cualquier dominio a consumir nuestros recursos   
-        //Colocar '*' solo en apis p�blicas 
+        //Colocar '*' solo en apis públicas 
         //respuesta.addHeader("Access-Control-Allow-Origin", "*");
 
         //Si admitimos peticiones de solo un origen lo a�adimos con protocolo://IP:puerto
@@ -59,7 +58,8 @@ public class CORSFilter implements Filter {
 
         List<String> origenesPermitidos = new ArrayList<>();
         origenesPermitidos.add("http://localhost:8081");
-        origenesPermitidos.add("http://www.nosecuantos.es");
+        origenesPermitidos.add("http://www.nosequé.es");
+        origenesPermitidos.add("http://www.nosecuántos.es");
         
         System.out.println(origenesPermitidos.contains(origin));
         if(origenesPermitidos.contains(origin)) {

@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.curso.controlador.CriptografiaUtil;
+import com.curso.util.CriptografiaUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -38,6 +38,7 @@ public class FiltroJWT implements Filter {
 		HttpServletRequest rq = (HttpServletRequest) request;
 		HttpServletResponse rp = (HttpServletResponse) response;
 		
+		//Authorization: Bearer fjhgurugu.dfjgu47de.fjfjhfd834
         String token = rq.getHeader("Authorization");
         
         if (token!=null && token.trim().length()>0) {

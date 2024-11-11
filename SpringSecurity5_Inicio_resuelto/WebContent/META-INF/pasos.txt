@@ -1,0 +1,408 @@
+﻿############################################################################################################# 
+# 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'AppInitializer'
+############################################################################################################# 
+servletContext.addFilter("springSecurityFilterChain", 
+	new DelegatingFilterProxy("springSecurityFilterChain"))
+		.addMappingForUrlPatterns(null, false, "/*");     
+
+############################################################################################################# 
+# 2. Crear una clase para configurar Spring Security
+#############################################################################################################  
+package expedientesx.cfg;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class ConfiguracionSpringSecurity {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.build();
+    }
+}
+
+############################################################################################################# 
+# 3. Añadir la configuración de seguridad con una seguridad mínima 
+############################################################################################################# 
+@Bean
+public UserDetailsService userDetailsService() {
+    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+    manager.createUser(User.withUsername("Fernando").password("{noop}1234").roles("AGENTE").build());
+    manager.createUser(User.withUsername("Mulder").password("{noop}fox").roles("AGENTE_ESPECIAL").build());
+    manager.createUser(User.withUsername("Scully").password("{noop}dana").roles("AGENTE_ESPECIAL").build());
+    manager.createUser(User.withUsername("Skinner").password("{noop}walter").roles("DIRECTOR").build());
+    return manager;
+}	
+
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
+    http
+        .authorizeHttpRequests((authz) -> authz
+            .requestMatchers("/**").hasRole("AGENTE_ESPECIAL")
+        );
+        
+    http.formLogin(Customizer.withDefaults());
+	
+    return http.build();
+}
+  
+############################################################################################################# 
+# 4.  Configurar el login/logout explícitamente
+############################################################################################################# 
+sustituir el bloque anterior por este.
+
+http
+    .authorizeHttpRequests((authz) -> authz
+        .requestMatchers("/**").hasRole("AGENTE_ESPECIAL")
+    );
+
+http.formLogin(form -> form
+	.loginPage("/paginas/nuestro-login.jsp")
+	//.usernameParameter("login")
+	//.passwordParameter("pw")
+	.failureUrl("/paginas/nuestro-login.jsp?login_error"));
+
+http.logout(logout -> logout
+		.logoutSuccessUrl("/paginas/desconectado.jsp"));
+
+http.csrf().disable();
+
+return http.build();			
+
+############################################################################################################# 
+# 4. (cont). Solucionar problemas de acceso a recursos
+############################################################################################################# 
+http
+    .authorizeHttpRequests((authz) -> authz
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")        
+    );
+
+############################################################################################################# 
+# 5.  Logout en index.jsp
+############################################################################################################# 
+	<!-- LOGOUT -->	
+	<p> 
+		Solo los Agentes pueden ver este recurso. Bienvenido <%= request.getUserPrincipal().getName() %> 
+
+		<form action="<c:url value='/logout'/>" method="post">
+			<sec:csrfInput/>
+			<input type="submit" value="Salir"/>
+		</form>
+	</p> 
+	<hr/>
+	<%= request.getUserPrincipal() %> 
+	
+############################################################################################################# 
+# 6.    UserDetailsService
+############################################################################################################# 	
+@Bean
+DataSource dataSource() {
+	return new EmbeddedDatabaseBuilder()
+		.setType(EmbeddedDatabaseType.H2)
+		.addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+		.build();
+}
+
+@Bean
+	public UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
+	String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
+	String authsByUserQuery = "select username, authority from authorities where username = ?";
+	JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+	userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
+	userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
+	  
+	UserDetails usuario1 = User.builder().username("Fernando").password("{noop}1234").roles("AGENTE").build();
+	UserDetails usuario2 = User.builder().username("Mulder").password("{noop}fox").roles("AGENTE_ESPECIAL").build();
+	UserDetails usuario3 = User.builder().username("Scully").password("{noop}dana").roles("AGENTE_ESPECIAL").build();
+	UserDetails usuario4 = User.builder().username("Skinner").password("{noop}walter").roles("DIRECTOR").build();
+	userDetailsManager.createUser(usuario1);
+	userDetailsManager.createUser(usuario2);
+	userDetailsManager.createUser(usuario3);
+	userDetailsManager.createUser(usuario4);
+	  
+	return userDetailsManager;
+}
+		
+
+############################################################################################################# 
+# 7.    Proteger contraseñas de los usuarios encriptándolas
+############################################################################################################# 	
+@Bean
+public PasswordEncoder passwordEncoder(){
+	PasswordEncoder encoder = new BCryptPasswordEncoder();
+	return encoder;
+}	
+
+@Bean
+public UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
+	String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
+	String authsByUserQuery = "select username, authority from authorities where username = ?";
+	JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+	userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
+	userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
+	  
+	UserDetails usuario1 = User.builder().username("Fernando").password(passwordEncoder().encode("1234")).roles("AGENTE").build();
+	UserDetails usuario2 = User.builder().username("Mulder").password(passwordEncoder().encode("fox")).roles("AGENTE_ESPECIAL").build();
+	UserDetails usuario3 = User.builder().username("Scully").password(passwordEncoder().encode("dana")).roles("AGENTE_ESPECIAL").build();
+	UserDetails usuario4 = User.builder().username("Skinner").password(passwordEncoder().encode("walter")).roles("DIRECTOR").build();
+	userDetailsManager.createUser(usuario1);
+	userDetailsManager.createUser(usuario2);
+	userDetailsManager.createUser(usuario3);
+	userDetailsManager.createUser(usuario4);
+	  
+	return userDetailsManager;
+}
+		
+############################################################################################################# 
+# 8.    Añadir funcionalidad "Remember Me"
+#############################################################################################################
+http.rememberMe(rememberMe -> rememberMe
+	.key("estoEsUnSecreto")
+	.tokenValiditySeconds(86400)
+	.rememberMeCookieName("my-remember-me")
+	.rememberMeParameter("remember-me-param")); //remember-me	
+
+############################################################################################################# 
+# 9.    Seguridad en el canal de transporte (HTTPS) - Configurar restricciones y puertos
+#############################################################################################################
+http.requiresChannel(channel -> channel
+	.anyRequest()
+	.requiresSecure()
+);
+
+//Activo por defecto
+http.headers(headers -> headers
+	.httpStrictTransportSecurity(hsts -> hsts
+		.includeSubDomains(true)
+		.preload(true)
+		.maxAgeInSeconds(31536000)
+	)
+);
+	
+############################################################################################################# 
+# 10.    Seguridad en el canal de transporte (HTTPS) - Crear conector SSL en Servidor
+#############################################################################################################	
+server.xml
+
+	<Connector SSLEnabled="true" acceptCount="100" 
+		connectionTimeout="20000" executor="tomcatThreadPool" 
+		keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore" 
+		keystorePass="changeme" 
+		maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1" 
+		redirectPort="8443" scheme="https" secure="true"/>
+	
+copiar tcserver.keystore al directorio a la configuracion de Tomcat en el workspace	
+	
+############################################################################################################# 
+# 11.    Control de la expiración de sesiones
+#############################################################################################################
+http.logout(logout -> logout
+		.logoutSuccessUrl("/paginas/desconectado.jsp")
+		.deleteCookies("JSESSIONID")
+	);
+
+http.sessionManagement(management -> management
+        .invalidSessionUrl("/paginas/sesion-expirada.jsp")
+    );
+		
+############################################################################################################# 
+# 12.    Control de la concurrencia de sesiones
+#############################################################################################################	
+    public void onStartup(ServletContext servletContext) throws ServletException {
+		//...
+        servletContext.addListener(new HttpSessionEventPublisher());
+			
+############################################################################################################# 
+# 12 (Cont).    Control de la concurrencia de sesiones
+#############################################################################################################	
+http.sessionManagement(management -> management
+        .invalidSessionUrl("/paginas/sesion-expirada.jsp")
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(true) //false por defecto
+    );	
+
+############################################################################################################# 
+# 13.    Session fixation
+#############################################################################################################	
+Configurado por defecto.
+
+http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
+		.sessionFixation().migrateSession() //por defecto
+					    //.none()
+		                //.newSession()
+	);
+    
+############################################################################################################# 
+# 14.	Uso de la librería de etiquetas (Spring Security Taglibs)
+#############################################################################################################	  
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+
+Deprecated:	
+<sec:authorize ifAnyGranted="ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR">
+	<a href="<c:url value='/expedientesx/clasificar?id=${expediente.id}'/>">clasificar</a>
+	<a href="<c:url value='/expedientesx/desclasificar?id=${expediente.id}'/>">desclasificar</a>
+</sec:authorize>
+
+############################################################################################################# 
+# 15.	Uso Expresiones SpEL con etiquetas Security Taglib
+#############################################################################################################
+<sec:authorize access="hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')">
+	<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
+	<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
+</sec:authorize>
+
+hasRole([role])
+hasAnyRole([role1,role2])
+permitAll
+denyAll
+isAnonymous()
+isAuthenticated()
+
+
+Invocando muestros propios métodos con SpEL
+
+@ComponentScan(basePackages = { "expedientesx.util" })
+
+@Component
+public class Seguridad {	
+	public boolean getPermiso(){	
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getAuthorities());
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+		return authorities.contains(new SimpleGrantedAuthority("ROLE_AGENTE_ESPECIAL")) 
+			   || authorities.contains(new SimpleGrantedAuthority("ROLE_DIRECTOR"));
+	}		
+}
+
+<sec:authorize access="@seguridad.getPermiso()">
+	<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
+	<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
+</sec:authorize>
+
+############################################################################################################# 
+# 16.	CSRF
+#############################################################################################################
+
+Comentar en ConfiguracionSpringSecurity:
+
+http.csrf().disable();
+
+Añadir un campo oculto para guardar el token en todos los formularios que utilicen el método POST:
+-nuestro-login.jsp
+-listadoExpedientes.jsp
+
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+
+Equivalente con la librería de etiquetas:
+
+<sec:csrfInput />
+
+
+############################################################################################################# 
+# 17.	Seguridad en la invocación de métodos de negocio con anotaciones Spring Security
+#############################################################################################################
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
+public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
+
+//...
+
+http
+	.exceptionHandling()
+	.accessDeniedPage("/paginas/acceso-denegado.jsp");
+	
+############################################################################################################# 
+# 17 (Cont).	Seguridad en la invocación de métodos de negocio con anotaciones Spring Security
+#############################################################################################################	
+@Secured("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
+void clasificar(Expediente expediente);
+
+@Secured("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
+void desclasificar(Expediente expediente);
+
+############################################################################################################# 
+# 18.	Seguridad en la invocación de métodos de negocio con anotaciones JSR-250
+#############################################################################################################
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true)
+	
+############################################################################################################# 
+# 18 (Cont).	Seguridad en la invocación de métodos de negocio con anotaciones JSR-250
+#############################################################################################################
+@RolesAllowed("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
+void desclasificar(Expediente expediente);
+
+############################################################################################################# 
+# 19.	Seguridad en la invocación de métodos de negocio con Expresiones SpEL (Preinvocación)
+#############################################################################################################
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
+	
+############################################################################################################# 
+# 19 (Cont).	Seguridad en la invocación de métodos de negocio con Expresiones SpEL (Preinvocación)
+#############################################################################################################
+@PreAuthorize("hasRole('ROLE_DIRECTOR')")
+void clasificar(Expediente expediente);
+
+@PreAuthorize("hasRole('ROLE_DIRECTOR') or #expediente.investigador == authentication.name")
+void desclasificar(Expediente expediente);
+
+############################################################################################################# 
+# 20.	Seguridad en la invocación de métodos de negocio con Expresiones SpEL (Postinvocación)
+#############################################################################################################	
+@PreAuthorize("hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')")
+@PostAuthorize("hasRole('ROLE_DIRECTOR') or returnObject.investigador == authentication.name")
+Expediente mostrar(Long id);
+	
+############################################################################################################# 
+# 21. Seguridad en la invocación de métodos de negocio con Expresiones SpEL (Filtro de resultados)
+#############################################################################################################	
+@PostFilter("not filterObject.informe.contains(principal.username)")
+List<Expediente> mostrarTodos();
+
+############################################################################################################# 
+# 22. Utilización del sistema de votantes - Explicitar la configuración del espacio de nombres Security
+#############################################################################################################
+@Bean
+public AffirmativeBased accessDecisionManager() {
+    AffirmativeBased affirmativeBased = new AffirmativeBased(
+	Arrays.asList(new RoleVoter(), 
+		      new AuthenticatedVoter(), 
+		      new WebExpressionVoter()));
+    affirmativeBased.setAllowIfAllAbstainDecisions(false);
+    return affirmativeBased;
+}
+
+http
+.authorizeRequests()
+	.accessDecisionManager(accessDecisionManager())
+	.antMatchers("/paginas/*").permitAll()
+	.antMatchers("/css/*").permitAll()
+	.antMatchers("/imagenes/*").permitAll()
+	.antMatchers("/**").access("isAuthenticated()");
+
+
+
+############################################################################################################# 
+# 23.  Utilización del sistema de votantes - Personalizar la configuracion del accessDecisionManager
+#############################################################################################################
+Sustituyendo a la anterior
+
+@Bean
+public UnanimousBased accessDecisionManager() throws Exception {
+	UnanimousBased unanimousBased = new UnanimousBased(
+			Arrays.asList(new AuthenticatedVoter(), 
+					  new WebExpressionVoter(), 
+					  new RoleVoter(),
+					  new HorarioVoter() ) );
+	unanimousBased.setAllowIfAllAbstainDecisions(false);
+	unanimousBased.afterPropertiesSet();
+
+	return unanimousBased;
+}
+    

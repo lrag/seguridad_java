@@ -39,7 +39,7 @@ public class SVPeliculas extends HttpServlet {
 	
 		Integer idPelicula = null;
 		try {
-			idPelicula = new Integer(request.getParameter("idPelicula"));
+			idPelicula = Integer.valueOf(request.getParameter("idPelicula"));
 		} catch (NumberFormatException e) {
 			//No hacemos nada: solo falla cuando estan modificando(no se implemento)
 		}

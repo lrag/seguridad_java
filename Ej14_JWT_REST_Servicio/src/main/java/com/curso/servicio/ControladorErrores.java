@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-//@ControllerAdvice
+@ControllerAdvice
 //@ControllerAdvice(basePackages = "com.curso")
 public class ControladorErrores {
 
@@ -14,7 +14,7 @@ public class ControladorErrores {
 		super();
 	}
 
-	@ExceptionHandler(value={ Exception.class })
+	@ExceptionHandler(value={ Throwable.class })
 	public ResponseEntity<Object> procesarError(Exception ex, WebRequest request){
 		
 		System.out.println("CONTROLADOR ERRORES");

@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class FiltroHttps implements Filter {
 	
 	public void destroy() {
@@ -25,17 +25,18 @@ public class FiltroHttps implements Filter {
 		
 		System.out.println("Filtro HTTPS:" + httpRequest.getRequestURI());
 		
-		if(!httpRequest.isSecure()){
-			
+		httpResponse.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+
+		if(!httpRequest.isSecure()){			
 			//Esto es adecuado para un api rest: la aplicaci�n cliente debe saber que esto es a trav�s de HTTPS
 			//response.getWriter().append("No se admiten peticiones que no sean https");
-			
+			//Esto es adecuado para una aplciación web
 			httpResponse.sendRedirect("Https://"
 									  +httpRequest.getServerName()
 									  +":8443"+httpRequest.getRequestURI());
-	
 			return;
 		}
+		
 		chain.doFilter(request, response);
 	}
 

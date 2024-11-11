@@ -50,6 +50,7 @@ public class SVClientes extends HttpServlet {
 			//Cliente clienteSel = gestorClientes.buscar(Integer.parseInt(request.getParameter("idCliente")));
 
 			//Con AccessRerenceMap
+			
 			IntegerAccessReferenceMap armap = (IntegerAccessReferenceMap) sesion.getAttribute("armap");
 			Integer idCliente = 0;
 			//tenemos que buscar un cliente por id pero lo que nos llega es una clave indirecta
@@ -59,12 +60,14 @@ public class SVClientes extends HttpServlet {
 			} catch (AccessControlException e) {
 				e.printStackTrace();
 			}
+			
+			
 			//ahora que tenemos la clave verdadera podemos pasarsela al negocio
 			Cliente clienteSel = gestorClientes.buscar(idCliente);
 			//rellenamos el cliente seleccionado con la clave indirecta para pasarsela a la pantalla
 			clienteSel.setId(Integer.valueOf(armap.getIndirectReference(idCliente)));
 			
-						
+					
 			request.setAttribute("clienteSel", clienteSel);			
 			siguienteVista = "formularioClientes.jsp";
 		} 	
@@ -78,6 +81,8 @@ public class SVClientes extends HttpServlet {
 			//indirectas, la clave seria la indirecta y el valor la verdadera
 			//Con AccessReferenceMap
 			//AccessReferenceMap armap = new RandomAccessReferenceMap();
+			
+			
 			IntegerAccessReferenceMap armap = new IntegerAccessReferenceMap();
 			for(Cliente c:clientes){
 				//add al mapa la clave verdadera, el generar� automaticamente una clave
@@ -87,7 +92,7 @@ public class SVClientes extends HttpServlet {
 				c.setId(claveIndirecta);
 			}
 			//Guardamos este mapa en la session del usuario
-			sesion.setAttribute("armap", armap);			 
+			sesion.setAttribute("armap", armap);	
 			
 			request.setAttribute("listadoClientes", clientes);
 			
@@ -117,9 +122,11 @@ public class SVClientes extends HttpServlet {
 			//e.printStackTrace();
 		}
 		*/
+		
     	//Fin
 		
 		//Con AccessReferenceMap
+		
 		HttpSession sesion = request.getSession(true);
 		IntegerAccessReferenceMap armap = (IntegerAccessReferenceMap) sesion.getAttribute("armap");
 		Integer id = 0;
@@ -132,9 +139,11 @@ public class SVClientes extends HttpServlet {
 		} catch (AccessControlException e) {
 			e.printStackTrace();
 		} 
+		
+		
    	    
 				
-		//Habr�a que impedir inyecciones (XSS, HTML, etc)
+		//Habría que impedir inyecciones (XSS, HTML, etc)
 		String nombre = request.getParameter("nombre");
 		String direccion = request.getParameter("direccion");
 		String telefono = request.getParameter("telefono");

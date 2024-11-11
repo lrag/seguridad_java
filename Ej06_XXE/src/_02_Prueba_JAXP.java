@@ -13,7 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 
 public class _02_Prueba_JAXP {
-
+	
 	public static void main(String[] args) {
 
 		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +

@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-//Cachearlo todo tiene un precio, y es que el servidor puede recibir m�s
+//No cachearlo todo tiene un precio, y es que el servidor puede recibir m�s
 //peticiones
 //@WebFilter("/seguro/*")
 public class FiltroNoCache implements Filter {
@@ -24,7 +24,7 @@ public class FiltroNoCache implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		System.out.println("Filtro no cach�");
+		System.out.println("Filtro no caché");
 
 		//Add todas estas cabeceras para eviar el cacheo en el navegador
 		//, algunas pueden funcionar, otras no

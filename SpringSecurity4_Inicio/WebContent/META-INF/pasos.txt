@@ -1,5 +1,5 @@
 ﻿############################################################################################################# 
-# 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'com.curso.cfg.AppInitializer'
+# 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'AppInitializer'
 ############################################################################################################# 
 servletContext.addFilter("springSecurityFilterChain", 
 	new DelegatingFilterProxy("springSecurityFilterChain"))
@@ -32,10 +32,10 @@ public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Ex
 
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-	http.authorizeRequests()
-		.antMatchers("/**")
-		.access("hasRole('AGENTE_ESPECIAL')")
-		.and().formLogin();
+	http.authorizeRequests().
+		antMatchers("/**").
+			access("hasRole('AGENTE_ESPECIAL')").
+		and().formLogin();
 }
   
 ############################################################################################################# 
@@ -90,10 +90,10 @@ http
 ############################################################################################################# 	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsManager());
+		auth.userDetailsService(userDetailsService());
 	}	
 	
-	public UserDetailsService userDetailsManager(){
+	public UserDetailsService userDetailsService(){
         Properties usuarios = new Properties();
 		usuarios.put("Fernando","1234,ROLE_AGENTE,enabled");
 		usuarios.put("Mulder"  ,"fox,ROLE_AGENTE_ESPECIAL,enabled");
@@ -103,18 +103,6 @@ http
 		return new InMemoryUserDetailsManager(usuarios);
 	}
 		
-		
-public void configureGlobal(AuthenticationManagerBuilder auth) 
-  throws Exception {
-    auth.jdbcAuthentication()
-      .dataSource(dataSource)
-      .usersByUsernameQuery("select email,password,enabled "
-        + "from bael_users "
-        + "where email = ?")
-      .authoritiesByUsernameQuery("select email,authority "
-        + "from authorities "
-        + "where email = ?");
-}		
 
 ############################################################################################################# 
 # 7.    Proteger contraseñas de los usuarios encriptándolas
@@ -127,10 +115,10 @@ public void configureGlobal(AuthenticationManagerBuilder auth)
 	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth, PasswordEncoder pe) throws Exception {
-		auth.userDetailsService(userDetailsManager()).passwordEncoder(pe);
+		auth.userDetailsService(userDetailsService()).passwordEncoder(pe);
 	}
 	
-	public UserDetailsManager userDetailsManager(){
+	public UserDetailsService userDetailsService(){
         Properties usuarios = new Properties();
 		usuarios.put("Fernando","$2a$10$SMPYtil7Hs2.cV7nrMjrM.dRAkuoLdYM8NdVrF.GeHfs/MrzcQ/zi,ROLE_AGENTE,enabled");
 		usuarios.put("Mulder"  ,"$2a$10$M2JRRHUHTfv4uMR4NWmCLebk1r9DyWSwCMZmuq4LKbImOkfhGFAIa,ROLE_AGENTE_ESPECIAL,enabled");

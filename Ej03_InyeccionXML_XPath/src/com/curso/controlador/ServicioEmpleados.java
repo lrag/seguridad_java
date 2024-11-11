@@ -108,13 +108,14 @@ public class ServicioEmpleados extends HttpServlet {
 			}
 			
 			//Leemos el XML
+			//Aqui falta evitar ataques por XXE (más adelante)
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse( new InputSource(new StringReader(DATASOURCE_XML)));
 			
 			//Con nuestro m�todo podemos evitar la inyeccion...
 			//descomentandolo para validar la entrada del usuario
-			
+				
 			/*
 			if (!checkValueForXpathInjection(idEmpleado)) {
 				System.out.println("Inyección!!!");
@@ -144,14 +145,14 @@ public class ServicioEmpleados extends HttpServlet {
 	        XPathFactory xpathfactory = XPathFactory.newInstance();
 	        XPath xpath = xpathfactory.newXPath();
 	        //Creamos la expresion xpath para buscar en nuestro xml
-	        //String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
+	        String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
 	        	  
 	        ///////////////////////////////////////
 			//Consultas precompiladas con par�metros
 	        //Equivalente a prepare statement en xpath
 	        //no nos podrian inyectar xpath
 	        ///////////////////////////////////////
-	        
+
 			//Esta clase la tenemos que programar nosotros
 	        SimpleVariableResolver variableResolver = new SimpleVariableResolver();
 	        
@@ -162,11 +163,11 @@ public class ServicioEmpleados extends HttpServlet {
 			//Establecemos el resolver a nuestro objeto xpath
 	        xpath.setXPathVariableResolver(variableResolver);
 	        
+	        
 	        //Ahora la expresi�n xml cambiara, siendo '$id' la clave
 	        //metida como 'QName("id")'
-			String xPathExpression = "/empleados/empleado[@id=$id]";
+			//String xPathExpression = "/empleados/empleado[@id=$id]";
 	        //Fin consultas con par�metros
-	        
 	        
 	        //compilamos la expresion
 	        XPathExpression expr = xpath.compile(xPathExpression);

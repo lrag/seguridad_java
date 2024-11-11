@@ -13,9 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.curso.modelo.entidad.Usuario;
+import com.curso.util.CriptografiaUtil;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -55,11 +55,10 @@ public class SVAutenticacion extends HttpServlet {
 						rs.getInt("id"),
 						rs.getString("nombre"),
 						rs.getString("login"),
-						rs.getString("pw"),
+						null, //rs.getString("pw"),
 						rs.getString("rol")
 					); 
 				byte[] clave = CriptografiaUtil.clave.getBytes();
-
 	            String token = Jwts.builder()
 	                .signWith(Keys.hmacShaKeyFor(clave), SignatureAlgorithm.HS512)
 	                .setHeaderParam("typ", "JWT")

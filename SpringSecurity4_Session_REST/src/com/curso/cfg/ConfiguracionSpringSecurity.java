@@ -50,13 +50,13 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers("/css/*").permitAll()
 			.antMatchers("/js/*").permitAll()
 			.antMatchers("/*.html").permitAll()
-			.antMatchers(HttpMethod.POST, "/servicios/login").permitAll()
-						
+			.antMatchers(HttpMethod.POST, "/servicios/login").permitAll()						
+			.antMatchers(HttpMethod.GET, "/servicios/peliculas").isAuthenticated()
 			.antMatchers(HttpMethod.POST, "/servicios/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 			.antMatchers(HttpMethod.PUT, "/servicios/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 			.antMatchers(HttpMethod.DELETE, "/servicios/peliculas/*").hasRole("DIRECTOR")
 						
-			//.antMatchers("/**").authenticated().and() //Esta línea es equivalente a la siguiente
+			//.antMatchers("/**").authenticated().and() //Esta lï¿½nea es equivalente a la siguiente
 			.anyRequest().authenticated().and()
 				.addFilter(new SessionAuthenticationFilter(authenticationManager()))
 				.addFilter(new SessionAuthorizationFilter(authenticationManager()));	

@@ -29,7 +29,7 @@ public class SVTransferencias extends HttpServlet {
 		//meterlo en el jsp. 
 		String token = UUID.randomUUID().toString();
 		sesion.setAttribute("CSRFToken", token);
-		*/
+		*/		
 		
 		request.getRequestDispatcher("formularioTransferencias.jsp").forward(request,response);
 		
@@ -53,8 +53,7 @@ public class SVTransferencias extends HttpServlet {
 			response.sendRedirect("../login.html");
 			return;
 		}
-		*/
-		 
+		*/ 
 			
 		String cuenta = request.getParameter("cuenta");
 		String cantidad = request.getParameter("cantidad");

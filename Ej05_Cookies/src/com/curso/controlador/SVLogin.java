@@ -65,7 +65,7 @@ public class SVLogin extends HttpServlet {
 				
 				//con esto podemos hacer que la cookie solo se 
 				//envie a a estas URLs
-				//galleta.setPath("/Ej05_Cookies/seguro");
+				galleta.setPath("/Ej05_Cookies/seguro");
 				
 				//Para hacer que las cookies solo se vean
 				//en el servidor, no en el javascript
@@ -74,7 +74,7 @@ public class SVLogin extends HttpServlet {
 				//Se puede hacer que en el server tomcat
 				//servers/tomcat v7.0/context.xmls
 				//se configure para desabilitarlo
-				//galleta.setHttpOnly(true);
+				galleta.setHttpOnly(true);
 				//galleta.setSecure(true);
 				
 				response.addCookie(galleta);

@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
-//@WebFilter(urlPatterns = "/*") 
+@WebFilter(urlPatterns = "/*") 
 public class CORSFilter implements Filter {
  
     public CORSFilter() {
@@ -29,18 +29,18 @@ public class CORSFilter implements Filter {
         HttpServletResponse respuesta = (HttpServletResponse) servletResponse;
         System.out.println("CORSFilter HTTP Request: " + request.getMethod()+", "+request.getRequestURI());
 
-        //Los headers para el CORS hay que colocarlos en todas las respuestas, no solo tras una petici�n OPTIONS
+        //Los headers para el CORS hay que colocarlos en todas las respuestas, no solo tras recibir una petición OPTIONS
         
         //Los navegadores no siempre hacen el preflight y en esas ocasiones esperan a la respuesta para aceptarla o no dependiendo de
         //los headers recibidos
         //
         //Esas peticiones sin preflight son:
-        //-Peticiones con los m�todos:
+        //-Peticiones con los métodos:
         //	GET, HEAD y POST
         //-Que incluyan solo los headers:
         //	User-Agent, Accept, Accept-Language, Content-Language
         //  Content-Type
-        //-Y adem�s para content type solo con los valores
+        //-Y además para content type solo con los valores
 	    //  application/x-www-form-urlencoded
 	    //  multipart/form-data
 	    //  text/plain  
@@ -52,11 +52,14 @@ public class CORSFilter implements Filter {
         //Si admitimos peticiones de solo un origen lo a�adimos con protocolo://IP:puerto
         //respuesta.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
         
+
+        
         //Si admitimos peticiones de m�s de un origen debemos comprobar si el origen de la petici�n est�
         //en la lista y responder en consecuencia, porque solo se puede colocar un origen en 'Access-Control-Allow-Origin'
         String origin = request.getHeader("Origin");
         System.out.println("Petici�n recibida de:"+origin);
         List<String> origenesPermitidos = new ArrayList<>();
+        //Esto estaría en la base de datos
         origenesPermitidos.add("http://localhost:8081");
         System.out.println(origenesPermitidos.contains(origin));
         if(origenesPermitidos.contains(origin)) {

@@ -83,18 +83,19 @@ public class SVESAPI extends HttpServlet {
 			} catch (IntrusionException e) {
 				e.printStackTrace();
 			} 
+						
+			//Encode for HTML: elimina el JS pero respeta el HTML
+			//Permite añadir una lista blanca de etiquetas HTML permitidas
+			String html = request.getParameter("html");
+			PolicyFactory sanitizer = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
+			html = sanitizer.sanitize(html);
 			
 			//El encoder para javascript es el m�s estricto de todos,sustituye
 			//practicamente todo
 			//si queremos poner algo en codigo javascript, solo podemos permitir
 			//poner valor de variables, es decir, texto
-			
-			
 			String javascript = ESAPI.encoder().encodeForJavaScript(request.getParameter("javascript"));
 			
-			String html       = request.getParameter("html");
-			PolicyFactory sanitizer = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
-			html = sanitizer.sanitize(html);
 			//Fin encoders			
 			
 			System.out.println("------------------------------");
@@ -106,7 +107,7 @@ public class SVESAPI extends HttpServlet {
 			System.out.println("parametroUrl:\n" + parametroUrl);
 			System.out.println("url:\n" + url);
 			System.out.println("javascript:\n" + javascript);
-			
+						
 			HttpSession sesion = request.getSession(true);
 			sesion.setAttribute("textoHtml",textoHtml);
 			sesion.setAttribute("atributo",atributo);

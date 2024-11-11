@@ -56,7 +56,7 @@ public class ServicioPeliculas {
 		if(pelicula!=null) {
 			return Response.status(200).entity(new PeliculaDTO(pelicula)).build();
 		} 
-		return Response.status(404).entity("Película no encontrada").build();
+		return Response.status(404).entity("Pelï¿½cula no encontrada").build();
 	}
 
 	@GET
@@ -71,7 +71,7 @@ public class ServicioPeliculas {
 		for(Pelicula c: peliculas){
 			peliculasDTO.add(new PeliculaDTO(c));			
 		}
-		//llamada a la lógica de negocio
+		//llamada a la lÃ³gica de negocio
 		return peliculasDTO;	
 	}
 	

@@ -27,6 +27,8 @@ public class SVInformes extends HttpServlet {
 		formato = formato.replaceAll("\\r|\\n", "");
 		
 		System.out.println(formato);
+		//DEsde hace mucho tiempo el método set header está programado para eliminar los
+		//saltos de línea y retornos de carro que tenga el valor recibido
 		response.setHeader("Content-Type", formato);
 		response.getWriter().append("Informe generado y bla bla blá").append(request.getContextPath());
 		
@@ -37,3 +39,9 @@ public class SVInformes extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+

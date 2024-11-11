@@ -11,13 +11,13 @@ public class ClienteServicioPeliculas {
 		try {
 
 			Client client = Client.create();
-			//metemos la autenticación
+			//metemos la autenticaciï¿½n
 			client.addFilter(new HTTPBasicAuthFilter("a", "a"));
 			
 			//Establecemos el recurso al que queremos acceder
-			WebResource webResource = client.resource("http://localhost:8080/Ej13_REST_Servicio/servicios/peliculas");
+			WebResource webResource = client.resource("http://localhost:8080/Ej13_BasicAuth_REST_Servicio/servicios/peliculas");
 			
-			//Invocamos al metodo get que nos retornará un JSON
+			//Invocamos al metodo get que nos retornarï¿½ un JSON
 			ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 			
 			//Si el estado es distinto a 200 algo mal a ocurrido

@@ -18,6 +18,10 @@ public class SVLogin extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//request.isSecure();
+		
+		//1997
 		response.setContentType("text/html");
 		response.getWriter().append("<marquee><H1>Página principal</H1><marquee>");
 	}

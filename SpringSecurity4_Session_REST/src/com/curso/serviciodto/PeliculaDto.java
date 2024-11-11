@@ -1,15 +1,18 @@
 package com.curso.serviciodto;
 
+/*
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+*/
 
 import com.curso.modelo.entidad.Pelicula;
 
 //
 //JAXB
 //
+/*
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pelicula", propOrder = {
@@ -19,6 +22,7 @@ import com.curso.modelo.entidad.Pelicula;
     "genero",
     "year"
 })
+*/
 public class PeliculaDto {
 
 	private Integer id;
