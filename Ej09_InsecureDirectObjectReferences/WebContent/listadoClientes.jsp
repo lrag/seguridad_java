@@ -12,7 +12,19 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 </head>
 
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script>
+
+function botonPulsado(){
+	alert(this.dataset.idcliente)
+}
+
+window.onload = function(){	
+	for(let boton of document.querySelectorAll("#tablaClientes [type=button]")){
+		boton.onclick = botonPulsado
+	}	
+}
+
+</script>
 
 <body>
 
@@ -21,7 +33,7 @@
     </div>
 	
 	<form action="SVClientes" method="get">
-	
+
 		<input type="hidden" name="accion" value="verFormulario"/>
 
 	    <div class="row">
@@ -49,6 +61,7 @@
 						<c:forEach var="c" items="${listadoClientes}">
 							<tr>
 								<td>
+									<input type="button" data-idcliente="${c.id}" value="Pulsar"/>
 									(${c.id})&nbsp;
 									<!-- Cuidado que esto no nos coloque el sessionId en la url -->
 									<c:url var="enlace" value="SVClientes">
@@ -58,7 +71,9 @@
 									<a href="${enlace}">${c.nombre}</a>
 								</td>
 								<td>${c.direccion}</td>
-								<td>${c.telefono}</td>
+								<td>
+									${c.telefono}
+								</td>
 							</tr>			
 						</c:forEach>		
 	                </tbody>

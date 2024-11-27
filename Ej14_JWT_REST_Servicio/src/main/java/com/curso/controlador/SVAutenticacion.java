@@ -63,9 +63,9 @@ public class SVAutenticacion extends HttpServlet {
 	                .signWith(Keys.hmacShaKeyFor(clave), SignatureAlgorithm.HS512)
 	                .setHeaderParam("typ", "JWT")
 	                .setIssuer("servicio-peliculas")
-	                .setAudience("secure-app")
+	                .setAudience("aplicacion-web-peliculas")
 	                .setSubject(usuario.getLogin())
-	                .setExpiration(new Date(System.currentTimeMillis() + 864000000)) //Un día
+	                .setExpiration(new Date(System.currentTimeMillis() + 86_400_000)) //Un día
 	                .claim("rol", usuario.getRol())
 	                .compact();
 	            response.addHeader("Authorization", "Bearer " + token);

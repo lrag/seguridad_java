@@ -85,13 +85,13 @@
 			<version>${logback.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.199</version>
-		</dependency>		
-
+		</dependency>
+		
 		<!-- Spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

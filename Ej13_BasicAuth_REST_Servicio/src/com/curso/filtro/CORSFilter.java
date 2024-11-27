@@ -51,16 +51,17 @@ public class CORSFilter implements Filter {
 
         //Si admitimos peticiones de solo un origen lo a�adimos con protocolo://IP:puerto
         //respuesta.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
-        
-
-        
-        //Si admitimos peticiones de m�s de un origen debemos comprobar si el origen de la petici�n est�
+                
+        //Si admitimos peticiones de más de un origen debemos comprobar si el origen de la petici�n est�
         //en la lista y responder en consecuencia, porque solo se puede colocar un origen en 'Access-Control-Allow-Origin'
         String origin = request.getHeader("Origin");
-        System.out.println("Petici�n recibida de:"+origin);
+        System.out.println("Petición recibida de:"+origin);
         List<String> origenesPermitidos = new ArrayList<>();
         //Esto estaría en la base de datos
         origenesPermitidos.add("http://localhost:8081");
+        origenesPermitidos.add("http://localhost:8082");
+        origenesPermitidos.add("http://localhost:8083");
+        
         System.out.println(origenesPermitidos.contains(origin));
         if(origenesPermitidos.contains(origin)) {
         	System.out.println("OK");

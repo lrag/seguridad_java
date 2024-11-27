@@ -182,7 +182,7 @@ function inicializar(){
                 <input class="btn btn-danger"  type="button" id="btnBorrar"    value="Borrar"/>
                 <input class="btn btn-primary" type="button" id="btnVaciar"    value="Vaciar"/>
                 |
-                <input class="btn btn-primary" type="button" id="btnSalir"    value="Salir"/>
+                <input class="btn btn-primary" type="button" id="btnSalir"     value="Salir"/>
             </div>
 
             <p/>

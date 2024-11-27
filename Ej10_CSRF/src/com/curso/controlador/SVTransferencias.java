@@ -50,10 +50,11 @@ public class SVTransferencias extends HttpServlet {
 		if(CSRFTokenSesion == null || CSRFTokenFormulario==null 
 				|| !CSRFTokenFormulario.equals(CSRFTokenSesion)){
 			System.out.println("Ataque CSRF detectado!");
+			//Faltaría invalidar la sesión
 			response.sendRedirect("../login.html");
 			return;
 		}
-		*/ 
+		*/		
 			
 		String cuenta = request.getParameter("cuenta");
 		String cantidad = request.getParameter("cantidad");

@@ -18,7 +18,6 @@ public class OyenteSesion implements HttpSessionListener, HttpSessionAttributeLi
 
     public void sessionDestroyed(HttpSessionEvent ev)  { 
     	System.out.println("SESIÓN INVALIDADA");
-    	
     }
 
 	@Override

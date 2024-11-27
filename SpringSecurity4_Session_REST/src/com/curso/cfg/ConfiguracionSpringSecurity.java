@@ -51,7 +51,7 @@ public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers("/js/*").permitAll()
 			.antMatchers("/*.html").permitAll()
 			.antMatchers(HttpMethod.POST, "/servicios/login").permitAll()						
-			.antMatchers(HttpMethod.GET, "/servicios/peliculas").isAuthenticated()
+			.antMatchers(HttpMethod.GET, "/servicios/peliculas").authenticated()
 			.antMatchers(HttpMethod.POST, "/servicios/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 			.antMatchers(HttpMethod.PUT, "/servicios/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 			.antMatchers(HttpMethod.DELETE, "/servicios/peliculas/*").hasRole("DIRECTOR")

@@ -40,7 +40,6 @@ public class FiltroAutenticacion implements Filter {
 		
 		//Si se ejecuta esta línea la petición sigue hacia delante
 		chain.doFilter(request, response);
-		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

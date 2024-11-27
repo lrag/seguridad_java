@@ -17,20 +17,9 @@
 <div id="content">
 
 	<h1>Página Principal</h1>
-	
-	
-	<!-- LOGOUT -->	
-	<p> 
-		Solo los Agentes pueden ver este recurso. Bienvenido <%= request.getUserPrincipal().getName() %> 
-
-		<form action="<c:url value='/logout'/>" method="post">
-			<sec:csrfInput/>
-			<input type="submit" value="Salir"/>
-		</form>
-	</p> 
-	<hr/>
-	<%= request.getUserPrincipal() %> 	
-	
+	<p>
+		Cualquiera puede ver este recurso.
+	</p>
 	
 	<p>
 		<a href="<c:url value='/expedientesx/mostrar/todos'/>">

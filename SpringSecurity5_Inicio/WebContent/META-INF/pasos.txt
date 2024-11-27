@@ -13,7 +13,6 @@ package expedientesx.cfg;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -40,10 +39,10 @@ public UserDetailsService userDetailsService() {
 
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
-    http
-        .authorizeHttpRequests((authz) -> authz
-       		.requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")
-        );
+	http
+    .authorizeHttpRequests((authz) -> authz
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")
+    );  
         
     http.formLogin(Customizer.withDefaults());
 	
@@ -57,7 +56,7 @@ sustituir el bloque anterior por este.
 
 http
     .authorizeHttpRequests((authz) -> authz
-        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")
+        .requestMatchers("/**").hasRole("AGENTE_ESPECIAL")
     );
 
 http.formLogin(form -> form
