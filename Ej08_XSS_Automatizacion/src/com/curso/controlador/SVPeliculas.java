@@ -37,12 +37,12 @@ public class SVPeliculas extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//Recoger los parámetros y hacer una primera conversion
+		//Recoger los parï¿½metros y hacer una primera conversion
 		//de String al tipo adecuado
 		
 		Integer idPelicula = null;
 		try {
-			idPelicula = new Integer(request.getParameter("idPelicula"));
+			idPelicula = Integer.valueOf(request.getParameter("idPelicula"));
 		} catch (NumberFormatException e) {
 			//No hacemos nada: solo falla cuando estan insertando
 		}
@@ -57,7 +57,7 @@ public class SVPeliculas extends HttpServlet {
 		//Validar los objetos
 		
 		/////////////////////////////////////////////		
-		// Validación XSS mediante las anotaciones //
+		// Validaciï¿½n XSS mediante las anotaciones //
 		/////////////////////////////////////////////		
 		try {
 			XSSEncoder.getInstancia().encode(p);
@@ -65,10 +65,10 @@ public class SVPeliculas extends HttpServlet {
 			e.printStackTrace();
 		}				
 		
-		//Averiguar que nos están pidiendo
+		//Averiguar que nos estï¿½n pidiendo
 		String accion = request.getParameter("accion");
 		
-		//Llamar al método de negocio adecuado
+		//Llamar al mï¿½todo de negocio adecuado
 		if("insertar".equals(accion)){
 			//gestorPeliculas.insertar(p);
 			HttpSession sesion = request.getSession(true);
@@ -79,8 +79,8 @@ public class SVPeliculas extends HttpServlet {
 			//gestorPeliculas.borrar(p);
 		}
 		
-		//Despues de una petición post se hace un redirect.
-		//Si se está usando MVC no se puede hacer un redirect a una vista
+		//Despues de una peticiï¿½n post se hace un redirect.
+		//Si se estï¿½ usando MVC no se puede hacer un redirect a una vista
 		//Se hace un redirect al controlador que muestre la vista que nos 
 		//interesa
 		//GET SVPeliculas

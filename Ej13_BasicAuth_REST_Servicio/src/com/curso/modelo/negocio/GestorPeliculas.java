@@ -10,7 +10,6 @@ public class GestorPeliculas {
 	private static List<Pelicula> peliculas;
 
 	static{
-
 		peliculas = new ArrayList<>();
 		peliculas.add(new Pelicula(1,"2001","Stanley Kubrik","Ci-Fi","1968"));
 		peliculas.add(new Pelicula(2,"Alien","Ridley Scott","Ci-Fi","1979"));

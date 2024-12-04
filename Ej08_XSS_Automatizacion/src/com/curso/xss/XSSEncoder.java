@@ -13,7 +13,7 @@ import org.owasp.html.Sanitizers;
 //Clase encargada de sanear los atributos de la clase pelicula
 //Es singleton
 //Las anotaciones se suelen programar con refection que es la parte
-//de java encargada de hacer la metaprogramación
+//de java encargada de hacer la metaprogramaciï¿½n
 public class XSSEncoder {
 
 	private static XSSEncoder instancia = new XSSEncoder();
@@ -59,7 +59,7 @@ public class XSSEncoder {
 				//set del objeto
 				String valor = getValor(tipo, nombre, obj);
 				
-				//En función de la anotación que tenga
+				//En funciÃ³n de la anotaciÃ³n que tenga
 				//emplearemos un encoder un otro
 				//En esta por ejemplo si tiene el EncodeHTMLText
 				//usamos el metodo encodeForHTML
@@ -96,7 +96,7 @@ public class XSSEncoder {
 			} catch (SecurityException e) {
 				//
 			} catch (IllegalAccessException e) {
-				throw new XSSException(nombre+" no es una propiedad pública", e);				
+				throw new XSSException(nombre+" no es una propiedad pï¿½blica", e);				
 			} catch (IllegalArgumentException e) {
 				throw new XSSException(nombre+" no es una propiedad de tipo String", e);
 			} catch (InvocationTargetException e) {
