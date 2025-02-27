@@ -22,7 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
+//@EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
 public class ConfiguracionSpringSecurity {
 
 	//Esta bean NO es el oyente

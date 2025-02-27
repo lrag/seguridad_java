@@ -214,9 +214,9 @@ http.sessionManagement(management -> management
 ############################################################################################################# 
 # 12.    Control de la concurrencia de sesiones
 #############################################################################################################	
-public void onStartup(ServletContext servletContext) throws ServletException {
-	//...
-    servletContext.addListener(new HttpSessionEventPublisher());
+    public void onStartup(ServletContext servletContext) throws ServletException {
+		//...
+        servletContext.addListener(new HttpSessionEventPublisher());
 			
 ############################################################################################################# 
 # 12 (Cont).    Control de la concurrencia de sesiones

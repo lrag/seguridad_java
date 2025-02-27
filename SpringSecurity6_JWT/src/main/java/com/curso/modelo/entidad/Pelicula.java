@@ -1,9 +1,6 @@
-package com.curso.serviciodto;
+package com.curso.modelo.entidad;
 
-import com.curso.modelo.entidad.Pelicula;
-
-
-public class PeliculaDto {
+public class Pelicula {
 
 	private Integer id;
 	private String titulo;
@@ -11,25 +8,22 @@ public class PeliculaDto {
 	private String genero;
 	private Integer year;
 
-	public PeliculaDto() {
+	public Pelicula() {
 		super();
 	}
+	
+	public Pelicula(Integer id) {
+		super();
+		this.id = id;
+	}
 
-	public PeliculaDto(Integer id, String titulo, String director, String genero, Integer year) {
+	public Pelicula(Integer id, String titulo, String director, String genero, Integer year) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.director = director;
 		this.genero = genero;
 		this.year = year;
-	}
-	
-	public PeliculaDto(Pelicula pelicula) {
-		id       = pelicula.getId();
-		titulo   = pelicula.getTitulo();
-		director = pelicula.getDirector();
-		genero   = pelicula.getGenero();
-		year     = pelicula.getYear();
 	}
 
 	public Integer getId() {
@@ -70,10 +64,6 @@ public class PeliculaDto {
 
 	public void setYear(Integer year) {
 		this.year = year;
-	}
-	
-	public Pelicula asPelicula() {
-		return new Pelicula(id,titulo,director,genero,year);
 	}
 
 }

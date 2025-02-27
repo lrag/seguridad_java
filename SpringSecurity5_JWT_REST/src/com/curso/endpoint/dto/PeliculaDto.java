@@ -1,8 +1,27 @@
-package com.curso.serviciodto;
+package com.curso.endpoint.dto;
 
+/*
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+*/
 import com.curso.modelo.entidad.Pelicula;
 
-
+//
+//JAXB
+//
+/*
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "pelicula", propOrder = {
+    "id",
+    "titulo",
+    "director",
+    "genero",
+    "year"
+})
+*/
 public class PeliculaDto {
 
 	private Integer id;
