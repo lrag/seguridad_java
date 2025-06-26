@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-//El objetivo de este filtro ser�a sanear los parametros de entrada
+//El objetivo de este filtro sería sanear los parametros de entrada
 
 @WebFilter("/SVPeliculas")
 public class FiltroXSS implements Filter {
@@ -23,7 +23,7 @@ public class FiltroXSS implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		
+	
 		System.out.println("FiltroXSS");
 		HttpServletRequest rq = (HttpServletRequest) request;
 		//Aqui tendriamos que cambiar los parametros de entrada de
@@ -35,7 +35,7 @@ public class FiltroXSS implements Filter {
 		XSSRequestWrapper xssRq = new XSSRequestWrapper(rq);
 		//la clave luego esta en que en el doFilter, el objeto que pasamos
 		//es el que acabamos de crear, por ello en todos los servlet
-		//le llegar� el objeto envoltorio o wrapper
+		//le llegará el objeto envoltorio o wrapper
 		chain.doFilter(xssRq, response);
 	}
 

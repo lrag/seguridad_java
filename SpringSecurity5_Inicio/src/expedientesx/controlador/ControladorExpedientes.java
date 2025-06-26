@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,6 +36,10 @@ public class ControladorExpedientes {
 		return mav;
 	}
 	
+	//POST /clasificar
+	//CT: form url encoded...
+	//-----------------------
+	//id=123
 	@PostMapping(value="/clasificar")
 	public String clasificar( @RequestParam("id") Long id, Model model){
 		System.out.println("Clasificar el expediente: "+id);
@@ -46,6 +48,10 @@ public class ControladorExpedientes {
 		return "redirect:/expedientesx/mostrar/todos";
 	}
 	
+	//POST /desclasificar
+	//CT: form url encoded...
+	//-----------------------
+	//id=123
 	@PostMapping(value="/desclasificar")
 	public String desclasificar( @RequestParam("id") Long id, Model model){
 		System.out.println("Desclasificar el expediente: "+id);

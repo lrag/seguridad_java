@@ -25,24 +25,37 @@ public class ControlAcceso {
 		this.authenticationManager = authenticationManager;
 		this.jwtUtil = jwtUtil;
 	}
-
-	@PostMapping("/login")
+    
+	@PostMapping("/servicioAutenticacion")
     public String login(@RequestBody LoginRequest loginRequest) {
-        
+		
 		Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
         
-        if (authentication.isAuthenticated()) {        	
-        	List<String> roles = authentication
-        		.getAuthorities()
-        		.stream()
-        		.map( a -> a.getAuthority())
-        		.collect(Collectors.toList());        	
-            return jwtUtil.generateToken(loginRequest.getUsername(), roles);
-        } else {
-            throw new UsernameNotFoundException("Invalid user request!");
-        }
+		if (!authentication.isAuthenticated()) {
+			throw new UsernameNotFoundException("El usuario no existe");
+		}
+		
+    	List<String> roles = authentication
+    		.getAuthorities()
+    		.stream()
+    		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))
+    		.collect(Collectors.toList());
+    	
+    	System.out.println(roles);
+    	
+        return jwtUtil.generateToken(loginRequest.getUsername(), roles);
+        
     }	
 	
 }
+
+
+
+
+
+
+
+
+

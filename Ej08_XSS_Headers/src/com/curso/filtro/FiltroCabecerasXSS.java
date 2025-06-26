@@ -59,7 +59,7 @@ public class FiltroCabecerasXSS implements Filter {
         //Específicando el src para los js y las imágenes (serían distintos de 'self')
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro-sitio'; img-src 'otro-sitio-distinto';");
         
-        //Espec�ficando m�s de un origen para javascript (o para cualquier otra cosa)
+        //Especáficando más de un origen para javascript (o para cualquier otra cosa)
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro y_otro';");
         
         //Permitiendo js-inline (no puede prevenir el XSS)
@@ -72,7 +72,7 @@ public class FiltroCabecerasXSS implements Filter {
         rq.getSession().setAttribute("nonce", nonce);
 
         response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
-                
+              
         filterChain.doFilter(servletRequest, response);
     }
 

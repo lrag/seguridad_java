@@ -28,7 +28,7 @@ public class FiltroHttps implements Filter {
 		httpResponse.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 
 		if(!httpRequest.isSecure()){			
-			//Esto es adecuado para un api rest: la aplicaci�n cliente debe saber que esto es a trav�s de HTTPS
+			//Esto es adecuado para un api rest: la aplicación cliente debe saber que esto es a travás de HTTPS
 			//response.getWriter().append("No se admiten peticiones que no sean https");
 			//Esto es adecuado para una aplciación web
 			httpResponse.sendRedirect("Https://"

@@ -28,7 +28,7 @@ public class FiltroNoCache implements Filter {
 
 		//Add todas estas cabeceras para eviar el cacheo en el navegador
 		//, algunas pueden funcionar, otras no
-		//dependiendo del navegador y su versi�n y el protocolo http usado
+		//dependiendo del navegador y su versión y el protocolo http usado
 		HttpServletResponse rp = (HttpServletResponse) response;
 		rp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
 		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0
@@ -37,6 +37,8 @@ public class FiltroNoCache implements Filter {
 							            //desde el 1 de 1 de 1970
 
 		chain.doFilter(request, response);
+		
+		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

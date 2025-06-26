@@ -101,7 +101,7 @@ public class ServicioEmpleados extends HttpServlet {
 		
 		try {
 
-			//Recogemos el par�metro
+			//Recogemos el parámetro
 			String idEmpleado = request.getParameter("idEmpleado");
 			if (idEmpleado == null) {
 				idEmpleado = "";
@@ -113,7 +113,7 @@ public class ServicioEmpleados extends HttpServlet {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse( new InputSource(new StringReader(DATASOURCE_XML)));
 			
-			//Con nuestro m�todo podemos evitar la inyeccion...
+			//Con nuestro método podemos evitar la inyeccion...
 			//descomentandolo para validar la entrada del usuario
 				
 			/*

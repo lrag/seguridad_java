@@ -14,10 +14,14 @@ public class ControladorErrores {
 		super();
 	}
 
-	@ExceptionHandler(value={ Exception.class })
+	@ExceptionHandler(value={ Throwable.class })
 	public ResponseEntity<Object> procesarError(Exception ex, WebRequest request){		
+		
+		ex.printStackTrace();
+		
+		
 		System.out.println("CONTROLADOR ERRORES");
-		ResponseEntity<Object> re = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		ResponseEntity<Object> re = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		return re;		
 	}
 	

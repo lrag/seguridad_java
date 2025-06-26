@@ -29,13 +29,13 @@ public class FiltroXSS implements Filter {
 		//Aqui tendriamos que cambiar los parametros de entrada de
 		//que nos vienen en la request, el roblema es que los parametros
 		//del request son inmutables
-		//Por lo que vamos a crearnos un wrapper de la request y ah�
+		//Por lo que vamos a crearnos un wrapper de la request y ahí
 		//ser� donde alteremos los parametros, de hecho rq no tiene
 		//setParameter por ejemplo
 		XSSRequestWrapper xssRq = new XSSRequestWrapper(rq);
 		//la clave luego esta en que en el doFilter, el objeto que pasamos
 		//es el que acabamos de crear, por ello en todos los servlet
-		//le llegar� el objeto envoltorio o wrapper
+		//le llegará el objeto envoltorio o wrapper
 		chain.doFilter(xssRq, response);
 	}
 

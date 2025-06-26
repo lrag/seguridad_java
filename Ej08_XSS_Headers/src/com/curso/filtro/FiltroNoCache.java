@@ -22,7 +22,7 @@ public class FiltroNoCache implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		System.out.println("Filtro no caché");
+		System.out.println("Filtro no cachÃ©");
 		
 		HttpServletResponse rp = (HttpServletResponse) response;
 		rp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1

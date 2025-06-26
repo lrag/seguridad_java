@@ -11,11 +11,14 @@ import org.springframework.stereotype.Component;
 public class Seguridad {	
 	
 	public boolean getPermiso(){	
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getAuthorities());
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
 		return authorities.contains(new SimpleGrantedAuthority("ROLE_AGENTE_ESPECIAL")) 
 			   || authorities.contains(new SimpleGrantedAuthority("ROLE_DIRECTOR"));
-	}
+		
+		
+	}	
 	
 }

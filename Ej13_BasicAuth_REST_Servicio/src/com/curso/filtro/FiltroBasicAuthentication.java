@@ -68,6 +68,12 @@ public class FiltroBasicAuthentication implements Filter {
 		}
 		
 		System.out.println("Usuario: "+usr.getNombre());
+
+		//Dejamos el usuario en el request como atributo o
+		//como UserPrincipal, que es la manera JEE style
+		request.setAttribute("USUARIO", usr);
+	
+		
 		chain.doFilter(request, response);
 	}
 

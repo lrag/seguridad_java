@@ -26,13 +26,22 @@ public class SVClientes extends HttpServlet {
 			response.sendRedirect("../login.html");
 			return;
 		}
-		*/		
-		
+		*/
+
 		request.getRequestDispatcher("clientes.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		
+		/*
+		HttpSession sesion = request.getSession(false);
+		if(sesion==null || sesion.getAttribute("usuario")==null) {
+			response.sendRedirect("../login.html");
+			return;
+		}
+		*/			
+		
 	}
 
 }

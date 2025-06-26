@@ -18,6 +18,7 @@
 
 	<h1>Página Principal</h1>
 
+
 	<!-- LOGOUT -->	
 	<p> 
 		Solo los Agentes pueden ver este recurso. Bienvenido <%= request.getUserPrincipal().getName() %> 

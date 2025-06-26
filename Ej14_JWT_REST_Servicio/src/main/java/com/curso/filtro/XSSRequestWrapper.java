@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 //HttpServletRequest, 
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
+	//Controlar el tamaño de este array
     private byte[] body;	
 	
 	//El objeto que creamos usamos el de la request para coger
@@ -27,12 +28,9 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
         //Leemos el body y lo guardamos en un array de bytes
         try {
-            
-        	//No deberíamos leer el body si no es un jotasón 
-        	body = IOUtils.toByteArray(super.getInputStream());
-            
             String contentType = servletRequest.getHeader("content-type");
             if(contentType.contains("application/json")) {
+            	body = IOUtils.toByteArray(super.getInputStream());
             	System.out.println("=========================================");
             	System.out.println("Un JSON!");
             	String json = new String(body);
@@ -53,6 +51,10 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
+    	//Si no se ha leído devolvemos el original
+    	if(body == null) {
+    		return super.getInputStream();
+    	}
         return new ServletInputStreamImpl(new ByteArrayInputStream(body));
     }
 

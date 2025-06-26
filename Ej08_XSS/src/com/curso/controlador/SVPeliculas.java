@@ -54,10 +54,10 @@ public class SVPeliculas extends HttpServlet {
 		//Validar los objetos
 		//...
 		
-		//Averiguar que nos est�n pidiendo
+		//Averiguar que nos están pidiendo
 		String accion = request.getParameter("accion");
 		
-		//Llamar al m�todo de negocio adecuado
+		//Llamar al método de negocio adecuado
 		if("insertar".equals(accion)){
 			//gestorPeliculas.insertar(p);
 			//Simulamos la inserccion en la bb.dd dejando la pel�cula en la HttpSession

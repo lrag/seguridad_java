@@ -1,9 +1,9 @@
-package com.curso.servicio;
+package com.curso.endpoint;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-//En todo el proyecto solo habrá una clase de estas características
+//En todo el proyecto solo habrï¿½ una clase de estas caracterï¿½sticas
 @ApplicationPath("servicios")
 public class AplicacionRest extends Application {
 	

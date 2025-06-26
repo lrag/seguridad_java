@@ -1,4 +1,4 @@
-package com.curso.servicio;
+package com.curso.endpoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +14,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import com.curso.endpoint.dto.PeliculaDTO;
 import com.curso.modelo.entidad.Pelicula;
 import com.curso.modelo.negocio.GestorPeliculas;
-import com.curso.servicio.dto.PeliculaDTO;
 
 @Path("peliculas")
-public class ServicioPeliculas {
+public class PeliculasRest {
 
 	private GestorPeliculas gestorPeliculas = new GestorPeliculas();
 	

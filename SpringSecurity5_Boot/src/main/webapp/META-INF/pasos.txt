@@ -1,10 +1,12 @@
 ﻿############################################################################################################# 
 # 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'AppInitializer'
 ############################################################################################################# 
+ESTE PASO NO ES NECESARIO CON SPRING BOOT
+
 servletContext.addFilter("springSecurityFilterChain", 
 	new DelegatingFilterProxy("springSecurityFilterChain"))
-		.addMappingForUrlPatterns(null, false, "/*");     
-
+		.addMappingForUrlPatterns(null, false, "/*");    
+		 
 ############################################################################################################# 
 # 2. Crear una clase para configurar Spring Security
 #############################################################################################################  

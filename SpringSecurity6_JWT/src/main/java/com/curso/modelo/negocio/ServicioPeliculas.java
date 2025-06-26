@@ -3,8 +3,7 @@ package com.curso.modelo.negocio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,7 +14,6 @@ import com.curso.modelo.persistencia.PeliculaDao;
 
 @Service
 public class ServicioPeliculas {
-
 	
 	@Autowired private PeliculaDao peliculaDao;
 
@@ -37,6 +35,12 @@ public class ServicioPeliculas {
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<Pelicula> listar(){
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("::::::::::"+authentication.getName());		
+		System.out.println("::::::::::"+authentication.getAuthorities());			
+		
+		
 		return peliculaDao.listar();
 	}
 	

@@ -6,14 +6,10 @@ import com.curso.modelo.entidad.Cliente;
 
 public interface ClienteDao {
 
-	public abstract void insertar(Cliente cliente);
-
-	public abstract void modificar(Cliente cliente);
-
-	public abstract void borrar(Cliente cliente);
-
-	public abstract Cliente buscar(int id);
-
-	public abstract List<Cliente> listar(int primero, int cantidad);
+	void insertar(Cliente cliente);
+	void modificar(Cliente cliente);
+	void borrar(Cliente cliente);
+	Cliente buscar(int id);
+	List<Cliente> listar(int primero, int cantidad);
 
 }

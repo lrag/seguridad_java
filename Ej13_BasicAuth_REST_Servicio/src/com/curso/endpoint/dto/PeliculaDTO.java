@@ -1,4 +1,4 @@
-package com.curso.servicio.dto;
+package com.curso.endpoint.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

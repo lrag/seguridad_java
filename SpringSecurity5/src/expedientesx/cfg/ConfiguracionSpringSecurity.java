@@ -5,7 +5,6 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -26,7 +25,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @ComponentScan(basePackages = { "expedientesx.util" })
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
 public class ConfiguracionSpringSecurity {
-
+	
+	@Bean
+	PasswordEncoder passwordEncoder(){
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}		
+	
 	@Bean
 	DataSource dataSource() {
 		return new EmbeddedDatabaseBuilder()
@@ -35,19 +40,14 @@ public class ConfiguracionSpringSecurity {
 			.build();
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}	
 
 	@Bean
-	public UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
-		//String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
-		//String authsByUserQuery = "select username, authority from authorities where username = ?";
+	UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
+		String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
+		String authsByUserQuery = "select username, authority from authorities where username = ?";
 		JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-		//userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
-		//userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
+		userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
+		userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
 		  
 		UserDetails usuario1 = User.builder().username("Fernando").password(passwordEncoder().encode("1234")).roles("AGENTE").build();
 		UserDetails usuario2 = User.builder().username("Mulder").password(passwordEncoder().encode("fox")).roles("AGENTE_ESPECIAL").build();
@@ -59,18 +59,17 @@ public class ConfiguracionSpringSecurity {
 		userDetailsManager.createUser(usuario4);
 		  
 		return userDetailsManager;
-	}
+	}	
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
 		
 		http
-	    .authorizeHttpRequests((authz) -> authz
+	    .authorizeHttpRequests( auth -> auth
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated()   
-			.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/clasificar")).permitAll()
+	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated()       
 	    );
 
 		http.formLogin(form -> form
@@ -78,15 +77,34 @@ public class ConfiguracionSpringSecurity {
 			//.usernameParameter("login")
 			//.passwordParameter("pw")
 			.failureUrl("/paginas/nuestro-login.jsp?login_error"));
+	
+		http.logout(logout -> logout
+				.logoutSuccessUrl("/paginas/desconectado.jsp"));
+		
+		http.requiresChannel(channel -> channel
+				.anyRequest()
+				.requiresSecure()
+			);
 
-        http.exceptionHandling(handling -> handling
-            	.accessDeniedPage("/paginas/acceso-denegado.jsp")
-    		);		
+		//Activo por defecto
+		http.headers(headers -> headers
+			.httpStrictTransportSecurity(hsts -> hsts
+				.includeSubDomains(true)
+				.preload(true)
+				.maxAgeInSeconds(31536000)
+			)
+		);		
+		
+		http.exceptionHandling(handling -> handling
+		    	.accessDeniedPage("/paginas/acceso-denegado.jsp")
+			);		
 		
 		
-		
-		http.csrf().disable();
+		//http.csrf().disable();
 	
 		return http.build();
 	}
+    
 }
+
+

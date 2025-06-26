@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import com.curso.endpoint.dto.PeliculaDto;
 import com.curso.modelo.entidad.Pelicula;
 import com.curso.modelo.negocio.GestorPeliculas;
-import com.curso.serviciodto.PeliculaDto;
 
 @RestController
 @RequestMapping(path="seguro/peliculas")

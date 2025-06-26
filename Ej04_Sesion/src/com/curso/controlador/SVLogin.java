@@ -70,7 +70,6 @@ public class SVLogin extends HttpServlet {
 				//Esto para evitar session hijacking
 				//si no existe no la crea con false, devuelve null
 
-				
 				s = request.getSession(false);
 				if(s != null){
 					s.invalidate();
@@ -100,12 +99,12 @@ public class SVLogin extends HttpServlet {
 				s.setAttribute("segundos", segundos);
 				
 				//Guardamos algo en la sesión para diferenciarla de aquellas que se
-				//hayan podido crear de manera autom�tica
+				//hayan podido crear de manera automática
 				Usuario usr = new Usuario(
 						rs.getInt("id"),
 						rs.getString("nombre"),
 						rs.getString("login"),
-						null //rs.getString("pw") //Ser�a interesante guardar el usuario sin el password
+						null //rs.getString("pw") //Debemos olvidarnos del password
 					); 
 				s.setAttribute("usuario",usr);
 

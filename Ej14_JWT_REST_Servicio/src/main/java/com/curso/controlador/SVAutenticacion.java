@@ -69,7 +69,7 @@ public class SVAutenticacion extends HttpServlet {
 	                .claim("rol", usuario.getRol())
 	                .compact();
 	            response.addHeader("Authorization", "Bearer " + token);
-				
+	           				
 			} else {
 				response.sendError(401,"Credenciales incorrectas");
 			}

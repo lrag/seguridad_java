@@ -66,7 +66,7 @@ public class _04_SVInyeccionHibernate extends HttpServlet {
 		List<Usuario> rs = 
 			s.createQuery("select u from Usuario u where u.login='"+login+"' and pw='"+pw+"'").list();
 		
-		//deberemos de usar algo as�, que seria el equivalente a prepared statement en hibernate
+		//deberemos de usar algo así, que seria el equivalente a prepared statement en hibernate
 		//Query q = s.createQuery("from Usuario u where u.login=:login and pw=:pw");
 		//q.setParameter("login", login);
 		//q.setParameter("pw", pw);

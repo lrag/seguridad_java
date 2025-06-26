@@ -19,14 +19,14 @@ public class SVBusquedas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String criterio = request.getParameter("criterio");
 	
-		//Aqui podríamos sanear la entrada para eliminar el JS
+		//Aqui podrÃ­amos sanear la entrada para eliminar el JS
 		
 		//
-		//Se ejecuta la búqueda...
+		//Se ejecuta la bÃºqueda...
 		//
 		
 		request.setAttribute("criterio", criterio);
-		request.setAttribute("resultado", "Este es el resultado de la búsqueda");
+		request.setAttribute("resultado", "Este es el resultado de la bï¿½squeda");
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
 		
 	}

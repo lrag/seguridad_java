@@ -21,13 +21,14 @@ public interface GestorExpendientes {
 	void desclasificar(Expediente expediente);
 
 	@PostFilter("not filterObject.informe.contains(principal.username)")
-	//@PostFilter("filterObject.investigador == principal.username or hasRole('ROLE_DIRECTOR')")
+	//@PostFilter("filterObject.investigador == principal.username || hasRole('ROLE_DIRECTOR')")
 	List<Expediente> listarTodos();
 
 	@PreAuthorize("hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')")
 	@PostAuthorize("hasRole('ROLE_DIRECTOR') "
 			+ "or returnObject.investigador == authentication.name")
 	Expediente buscar(Long id);
+	
 }
 
 

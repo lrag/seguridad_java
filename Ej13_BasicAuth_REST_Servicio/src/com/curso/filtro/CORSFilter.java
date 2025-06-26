@@ -46,10 +46,10 @@ public class CORSFilter implements Filter {
 	    //  text/plain  
         
         //Autorizamos a cualquier dominio a consumir nuestros recursos   
-        //Colocar '*' solo en apis p�blicas 
+        //Colocar '*' solo en apis públicas 
         //respuesta.addHeader("Access-Control-Allow-Origin", "*");
 
-        //Si admitimos peticiones de solo un origen lo a�adimos con protocolo://IP:puerto
+        //Si admitimos peticiones de solo un origen lo añadimos con protocolo://IP:puerto
         //respuesta.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
                 
         //Si admitimos peticiones de más de un origen debemos comprobar si el origen de la petici�n est�
@@ -74,7 +74,7 @@ public class CORSFilter implements Filter {
  
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 	 
-        //Si la petici�n ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
+        //Si la petición ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
         //como se espera en el 'cors handsake'
         
         if (request.getMethod().equals("OPTIONS")) {
