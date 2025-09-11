@@ -115,7 +115,6 @@ public class ServicioEmpleados extends HttpServlet {
 			
 			//Con nuestro método podemos evitar la inyeccion...
 			//descomentandolo para validar la entrada del usuario
-				
 			/*
 			if (!checkValueForXpathInjection(idEmpleado)) {
 				System.out.println("Inyección!!!");
@@ -145,8 +144,10 @@ public class ServicioEmpleados extends HttpServlet {
 	        XPathFactory xpathfactory = XPathFactory.newInstance();
 	        XPath xpath = xpathfactory.newXPath();
 	        //Creamos la expresion xpath para buscar en nuestro xml
-	        String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
-	        	  
+	        //
+	        //String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
+	        	// 
+	        
 	        ///////////////////////////////////////
 			//Consultas precompiladas con par�metros
 	        //Equivalente a prepare statement en xpath
@@ -164,14 +165,14 @@ public class ServicioEmpleados extends HttpServlet {
 	        xpath.setXPathVariableResolver(variableResolver);
 	        
 	        
-	        //Ahora la expresi�n xml cambiara, siendo '$id' la clave
+	        //Ahora la expresión xml cambiara, siendo '$id' la clave
 	        //metida como 'QName("id")'
-			//String xPathExpression = "/empleados/empleado[@id=$id]";
+			String xPathExpression = "/empleados/empleado[@id=$id]";
 	        //Fin consultas con par�metros
 	        
 	        //compilamos la expresion
 	        XPathExpression expr = xpath.compile(xPathExpression);
-	        //pedimos que nos devuelva todos los nodos que coincidan con la expresi�n
+	        //pedimos que nos devuelva todos los nodos que coincidan con la expresión
 			NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 	         	                
 			//Siempre recorremos los nodos que coincidan con la 

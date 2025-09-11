@@ -37,7 +37,7 @@ while(claves.hasMoreElements()){
 			</font>
 		</c:if>
 		
-		<form name="f" action="<c:url value='/paginas/nuestro-login.jsp'/>"	method="POST">
+		<form name="f" action="<c:url value='/paginas/nuestro-login.jsp'/>"method="POST">
 			<table>
 				<tr>
 					<td>Usuario</td>

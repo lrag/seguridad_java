@@ -208,10 +208,6 @@ http.headers(headers -> headers
 .frameOptions(frameOptions -> frameOptions
 	.sameOrigin()
 )
-
-.frameOptions(frameOptions -> frameOptions
-	.sameOrigin()
-)
 				
 .cacheControl(cache -> cache.disable())				
 		

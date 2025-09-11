@@ -64,13 +64,8 @@
 							<a href="<c:url value='/expedientesx/desclasificar?id=${expediente.id}'/>">desclasificar</a>
 							-->
 							<!--  -->
-							
-							<sec:authorize access="@seguridad.getPermiso()">
-								<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
-								<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
-							</sec:authorize>							
-							
-							
+							<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
+							<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
 						</td>
 					</tr>
 				</c:forEach>

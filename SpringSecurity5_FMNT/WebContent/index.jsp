@@ -17,6 +17,7 @@
 <div id="content">
 
 	<h1>Página Principal</h1>
+	<p>
 
 
 	<!-- LOGOUT -->	
@@ -30,15 +31,8 @@
 	</p> 
 	<hr/>
 	<%= request.getUserPrincipal() %> 
-	
 
 
-	
-	<p>
-		<a href="<c:url value='/expedientesx/mostrar/todos'/>">
-			Mostrar	expedientes
-		</a>
-	</p>
 	
 </div>
 

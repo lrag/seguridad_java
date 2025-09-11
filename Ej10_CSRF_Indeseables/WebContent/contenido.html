@@ -12,9 +12,13 @@
 
 </form>
 
+<a href="http://localhost:8080/Ej10_CSRF/seguro/saldo.jsp">VER</a>
+
 <!-- CORS -->
 <script type="application/javascript">
+
 	console.log("HOLA")
+	console.log("GALLETAS: "+document.cookie)
 	
 	let xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("post","http://127.0.0.1:8080/Ej10_CSRF/seguro/SVTransferencias", false)

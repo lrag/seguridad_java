@@ -2,13 +2,12 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
-/*
+
 HttpSession sesion = request.getSession();
 if(sesion == null || sesion.getAttribute("usuario")==null){
 	response.sendRedirect("../login.html");
 	return;
 }
-*/
 
 %>       
     

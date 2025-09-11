@@ -22,8 +22,10 @@ public class XFrameOptionsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse; 
         response.addHeader("X-Frame-Options", "DENY"); 
         //response.addHeader("X-Frame-Options", "SAMEORIGIN"); 
-        //response.addHeader("X-Frame-Options", "ALLOW-FROM http://localhost:8080"); 
- 
+        //OBSOLETO:
+        //response.addHeader("X-Frame-Options", "ALLOW-FROM http://localhost:8080");  
+        response.addHeader("Content-Security-Policy", "frame-ancestors http://localhost:8080");
+        
         filterChain.doFilter(servletRequest, response); 
     } 
  

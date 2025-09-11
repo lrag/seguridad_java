@@ -30,7 +30,7 @@ public class JAXBServlet extends HttpServlet {
 			throws ServletException, IOException {
 			
 		System.setProperty("javax.xml.accessExternalSchema", "file, http");
-		System.setProperty("javax.xml.accessExternalDTD", "file, http");		
+		//System.setProperty("javax.xml.accessExternalDTD", "file, http");		
 		
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance( Cliente.class );

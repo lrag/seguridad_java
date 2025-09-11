@@ -38,8 +38,7 @@ public class SVESAPI extends HttpServlet {
 			String url          = request.getParameter("url");
 			String javascript   = request.getParameter("javascript");
 			String html         = request.getParameter("html");
-			*/
-			
+			*/			
 
 			//Aqui empiezan los encoder, descomentar para aplicar
 			//Estos encoders nos van a asegurar que no nos van a inyectar codigo malicioso
@@ -109,7 +108,8 @@ public class SVESAPI extends HttpServlet {
 			System.out.println("parametroUrl:\n" + parametroUrl);
 			System.out.println("url:\n" + url);
 			System.out.println("javascript:\n" + javascript);
-						
+				
+			
 			HttpSession sesion = request.getSession(true);
 			sesion.setAttribute("textoHtml",textoHtml);
 			sesion.setAttribute("atributo",atributo);

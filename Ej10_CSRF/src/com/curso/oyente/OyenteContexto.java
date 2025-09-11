@@ -27,12 +27,9 @@ public class OyenteContexto implements ServletContextListener {
 		
 		//La cookie solo se enviará a esta url pattern
 		SessionCookieConfig scf = sce.getServletContext().getSessionCookieConfig();
-		System.out.println("PATH ANTES  :"+scf.getPath());
-		scf.setPath("/Ej05_Cookies/seguro");
-		System.out.println("PATH DESPUES:"+scf.getPath());
 
 		//Más opciones:		
-		scf.setHttpOnly(true); //No podrá ser accedida desde JS
+		scf.setHttpOnly(false); //No podrá ser accedida desde JS
 							   //diga lo que diga la conf del servidor
 		
 		//Esto add una exigencia extra, solo se enviara la

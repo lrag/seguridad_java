@@ -28,9 +28,7 @@
 	<br/>
 
 	<form name="formulario" action="SVTransferencias" method="post">
-		<!-- 
-		-->
-		<input type="text" name="CSRFToken" value="${CSRFToken}"/>
+
 
 		<div class="row">
 			
@@ -38,6 +36,14 @@
 
 				<div class="row">
 		
+				    <div class="col-3 mt-1">
+				    </div>
+				    <div class="col-9 mt-1">
+			        		<!-- 
+						-->
+						<input type="text" name="CSRFToken" value="${CSRFToken}"/>
+				    </div>				    
+
 				    <div class="col-3 mt-1">
 				        <label>Cuenta</label>
 				    </div>

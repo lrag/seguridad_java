@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
+
 //No cachearlo todo tiene un precio, y es que el servidor puede recibir m�s
 //peticiones
 @WebFilter("/seguro/*")
@@ -36,8 +37,11 @@ public class FiltroNoCache implements Filter {
 									    //cuando debe expirar una pagina en milisegundos
 							            //desde el 1 de 1 de 1970
 
+		//ANTES
+		
 		chain.doFilter(request, response);
 		
+		//DESPUES
 		
 	}
 
