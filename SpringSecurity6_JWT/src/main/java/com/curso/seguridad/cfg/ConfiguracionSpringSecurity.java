@@ -20,21 +20,21 @@ public class ConfiguracionSpringSecurity {
 	
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	
-    	http
-    		.sessionManagement(sess -> sess
-    			.sessionCreationPolicy(SessionCreationPolicy.STATELESS) 
-    		);
-    	
-    	http    		
-            .csrf(csrf -> csrf.disable());
-    	
-    	http
+	    	
+	    	http
+	    		.sessionManagement(sess -> sess
+	    			.sessionCreationPolicy(SessionCreationPolicy.STATELESS) 
+	    		);
+	    	
+	    	http    		
+	            .csrf(csrf -> csrf.disable());
+	    	
+	    	http
 			.authorizeHttpRequests( auth -> auth
 				.requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
 				.requestMatchers(AntPathRequestMatcher.antMatcher("/js/*")).permitAll()
 				.requestMatchers(AntPathRequestMatcher.antMatcher("/*.html")).permitAll()
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/servicioAutenticacion")).permitAll()
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/controlAutenticacion")).permitAll()
 				.anyRequest().authenticated());
     	
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class); 

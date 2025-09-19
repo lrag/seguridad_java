@@ -47,6 +47,7 @@ public class ConfiguracionSpringSecurity {
 
 }
 
+/*
 class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
@@ -56,6 +57,7 @@ class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 }
+*/
 
 
 

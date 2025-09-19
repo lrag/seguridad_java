@@ -32,7 +32,11 @@
 	<hr/>
 	<%= request.getUserPrincipal() %> 
 
-
+	<p>
+		<a href="<c:url value='/expedientesx/mostrar/todos'/>">
+			Mostrar	expedientes
+		</a>
+	</p>
 	
 </div>
 

@@ -26,7 +26,7 @@ public class ControlAcceso {
 		this.jwtUtil = jwtUtil;
 	}
     
-	@PostMapping("/servicioAutenticacion")
+	@PostMapping("/controlAutenticacion")
     public String login(@RequestBody LoginRequest loginRequest) {
 		
 		Authentication authentication = authenticationManager.authenticate(
@@ -37,13 +37,13 @@ public class ControlAcceso {
 			throw new UsernameNotFoundException("El usuario no existe");
 		}
 		
-    	List<String> roles = authentication
-    		.getAuthorities()
-    		.stream()
-    		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))
-    		.collect(Collectors.toList());
-    	
-    	System.out.println(roles);
+	    	List<String> roles = authentication
+	    		.getAuthorities()
+	    		.stream()
+	    		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))
+	    		.collect(Collectors.toList());
+	    	
+	    	System.out.println(roles);
     	
         return jwtUtil.generateToken(loginRequest.getUsername(), roles);
         

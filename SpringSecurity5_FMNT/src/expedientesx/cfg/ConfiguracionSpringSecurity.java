@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -16,10 +17,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
 public class ConfiguracionSpringSecurity {
 	
 	@Bean
@@ -64,7 +67,7 @@ public class ConfiguracionSpringSecurity {
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")        
+	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated() //   hasRole("AGENTE_ESPECIAL")        
 	    );
 
 		http.formLogin(form -> form
@@ -80,6 +83,8 @@ public class ConfiguracionSpringSecurity {
 				.anyRequest()
 				.requiresSecure()
 			);
+		
+		
 
 		//Activo por defecto
 		http.headers(headers -> headers
@@ -88,7 +93,28 @@ public class ConfiguracionSpringSecurity {
 				.preload(true)
 				.maxAgeInSeconds(31536000)
 			)
-		);		
+
+			.frameOptions(frameOptions -> frameOptions
+				.sameOrigin()
+			)
+							
+			.cacheControl(cache -> cache.disable())				
+					
+			.xssProtection(xss -> xss
+				.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
+			)
+							
+			//.contentSecurityPolicy(csp -> csp
+			//	.policyDirectives("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/")
+			//)				
+			
+			
+		);	
+		
+		http.exceptionHandling(handling -> handling
+		    	.accessDeniedPage("/paginas/acceso-denegado.jsp")
+			);		
+
 		
         http.csrf(csrf -> csrf.disable());
 	
