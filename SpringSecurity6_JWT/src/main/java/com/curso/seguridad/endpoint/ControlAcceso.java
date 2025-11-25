@@ -37,16 +37,16 @@ public class ControlAcceso {
 			throw new UsernameNotFoundException("El usuario no existe");
 		}
 		
-	    	List<String> roles = authentication
-	    		.getAuthorities()
-	    		.stream()
-	    		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))
-	    		.collect(Collectors.toList());
-	    	
-	    	System.out.println(roles);
+    	List<String> roles = authentication
+    		.getAuthorities()
+    		.stream()
+    		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))
+    		.collect(Collectors.toList());
     	
-        return jwtUtil.generateToken(loginRequest.getUsername(), roles);
+        String tk = jwtUtil.generateToken(loginRequest.getUsername(), roles);        
+        System.out.println(tk);
         
+        return tk;
     }	
 	
 }

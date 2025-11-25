@@ -11,10 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-
 //No cachearlo todo tiene un precio, y es que el servidor puede recibir m�s
 //peticiones
-@WebFilter("/seguro/*")
+//@WebFilter("/seguro/*")
 public class FiltroNoCache implements Filter {
 
     public FiltroNoCache() {

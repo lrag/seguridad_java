@@ -69,7 +69,7 @@ public class ConfiguracionSpringSecurity {
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated() //   hasRole("AGENTE_ESPECIAL")        
 	    );
-
+		
 		http.formLogin(form -> form
 			.loginPage("/paginas/nuestro-login.jsp")
 			//.usernameParameter("login")
@@ -82,9 +82,7 @@ public class ConfiguracionSpringSecurity {
 		http.requiresChannel(channel -> channel
 				.anyRequest()
 				.requiresSecure()
-			);
-		
-		
+			);	
 
 		//Activo por defecto
 		http.headers(headers -> headers
@@ -106,8 +104,7 @@ public class ConfiguracionSpringSecurity {
 							
 			//.contentSecurityPolicy(csp -> csp
 			//	.policyDirectives("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/")
-			//)				
-			
+			//)			
 			
 		);	
 		

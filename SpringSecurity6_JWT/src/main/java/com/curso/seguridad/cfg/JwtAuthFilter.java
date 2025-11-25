@@ -35,12 +35,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 	*/
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-      
-    		response.setHeader("TOCOTÓ", "TACATÁ");
-    	
+    	    	
         String authHeader = request.getHeader("Authorization");
         String token = null;
 
+        //Si viene el token se examina
+        //Si todo es correcto se añade el usuario al security context holder
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
             
@@ -62,13 +62,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 );    
             
             //Tambien deberíamos dejar el UserPrincipal' en el request
-            SecurityContextHolder.getContext().setAuthentication(authToken);
-            
+            SecurityContextHolder.getContext().setAuthentication(authToken);            
         }        
 
+        //Si no venía el token la petición continúa:
+        //-puede ser una petición que todo el mundo puede hacer
+        //-si la petición exíge el token ya la detendrán más adelante, cuando se ejecute la autorización
         filterChain.doFilter(request, response);
-        
-        //
         
     }
 }

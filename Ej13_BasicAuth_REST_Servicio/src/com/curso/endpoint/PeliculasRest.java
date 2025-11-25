@@ -20,6 +20,14 @@ import com.curso.modelo.negocio.GestorPeliculas;
 
 @Path("peliculas")
 public class PeliculasRest {
+	
+	/*
+	GET    /peliculas
+	GET    /peliculas/{id}
+	POST   /peliculas
+	PUT    /peliculas/{id}
+	DELETE /peliculas/{id}
+	*/
 
 	private GestorPeliculas gestorPeliculas = new GestorPeliculas();
 	
@@ -33,7 +41,7 @@ public class PeliculasRest {
 	}
 	
 	@PUT
-	//@Path("{id}")
+	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modificar(PeliculaDTO pelicula){
 		//gestorPeliculas.modificarPelicula(pelicula.asPelicula());

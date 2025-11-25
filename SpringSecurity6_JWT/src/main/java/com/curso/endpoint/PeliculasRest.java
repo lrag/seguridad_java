@@ -21,6 +21,8 @@ import com.curso.endpoint.dto.PeliculaDto;
 import com.curso.modelo.entidad.Pelicula;
 import com.curso.modelo.negocio.ServicioPeliculas;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(path="peliculas")
 public class PeliculasRest {
