@@ -24,8 +24,8 @@ public class OyenteContexto implements ServletContextListener {
 		
 		SessionCookieConfig scf = sce.getServletContext().getSessionCookieConfig();
 
-		//M·s opciones:		
-		scf.setHttpOnly(false); //No podr· ser accedida desde JS con true
+		//M√°s opciones:		
+		scf.setHttpOnly(true); //No podr√° ser accedida desde JS con true
 		//scf.setSecure(true);		
 
 		System.out.println("Is http only:"+scf.isHttpOnly());

@@ -41,7 +41,7 @@ hola&#x21;
 			<tr>
 				<td>Nodo de texto en html</td>
 				<td>
-					<b>${textoHtml}</b><!-- Solo admito texto html -->
+					<b>${textoHtml}</b><!-- Solo admito nodo de texto! -->
 				</td>
 			</tr>
 			<tr>

@@ -30,7 +30,9 @@ public class FiltroHttps implements Filter {
 		if(!httpRequest.isSecure()){			
 			//Esto es adecuado para un api rest: la aplicación cliente debe saber que esto es a travás de HTTPS
 			//response.getWriter().append("No se admiten peticiones que no sean https");
-			//Esto es adecuado para una aplciación web
+			//return;
+			//
+			//Esto es adecuado para una aplicación web
 			httpResponse.sendRedirect("Https://"
 									  +httpRequest.getServerName()
 									  +":8443"+httpRequest.getRequestURI());

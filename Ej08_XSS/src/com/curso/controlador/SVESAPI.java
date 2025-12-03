@@ -38,7 +38,7 @@ public class SVESAPI extends HttpServlet {
 			String url          = request.getParameter("url");
 			String javascript   = request.getParameter("javascript");
 			String html         = request.getParameter("html");
-			*/			
+			*/
 
 			//Aqui empiezan los encoder, descomentar para aplicar
 			//Estos encoders nos van a asegurar que no nos van a inyectar codigo malicioso
@@ -50,7 +50,7 @@ public class SVESAPI extends HttpServlet {
 			//Los encoders sirven apra sustituir caracteres en su equivalente
 			//Este permite caracteres, letras, etc. Pero si se encuentran
 			//<h1> por ejemplo, tienen que codificarlo a &lt; h1 &gt;
-			String textoHtml  = 
+			String nodoDeTexto  = 
 				ESAPI.encoder().
 					encodeForHTML(request.getParameter("textoHtml"));
 			//Este seria más intesivo, aqui por ejemplo ni espacios en blanco permitiria
@@ -96,12 +96,11 @@ public class SVESAPI extends HttpServlet {
 			//poner valor de variables, es decir, texto
 			String javascript = ESAPI.encoder().encodeForJavaScript(request.getParameter("javascript"));
 			
-			//Fin encoders	
-
+			//Fin encoders
 				
 			System.out.println("------------------------------");
 			System.out.println("------------------------------");
-			System.out.println("textoHtml:\n" + textoHtml);
+			System.out.println("textoHtml:\n" + nodoDeTexto);
 			System.out.println("html:\n" + html);
 			System.out.println("atributo:\n" + atributo);
 			System.out.println("css:\n" + css);
@@ -111,7 +110,7 @@ public class SVESAPI extends HttpServlet {
 				
 			
 			HttpSession sesion = request.getSession(true);
-			sesion.setAttribute("textoHtml",textoHtml);
+			sesion.setAttribute("textoHtml",nodoDeTexto);
 			sesion.setAttribute("atributo",atributo);
 			sesion.setAttribute("css",css);
 			sesion.setAttribute("parametroUrl",parametroUrl);

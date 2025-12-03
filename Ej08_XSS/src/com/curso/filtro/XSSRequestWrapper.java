@@ -16,7 +16,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
     }
 
     //Gracias a la herencia podemos sobrescribir los metodos de la
-    //clase request original, para as� poder pasar los encoders
+    //clase request original, para así poder pasar los encoders
     //a los parametros
     @Override
     public String[] getParameterValues(String parameter) {
@@ -55,7 +55,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         if (value != null) {
             value = ESAPI.encoder().canonicalize(value);
             
-            //Este ejemplo ser�a otra alternativa al ESAPI para evitar el 
+            //Este ejemplo sería otra alternativa al ESAPI para evitar el 
             //XSS, pasa todos los barridos necesarios para evitar la inyecccion
             
             // Avoid null characters

@@ -33,6 +33,9 @@
 	<p align="center">
 		<a href="SVTransferencias">Transferencias</a>
 	</p>	
+	<p align="center">
+		<a href="saldo.jsp">Saldo</a>
+	</p>	
 
 </body>
 </html>

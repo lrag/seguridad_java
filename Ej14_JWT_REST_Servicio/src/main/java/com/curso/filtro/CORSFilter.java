@@ -40,10 +40,11 @@ public class CORSFilter implements Filter {
         //-Que incluyan solo los headers:
         //	User-Agent, Accept, Accept-Language, Content-Language
         //  Content-Type
-        //-Y adem�s para content type solo con los valores
+        //-Y además para content type solo con los valores
 	    //  application/x-www-form-urlencoded
 	    //  multipart/form-data
-	    //  text/plain  
+	    //  text/plain
+        //
         //Autorizamos a cualquier dominio a consumir nuestros recursos   
         //Colocar '*' solo en apis públicas 
         //respuesta.addHeader("Access-Control-Allow-Origin", "*");
@@ -63,8 +64,8 @@ public class CORSFilter implements Filter {
         
         System.out.println(origenesPermitidos.contains(origin));
         if(origenesPermitidos.contains(origin)) {
-        	System.out.println("OK");
-        	respuesta.addHeader("Access-Control-Allow-Origin", origin);
+        		System.out.println("OK");
+        		respuesta.addHeader("Access-Control-Allow-Origin", origin);
         }
         
         respuesta.addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST, DELETE");
@@ -73,7 +74,7 @@ public class CORSFilter implements Filter {
  
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 	 
-        //Si la petici�n ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
+        //Si la petición ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
         //como se espera en el 'cors handsake'
         
         if (request.getMethod().equals("OPTIONS")) {

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 //No cachearlo todo tiene un precio, y es que el servidor puede recibir m�s
 //peticiones
-//@WebFilter("/seguro/*")
+@WebFilter("/seguro/*")
 public class FiltroNoCache implements Filter {
 
     public FiltroNoCache() {
@@ -30,7 +30,8 @@ public class FiltroNoCache implements Filter {
 		//, algunas pueden funcionar, otras no
 		//dependiendo del navegador y su versión y el protocolo http usado
 		HttpServletResponse rp = (HttpServletResponse) response;
-		rp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+		rp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0"); // HTTP 1.1
+		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0
 		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0
 		rp.setDateHeader("Expires", 0); //esta es la mas efectiva de todas
 									    //cuando debe expirar una pagina en milisegundos

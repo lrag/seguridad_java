@@ -18,7 +18,7 @@ import org.apache.http.impl.client.HttpClients;
 
 import entidades.Cliente;
 
-public class _05_Prueba_CrecimientroCuadratico {
+public class _05_Prueba_VoladuraCuadratica {
 
 	public static void main(String[] args) {
 

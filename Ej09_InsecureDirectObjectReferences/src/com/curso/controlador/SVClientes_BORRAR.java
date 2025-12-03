@@ -16,13 +16,13 @@ import org.owasp.esapi.reference.IntegerAccessReferenceMap;
 import com.curso.modelo.entidad.Cliente;
 import com.curso.modelo.negocio.GestorClientes;
 
-@WebServlet("/SVClientes")
-public class SVClientes extends HttpServlet {
+//@WebServlet("/SVClientes")
+public class SVClientes_BORRAR extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private GestorClientes gestorClientes = new GestorClientes();
 	
-    public SVClientes() {
+    public SVClientes_BORRAR() {
         super();
     }
     
@@ -54,12 +54,13 @@ public class SVClientes extends HttpServlet {
 				idCliente = (Integer) armap.getDirectReference(request.getParameter("idCliente"));
 			} catch (AccessControlException e) {
 				e.printStackTrace();
-			} 
+			}
 			
 			//ahora que tenemos la clave verdadera podemos pasarsela al negocio
 			Cliente clienteSel = gestorClientes.buscar(idCliente);
 			//rellenamos el cliente seleccionado con la clave indirecta para pasarsela a la pantalla
 			clienteSel.setId(Integer.valueOf(armap.getIndirectReference(idCliente)));
+	
 					
 			request.setAttribute("clienteSel", clienteSel);			
 			siguienteVista = "formularioClientes.jsp";
@@ -74,6 +75,7 @@ public class SVClientes extends HttpServlet {
 			//indirectas, la clave seria la indirecta y el valor la verdadera
 			//Con AccessReferenceMap
 			//AccessReferenceMap armap = new RandomAccessReferenceMap();
+					
 			IntegerAccessReferenceMap armap = new IntegerAccessReferenceMap();
 			for(Cliente c:clientes){
 				//add al mapa la clave verdadera, el generará automaticamente una clave
@@ -84,6 +86,7 @@ public class SVClientes extends HttpServlet {
 			}
 			//Guardamos este mapa en la session del usuario
 			sesion.setAttribute("armap", armap);	
+			
 			
 			request.setAttribute("listadoClientes", clientes);
 			
@@ -101,7 +104,7 @@ public class SVClientes extends HttpServlet {
 	//Borrar
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//Recoger los parámetros y hacer una primera conversion
+		//Recoger los par�metros y hacer una primera conversion
 		//de String al tipo adecuado		
 		//Sin AccessReferenceMap
 		/*
@@ -111,9 +114,9 @@ public class SVClientes extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("idCliente"));
 		} catch (NumberFormatException e) {
 			//e.printStackTrace();
-		}
-		*/		
-		//Fin
+		}	
+		*/	
+    	//Fin
 		
 		//Con AccessReferenceMap
 		HttpSession sesion = request.getSession(true);

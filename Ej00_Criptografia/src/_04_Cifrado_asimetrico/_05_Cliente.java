@@ -40,7 +40,7 @@ public class _05_Cliente {
 			String clavePublicaB64 = sc.nextLine();
 			Decoder decoderB64 = Base64.getDecoder();
 			byte[] keyBytes = decoderB64.decode(clavePublicaB64);
-			System.out.println("Clave pública recibida:"+clavePublicaB64);
+			System.out.println("Clave pÃºblica recibida:"+clavePublicaB64);
 			X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 			KeyFactory kf = KeyFactory.getInstance("RSA", "BC");
 			Key clavePublica = kf.generatePublic(spec);
@@ -50,18 +50,18 @@ public class _05_Cliente {
 			Key sKey = Utils.createKeyForAES(256, random);
 			IvParameterSpec sIvSpec = Utils.createCtrIvForAES(0, random);
 
-			// Encriptar la clave simétrica con la clave pública del servidor
+			// Encriptar la clave simÃ©trica con la clave pÃºblica del servidor
 			Cipher xCipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA1AndMGF1Padding", "BC");
 			xCipher.init(Cipher.ENCRYPT_MODE, clavePublica, random);
 			byte[] claveSimetricaBytes = xCipher.doFinal(packKeyAndIv(sKey, sIvSpec));
 
-			//Enviar la clave simétrica cifrada al servidor
+			//Enviar la clave simÃ©trica cifrada al servidor
 			Encoder encoderB64 = Base64.getEncoder();
 			String claveSimetricaB64 = encoderB64.encodeToString(claveSimetricaBytes);
-			System.out.println("Enviando clave simétrica cifrada:"+claveSimetricaB64);
+			System.out.println("Enviando clave simÃ©trica cifrada:"+claveSimetricaB64);
 			out.println(claveSimetricaB64);
 			
-			//Leemos el mensaje encriptado con la clave simétrica
+			//Leemos el mensaje encriptado con la clave simÃ©trica
 			String mensajeEncriptadoB64 = sc.nextLine();
 			byte[] mensajeEncriptadoBytes = decoderB64.decode(mensajeEncriptadoB64);
 			

@@ -26,6 +26,14 @@ import com.curso.modelo.negocio.GestorPeliculas;
 @RequestMapping(path="seguro/peliculas")
 public class PeliculasRest {
 
+	/*
+	GET    /peliculas
+	GET    /peliculas/{id}
+	POST   /peliculas
+	PUT    /peliculas/{id}
+	DELETE /peliculas/{id}
+	*/
+	
 	@Autowired
 	private GestorPeliculas gestorPeliculas;
 	
@@ -33,7 +41,7 @@ public class PeliculasRest {
 				 consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
 		gestorPeliculas.insertar(peliculaDto.asPelicula());
-		return new ResponseEntity<String>("La pelicula se insert�", HttpStatus.CREATED);
+		return new ResponseEntity<String>("La pelicula se insertó", HttpStatus.CREATED);
 	}
 
 	@PutMapping(path="/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)

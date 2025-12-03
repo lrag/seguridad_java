@@ -59,6 +59,7 @@ function accederIframes(){
 	parametro. Hay su equivalente para otros navegadores
  -->
 <h2 align="center"><font color="lightGreen">--disable-web-security</font></h2>
+<h2 align="center"><font color="lightBlue" style="font-family: Arial">rnicrosoft.com</font></h2>
 
 <p align="center">
  	<iframe id="iframe1" width="500px" src="http://localhost:8080/Ej04_Sesion/login.html"></iframe>

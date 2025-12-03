@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/seguro/*")
+//@WebFilter("/seguro/*")
 public class FiltroCSRF implements Filter {
 
     public FiltroCSRF() {

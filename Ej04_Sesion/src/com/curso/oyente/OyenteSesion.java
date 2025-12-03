@@ -21,7 +21,7 @@ public class OyenteSesion implements HttpSessionListener, HttpSessionAttributeLi
     //cuando establecemos un atributo nuevo en la session
     public void attributeAdded(HttpSessionBindingEvent ev)  { 
          if(ev.getName().equals("usuario")){
-        	 System.out.println("Atributo añadido:"+ev.getSession().getId()+":"+ev.getName()+":"+ev.getValue());
+        	 System.out.println("Atributo aÃ±adido:"+ev.getSession().getId()+":"+ev.getName()+":"+ev.getValue());
          }
     }
 

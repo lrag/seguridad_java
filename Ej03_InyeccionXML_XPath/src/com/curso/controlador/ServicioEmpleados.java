@@ -205,7 +205,7 @@ public class ServicioEmpleados extends HttpServlet {
 		//Si value no es vacio ni nulo, comprobamos si nos estan inyectando
 		if ((value != null) && !"".equals(value)) {
 			//si la cadena tiene algunos de estos elementos
-			//no ser� valida (Caracteres susceptibles a inyeccion Xpath)
+			//no será valida (Caracteres susceptibles a inyeccion Xpath)
 			String xpathCharList = "()='[]:,*/ ";
 			
 			//recorremos la cadena que nos ha metido el usuario
