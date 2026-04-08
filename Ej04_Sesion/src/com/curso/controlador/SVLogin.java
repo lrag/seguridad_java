@@ -70,11 +70,12 @@ public class SVLogin extends HttpServlet {
 				//Esto para evitar session hijacking
 				//si no existe no la crea con false, devuelve null
 
-				
+				/*
 				s = request.getSession(false);
 				if(s != null){
 					s.invalidate();
 				}
+				*/
 				
 				//Desde JEE 7:
 				/*
@@ -91,8 +92,8 @@ public class SVLogin extends HttpServlet {
 				//en segundos(en tomcat 30 min, por defecto)
 				//Y deberiamos avisar al usuario cuando vaya a caducar
 				//mediante javascript (avisoTimeout.jsp)
-				//el intervalo deber�a de ser mas exigente para los roles
-				//m�s comprometidos (administradores, etc)
+				//el intervalo debería de ser mas exigente para los roles
+				//más comprometidos (administradores, etc)
 				/*
 				 */
 				int segundos = 240;
@@ -105,6 +106,7 @@ public class SVLogin extends HttpServlet {
 						rs.getInt("id"),
 						rs.getString("nombre"),
 						rs.getString("login"),
+						//rs.getString("ROLES"),
 						null //rs.getString("pw") //Debemos olvidarnos del password
 					); 
 				s.setAttribute("usuario",usr);

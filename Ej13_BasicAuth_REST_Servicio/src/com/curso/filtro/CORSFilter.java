@@ -68,15 +68,14 @@ public class CORSFilter implements Filter {
         	respuesta.addHeader("Access-Control-Allow-Origin", origin);
         }
         
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
+	 
         respuesta.addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST, DELETE");
         respuesta.addHeader("Access-Control-Allow-Headers", "*");
         respuesta.addHeader("Access-Control-Expose-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
- 
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
-	 
-        //Si la petición ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
-        //como se espera en el 'cors handsake'
         
+        //Si la petición ha sido un OPTIONS respondemos con el status code 'ACCEPTED',
+        //como se espera en el 'cors handsake'        
         if (request.getMethod().equals("OPTIONS")) {
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
             return;

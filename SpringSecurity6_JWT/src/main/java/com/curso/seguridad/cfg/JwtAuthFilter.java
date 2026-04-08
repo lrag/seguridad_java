@@ -21,17 +21,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
+//OncePerRequestFilter se ejecutará una única vez aunque haya forwards
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-    
     /*
     GET /peliculas
-    Authorization: Bearer fhryu4767f63.t8759823jfdhrh3.fijf9598y8348uw
+    Authorization: Bearer fhryu374firrumbio4767f63.t8759esnafrillo823jfdhrh3.fijf9598y8348uw
 	*/
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

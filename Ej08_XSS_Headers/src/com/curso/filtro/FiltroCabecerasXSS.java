@@ -21,10 +21,10 @@ public class FiltroCabecerasXSS implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
 
-	    	//Chrome, hasta jul-2019
-	    	//No todos los navegadores llegaron a soportarlo
-	    	HttpServletResponse response = (HttpServletResponse) servletResponse;
-	    	//X-XSS-Protection: 0
+    	//Chrome, hasta jul-2019
+    	//No todos los navegadores llegaron a soportarlo
+    	HttpServletResponse response = (HttpServletResponse) servletResponse;
+    	//X-XSS-Protection: 0
 		//X-XSS-Protection: 1
 		//X-XSS-Protection: 1; mode=block
         //response.setHeader("X-XSS-Protection", "1; mode=block");
@@ -51,6 +51,7 @@ public class FiltroCabecerasXSS implements Filter {
         
         //
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
+        //String nonce = UUID.randomUUID().toString();
         String nonce = randomString(20);
         rq.getSession().setAttribute("nonce", nonce);
 

@@ -80,7 +80,8 @@ http
         .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")        
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")      
+		//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/desclasificar")).hasRole("DIRECTOR")          
     );
 
 ############################################################################################################# 
@@ -210,7 +211,8 @@ http.headers(headers -> headers
 )
 				
 .cacheControl(cache -> cache.disable())				
-		
+	
+//Este es antiguo y ya se ignora	
 .xssProtection(xss -> xss
 	.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
 )

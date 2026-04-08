@@ -15,7 +15,7 @@ function enviar(){
 	body.innerHTML = contenido
 }
 
-function mostrarLogin(){
+function mostrarLoginFalso(){
 
 	body = document.getElementsByTagName("body")[0]
 	contenido = body.innerHTML
@@ -68,7 +68,7 @@ function mostrarLogin(){
 }
 
 if(!localStorage.getItem("pillaste")){
-	mostrarLogin()
+	mostrarLoginFalso()
 	localStorage.setItem("pillaste", "a base de bien")
 }
 

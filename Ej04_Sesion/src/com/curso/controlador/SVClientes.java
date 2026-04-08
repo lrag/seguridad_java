@@ -26,9 +26,7 @@ public class SVClientes extends HttpServlet {
 			response.sendRedirect("../login.html");
 			return;
 		}
-		*/
-
-		
+		*/		
 		
 		request.getRequestDispatcher("clientes.jsp").forward(request, response);
 	}

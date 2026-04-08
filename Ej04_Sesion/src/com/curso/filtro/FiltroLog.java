@@ -11,8 +11,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-//@WebFilter("/*")
+import com.curso.modelo.entidad.Usuario;
+
+@WebFilter("/*")
 public class FiltroLog implements Filter {
 
     public FiltroLog() {
@@ -26,7 +29,15 @@ public class FiltroLog implements Filter {
 		HttpServletRequest rq = (HttpServletRequest) request;
 		HttpServletResponse rp = (HttpServletResponse) response;
 		
-		System.out.println("Filtro log. Petición recibida: "+rq.getMethod()+" "+rq.getRequestURI());
+		HttpSession sesion = rq.getSession(false);
+		String log = "Filtro log. Petición recibida: "+rq.getMethod()+" "+rq.getRequestURI();
+		if(sesion!=null && sesion.getAttribute("usuario")!=null) {
+			log = log + ". Usuario: "+((Usuario) sesion.getAttribute("usuario")).getLogin();
+		} else {
+			log = log + ". Usuario no autenticado.";
+		}
+		
+		System.out.println(log);
 
 		chain.doFilter(request, response);
 	}

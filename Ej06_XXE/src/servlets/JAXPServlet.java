@@ -49,7 +49,7 @@ public class JAXPServlet extends HttpServlet {
 			String FEATURE;
 			// This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all 
 		    // XML entity attacks are prevented
-		    // Xerces 2 only - http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
+		    //// Xerces 2 only - http://xerces.apache.org/xerces2-j/features.html#disallow-doctype-decl
 		    //FEATURE = "http://apache.org/xml/features/disallow-doctype-decl";
 		    //dbf.setFeature(FEATURE, true);
 

@@ -18,6 +18,7 @@ function login(){
 		
     $.ajax( 
     	{ 
+    	  //'url'  : 'Ej14_JWT_REST_Servicio/SVAutenticacion', Tembién funcionaría con una ruta relativa
     	  'url'  : 'http://localhost:8080/Ej14_JWT_REST_Servicio/SVAutenticacion',
           'type' : 'post',
           'data' : parametros ,

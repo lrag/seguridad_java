@@ -24,14 +24,14 @@ public class XFrameOptionsFilter implements Filter {
     	//
     	//Este header queda obsoleto por la adición del control del source de frames a content-security-policy
     	//
-        //response.addHeader("X-Frame-Options", "DENY");       //Toddavía funciona
+        //response.addHeader("X-Frame-Options", "DENY");       //Todavía funciona
         //response.addHeader("X-Frame-Options", "SAMEORIGIN"); //Todavía funciona 
-        //response.addHeader("X-Frame-Options", "ALLOW-FROM http://localhost:8080"); //Ya es ignorado por los navegadores  
+        response.addHeader("X-Frame-Options", "ALLOW-FROM http://localhost:8080"); //Ya es ignorado por los navegadores  
         
         //
         //Con content-security-policy:
         //        
-        //response.addHeader("Content-Security-Policy", "frame-ancestors 'none'");
+        response.addHeader("Content-Security-Policy", "frame-ancestors 'none'");
         //response.addHeader("Content-Security-Policy", "frame-ancestors 'self'");
         //response.addHeader("Content-Security-Policy", "rame-ancestors 'self' *.movidas.com http://localhost:8081");
         

@@ -34,7 +34,7 @@ public class _03_SVInyeccionPreparedStatement extends HttpServlet {
 			Class.forName("org.h2.Driver");			
 			cx = DriverManager.getConnection("jdbc:h2:c:/H2/bbdd_seguridad","sa","");
 			
-			//La mejor soluci�n suele ser crear un prepareStatement para hacer la consulta
+			//La mejor solución suele ser crear un prepareStatement para hacer la consulta
 			//ya que previene la inyeccion sql y mejora la eficiencia de las consultas
 			PreparedStatement pst = cx.prepareStatement("select * from usuario where login=? and pw=?");
 			pst.setString(1, login);

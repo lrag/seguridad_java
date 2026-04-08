@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.curso.modelo.entidad.Usuario;
-import com.curso.modelo.negocio.GestorUsuarios;
+import com.curso.modelo.negocio.ServicioUsuarios;
 
 @WebFilter("/servicios/*")
 public class FiltroBasicAuthentication implements Filter {
 
-	private GestorUsuarios gestorUsuarios = new GestorUsuarios();
+	private ServicioUsuarios servicioUsuarios = new ServicioUsuarios();
 	
     public FiltroBasicAuthentication() {
     }
@@ -61,7 +61,7 @@ public class FiltroBasicAuthentication implements Filter {
 		System.out.println("Login: "+login);
 		System.out.println("Pw   : "+pw);
 		
-		Usuario usr = gestorUsuarios.buscarPorLogin(login);
+		Usuario usr = servicioUsuarios.buscarPorLogin(login);
 		if(usr == null || !usr.getPw().equals(pw) ) {
 			rp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return;

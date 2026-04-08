@@ -74,7 +74,7 @@ public class _04_SVInyeccionHibernate extends HttpServlet {
 		
 		if(rs.size()>0){
 			response.sendRedirect("inicio.html");
-		} else {
+		} else { 
 			response.sendRedirect("04_loginInyeccionHibernate.html");
 		}		
 		

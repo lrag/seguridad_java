@@ -6,6 +6,12 @@
 	<artifactId>Ej01_InyeccionSql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	
+	<properties>
+	    <sonar.host.url>http://localhost:9002</sonar.host.url>
+	    <sonar.token>squ_95f7c152ca1a3eec7355e31b9f640af84045406b</sonar.token>
+	</properties>	
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -32,6 +38,11 @@
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+			    <groupId>org.sonarsource.scanner.maven</groupId>
+			    <artifactId>sonar-maven-plugin</artifactId>
+			    <version>5.0.0.4389</version>
+			</plugin>			
 		</plugins>
 	</build>
 

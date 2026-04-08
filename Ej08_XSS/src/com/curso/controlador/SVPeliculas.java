@@ -24,7 +24,8 @@ public class SVPeliculas extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String accion = request.getParameter("accion");
+		String accion = request.getParameter("accion"); 
+
 		
 		String siguienteVista = "formularioPeliculas.jsp";
 		if("verResumen".equals(accion)){			

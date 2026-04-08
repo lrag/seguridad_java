@@ -11,12 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import com.curso.modelo.entidad.Articulo;
 import com.curso.modelo.entidad.Usuario;
-import com.curso.modelo.negocio.GestorArticulos;
+import com.curso.modelo.negocio.ServicioArticulos;
 
 @WebServlet("/seguro/SVArticulos")
 public class SVArticulos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private GestorArticulos gestorArticulos = new GestorArticulos();
+    private ServicioArticulos gestorArticulos = new ServicioArticulos();
 	
     public SVArticulos() {
         super();

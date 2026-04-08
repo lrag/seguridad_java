@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.curso.endpoint.dto.PeliculaDTO;
 import com.curso.modelo.entidad.Pelicula;
-import com.curso.modelo.negocio.GestorPeliculas;
+import com.curso.modelo.negocio.ServicioPeliculas;
 
 @Path("peliculas")
 public class PeliculasRest {
@@ -29,7 +29,7 @@ public class PeliculasRest {
 	DELETE /peliculas/{id}
 	*/
 
-	private GestorPeliculas gestorPeliculas = new GestorPeliculas();
+	private ServicioPeliculas gestorPeliculas = new ServicioPeliculas();
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -37,7 +37,7 @@ public class PeliculasRest {
 	public Response insertar(PeliculaDTO peliculaDTO){
 		Pelicula pelicula = peliculaDTO.asPelicula();
 		gestorPeliculas.insertarPelicula(pelicula);
-		return Response.status(200).entity(pelicula).build();
+		return Response.status(201).entity(pelicula).build();
 	}
 	
 	@PUT

@@ -2,12 +2,14 @@
     pageEncoding="ISO-8859-1"%>
     
 <%
+/*
 //De esto se encarga el filtro de seguridad
-//HttpSession sesion = request.getSession(false);
-//if(sesion == null || sesion.getAttribute("usuario")==null){
-//	response.sendRedirect("../login.html");
-//	return;
-//}
+HttpSession sesion = request.getSession(false);
+if(sesion == null || sesion.getAttribute("usuario")==null){
+	response.sendRedirect("../login.html");
+	return;
+}
+*/
 %>  
        
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

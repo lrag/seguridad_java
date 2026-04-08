@@ -146,10 +146,10 @@ public class ServicioEmpleados extends HttpServlet {
 	        //Creamos la expresion xpath para buscar en nuestro xml
 	        //
 	        //String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
-	        	// 
+	        // 
 	        
 	        ///////////////////////////////////////
-			//Consultas precompiladas con par�metros
+			//Consultas precompiladas con parámetros
 	        //Equivalente a prepare statement en xpath
 	        //no nos podrian inyectar xpath
 	        ///////////////////////////////////////

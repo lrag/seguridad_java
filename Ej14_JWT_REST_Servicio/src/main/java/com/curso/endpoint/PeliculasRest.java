@@ -20,7 +20,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.curso.endpoint.dto.PeliculaDto;
 import com.curso.modelo.entidad.Pelicula;
-import com.curso.modelo.negocio.GestorPeliculas;
+import com.curso.modelo.negocio.ServicioPeliculas;
 
 @RestController
 @RequestMapping(path="seguro/peliculas")
@@ -35,12 +35,12 @@ public class PeliculasRest {
 	*/
 	
 	@Autowired
-	private GestorPeliculas gestorPeliculas;
+	private ServicioPeliculas servicioPeliculas;
 	
 	@PostMapping(/*path="peliculas",*/
 				 consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
-		gestorPeliculas.insertar(peliculaDto.asPelicula());
+		servicioPeliculas.insertar(peliculaDto.asPelicula());
 		return new ResponseEntity<String>("La pelicula se insertó", HttpStatus.CREATED);
 	}
 
@@ -48,7 +48,7 @@ public class PeliculasRest {
 	public ResponseEntity<String> modificar(@RequestBody PeliculaDto peliculaDto, @PathVariable("id") Integer id){
 		try {
 			peliculaDto.setId(id);
-			gestorPeliculas.modificar(peliculaDto.asPelicula());
+			servicioPeliculas.modificar(peliculaDto.asPelicula());
 			return new ResponseEntity<String>("La pelicula se modific�", HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class PeliculasRest {
 	@DeleteMapping(path="{id}")
 	public ResponseEntity<String> borrar(@PathVariable("id") Integer id){
 		try {
-			gestorPeliculas.borrar(new Pelicula(id));
+			servicioPeliculas.borrar(new Pelicula(id));
 			return new ResponseEntity<String>("La pelicula se ha borrado", HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class PeliculasRest {
 	@GetMapping(path="{id}", 
 			    produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PeliculaDto> buscar(@PathVariable("id") Integer id){
-		Pelicula p = gestorPeliculas.buscar(id);
+		Pelicula p = servicioPeliculas.buscar(id);
 		if(p==null){
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
@@ -79,7 +79,7 @@ public class PeliculasRest {
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<PeliculaDto> listar() throws Exception{
-		return gestorPeliculas.listar()
+		return servicioPeliculas.listar()
 				.stream()
 				.map( p -> new PeliculaDto(p))
 				.collect(Collectors.toList());

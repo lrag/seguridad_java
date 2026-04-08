@@ -16,8 +16,8 @@
 function login(){	
 	let parametros = "username="+$("#username").val()+"&password="+$("#password").val()
 	
-    $.ajax( 	{ 
-    	  	  'url'     : 'http://localhost:8080/Ej14_JWT_REST_Servicio/SVAutenticacion',
+    $.ajax(	{ 
+    	  'url'     : 'http://localhost:8080/Ej14_JWT_REST_Servicio/SVAutenticacion',
           'type'    : 'post',
           'data'    : parametros ,
           'contentType' : 'application/x-www-form-urlencoded'

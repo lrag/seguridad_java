@@ -32,6 +32,11 @@ public class FiltroHttps implements Filter {
 			//response.getWriter().append("No se admiten peticiones que no sean https");
 			//return;
 			//
+			
+			//http://www.tienda.es
+			
+			//https://www.tienda.es
+			
 			//Esto es adecuado para una aplicación web
 			httpResponse.sendRedirect("Https://"
 									  +httpRequest.getServerName()
@@ -40,6 +45,8 @@ public class FiltroHttps implements Filter {
 		}
 		
 		chain.doFilter(request, response);
+		
+		
 	}
 
 

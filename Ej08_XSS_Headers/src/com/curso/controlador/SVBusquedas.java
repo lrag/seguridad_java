@@ -26,7 +26,7 @@ public class SVBusquedas extends HttpServlet {
 		//
 		
 		request.setAttribute("criterio", criterio);
-		request.setAttribute("resultado", "Este es el resultado de la b�squeda");
+		request.setAttribute("resultado", "Este es el resultado de la búsqueda");
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
 		
 	}

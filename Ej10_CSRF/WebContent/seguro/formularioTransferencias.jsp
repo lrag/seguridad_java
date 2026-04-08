@@ -39,7 +39,7 @@
 				    <div class="col-3 mt-1">
 				    </div>
 				    <div class="col-9 mt-1">
-			        		<!-- 
+		        		<!-- 
 						-->
 						<input type="text" name="CSRFToken" value="${CSRFToken}"/>
 				    </div>				    

@@ -43,7 +43,6 @@ public class JAXBServlet extends HttpServlet {
 	        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 	        Cliente cliente = (Cliente) unmarshaller.unmarshal(xsr);
 	        
-	        
 	        response.getWriter().print(cliente);
 		} catch (JAXBException e) {
 			e.printStackTrace();

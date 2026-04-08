@@ -13,6 +13,7 @@
 <script type="text/javascript" nonce="${nonce}">
 
 let headers = null
+//let url = '/Ej14_JWT_REST_Servicio/servicios/seguro/peliculas'; También funcionaría con una ruta relativa
 let url = 'http://localhost:8080/Ej14_JWT_REST_Servicio/servicios/seguro/peliculas';
 let peliculaSel;
 

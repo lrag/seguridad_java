@@ -31,7 +31,7 @@ public class SVESAPI extends HttpServlet {
 		
 			//MAL
 			/*
-			String textoHtml    = request.getParameter("textoHtml");
+			String nodoDeTexto  = request.getParameter("textoHtml");
 			String atributo     = request.getParameter("atributo");
 			String css          = request.getParameter("css");
 			String parametroUrl = request.getParameter("parametroUrl");
