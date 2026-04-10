@@ -99,6 +99,9 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             // Avoid onload= expressions
             scriptPattern = Pattern.compile("onload(.*?)=", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
+            
+            
+            
         }
         return value;
     }

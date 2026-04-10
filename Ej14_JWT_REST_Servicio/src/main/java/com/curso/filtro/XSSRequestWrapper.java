@@ -29,7 +29,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         //Leemos el body y lo guardamos en un array de bytes
         try {
             String contentType = servletRequest.getHeader("content-type");
-            if(contentType.contains("application/json")) {
+            if(contentType.contains("application/json") || contentType.contains("application/xml")) {
             	body = IOUtils.toByteArray(super.getInputStream());
             	System.out.println("=========================================");
             	System.out.println("Un JSON!");

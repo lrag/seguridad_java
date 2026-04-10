@@ -26,6 +26,7 @@ public class FiltroXSS implements Filter {
 	
 		System.out.println("FiltroXSS");
 		HttpServletRequest rq = (HttpServletRequest) request;
+		
 		//Aqui tendriamos que cambiar los parametros de entrada de
 		//que nos vienen en la request, el problema es que los parametros
 		//del request son inmutables
