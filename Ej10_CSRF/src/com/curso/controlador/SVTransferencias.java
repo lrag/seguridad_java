@@ -22,20 +22,20 @@ public class SVTransferencias extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		/*
+
 		HttpSession sesion = request.getSession(false);
 		//Generamos un numero UUID (Universally unique identifier)
 		//para crear el CSRF Token para guardarlo en la session y 
 		//meterlo en el jsp. 
 		String token = UUID.randomUUID().toString();
 		sesion.setAttribute("CSRFToken", token);
-		*/
+		
 		request.getRequestDispatcher("formularioTransferencias.jsp").forward(request,response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+
 		String CSRFTokenFormulario = request.getParameter("CSRFToken");
 		HttpSession sesion = request.getSession(false);
 		String CSRFTokenSesion = (String) sesion.getAttribute("CSRFToken");
@@ -52,7 +52,6 @@ public class SVTransferencias extends HttpServlet {
 			response.sendRedirect("../login.html");
 			return;
 		}
-		*/
 		
 		String cuenta = request.getParameter("cuenta");
 		String cantidad = request.getParameter("cantidad");

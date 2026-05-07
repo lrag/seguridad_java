@@ -78,9 +78,9 @@ public class ConfiguracionSpringSecurity {
     	http
 			.authorizeHttpRequests( auth -> auth
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/controlAutenticacion")).permitAll()
-				//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/peliculas**")).hasAnyRole("VISITANTE", "USUARIO", "ADMIN")
-				//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/peliculas")).hasAnyRole("USUARIO", "ADMIN")
-				//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/peliculas/*")).hasAnyRole("ADMIN")
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/peliculas**")).hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/peliculas")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/peliculas/*")).hasAnyRole("DIRECTOR")
 				.anyRequest().authenticated());
     	
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 

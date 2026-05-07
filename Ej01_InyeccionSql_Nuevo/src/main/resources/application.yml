@@ -1,0 +1,14 @@
+spring:
+  application.name: Ej01_InyeccionSql_
+
+  datasource:
+    url: jdbc:h2:c:/H2/bbdd_seguridad_2026
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  #Esto no es recomendable. Las consultas en los logs podrían llegar a verse...
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+  

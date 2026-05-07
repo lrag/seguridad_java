@@ -1,0 +1,41 @@
+Para los ejemplos se usara una base de datos H2 que es como una
+derby o un sqlite
+La base de datos debe de estar en 'c:/H2/bbdd' para que estos
+ejemplos funcionen
+
+Primero se ve el la pagina del https://www.owasp.org/index.php/Top_10_2013-Top_10
+, ya que se dedican a hacer
+estadisticas de proyectos reales y sacan una lista de los peligros
+reales de las aplicaciones web, los 10 primeros, en esta web se ven
+los problemas y posibles soluciones
+
+En este ejemplo se va a ver el problema de la inyeccion slq, estan
+numerados
+
+El primer ejemplo, el 01_loginInyeccion busca hacer un problema
+de inyeccion
+Hay dos usuarios, a:a y b:b (user:password)
+
+El segundo ejemplo muestra el mismo ejemplo, pero esta vez
+vamos a meter una librería que sirve para sanear o escapar
+ la entrada como la libreria ESAPI, debemos de descomentar
+ algunas partes del codigo
+Esta solución no es la mejor, pero desde luego es cuando
+no podemos tocar el codigo de la logica de negocio y queremos
+comprobar la entrada
+
+En el tercer ejemplo vemos la solución ideal que sería
+usando un prepared statement, aqui no podriamos hacer inyeccion
+SQL, pero puede que queramos seguir saneando el codigo de entrada
+ya que puede que en vez de un select hagan un insert, y no queramos
+llenar la base de datos de datos maliciosos. Además prepared stat.
+proporciona otras ventajas como velocidad de consultas
+
+El ejemplo 04 es con hibernate, pero se trata de lo mismo
+
+Puede haber inyeccion en un LDAP, tambien o XML o JavaScript como 
+veremos más adelante
+Incluso puede haber inyecciones OS(comandos de sistema) si tuvieramos
+una aplicación que ejecute comandos windows o linux por ejemplo
+
+1 hora
