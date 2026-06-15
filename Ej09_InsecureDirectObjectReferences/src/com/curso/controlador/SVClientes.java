@@ -54,7 +54,7 @@ public class SVClientes extends HttpServlet {
 				idCliente = (Integer) armap.getDirectReference(request.getParameter("idCliente"));
 			} catch (AccessControlException e) {
 				e.printStackTrace();
-			} 
+			}
 			
 			//ahora que tenemos la clave verdadera podemos pasarsela al negocio
 			Cliente clienteSel = gestorClientes.buscar(idCliente);
@@ -76,7 +76,7 @@ public class SVClientes extends HttpServlet {
 			//AccessReferenceMap armap = new RandomAccessReferenceMap();
 			IntegerAccessReferenceMap armap = new IntegerAccessReferenceMap();
 			for(Cliente c:clientes){
-				//add al mapa la clave verdadera, el generará automaticamente una clave
+				//add al mapa la clave verdadera, el generar� automaticamente una clave
 				//indirecta
 				Integer claveIndirecta = Integer.valueOf(armap.addDirectReference(c.getId()));
 				System.out.println("CI:"+claveIndirecta);
@@ -101,7 +101,7 @@ public class SVClientes extends HttpServlet {
 	//Borrar
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//Recoger los parámetros y hacer una primera conversion
+		//Recoger los par�metros y hacer una primera conversion
 		//de String al tipo adecuado		
 		//Sin AccessReferenceMap
 		/*
@@ -113,7 +113,7 @@ public class SVClientes extends HttpServlet {
 			//e.printStackTrace();
 		}
 		*/		
-		//Fin
+    	//Fin
 		
 		//Con AccessReferenceMap
 		HttpSession sesion = request.getSession(true);
@@ -140,11 +140,11 @@ public class SVClientes extends HttpServlet {
 		//Validar los objetos
 		//...
 		
-		//Averiguar que nos est�n pidiendo
+		//Averiguar que nos están pidiendo
 		String accion = request.getParameter("accion");
-		//Llamar al m�todo de negocio adecuado segun la accion
+		//Llamar al método de negocio adecuado segun la accion
 		switch(accion) {
-		case "insertar" : 
+			case "insertar" : 
 				gestorClientes.insertar(c);
 				break;
 			case "modificar" :

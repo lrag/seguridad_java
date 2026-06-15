@@ -16,7 +16,7 @@ import com.curso.modelo.negocio.ServicioArticulos;
 @WebServlet("/seguro/SVArticulos")
 public class SVArticulos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private ServicioArticulos gestorArticulos = new ServicioArticulos();
+    private ServicioArticulos servicioArticulos = new ServicioArticulos();
 	
     public SVArticulos() {
         super();
@@ -30,7 +30,7 @@ public class SVArticulos extends HttpServlet {
 		if("crearArticulo".equals(accion)){
 			sigVista = "formularioArticulo.jsp";
 		} else {
-			request.setAttribute("articulos", gestorArticulos.listarArticulos());
+			request.setAttribute("articulos", servicioArticulos.listarArticulos());
 		}
 		
 		request.getRequestDispatcher(sigVista).forward(request, response);
@@ -49,7 +49,7 @@ public class SVArticulos extends HttpServlet {
 		
 		Articulo articulo = new Articulo(usr, titulo, texto);
 		//simulamos negocio pero la capa de acceso a datos esta en memoria
-		gestorArticulos.insertar(articulo);
+		servicioArticulos.insertar(articulo);
 		
 		response.sendRedirect("SVArticulos");		
 	

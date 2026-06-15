@@ -145,7 +145,7 @@ public class ServicioEmpleados extends HttpServlet {
 	        XPath xpath = xpathfactory.newXPath();
 	        //Creamos la expresion xpath para buscar en nuestro xml
 	        //
-	        //String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
+	        String xPathExpression = "/empleados/empleado[@id='" + idEmpleado + "']";
 	        // 
 	        
 	        ///////////////////////////////////////
@@ -167,7 +167,9 @@ public class ServicioEmpleados extends HttpServlet {
 	        
 	        //Ahora la expresión xml cambiara, siendo '$id' la clave
 	        //metida como 'QName("id")'
-			String xPathExpression = "/empleados/empleado[@id=$id]";
+			//
+	        //String xPathExpression = "/empleados/empleado[@id=$id]";
+	        //
 	        //Fin consultas con par�metros
 	        
 	        //compilamos la expresion

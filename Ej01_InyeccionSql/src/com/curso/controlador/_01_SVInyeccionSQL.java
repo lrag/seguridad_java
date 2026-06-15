@@ -53,6 +53,7 @@ public class _01_SVInyeccionSQL extends HttpServlet {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			//throw new RuntimeException(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {

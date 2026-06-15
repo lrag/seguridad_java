@@ -1,5 +1,5 @@
 ﻿############################################################################################################# 
-# 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'AppInitializer'
+# 1. Añadir el filtro de seguridad en el método 'onStartup' de la clase 'expedientesx.cfg.AppInitializer'
 ############################################################################################################# 
 servletContext.addFilter("springSecurityFilterChain", 
 	new DelegatingFilterProxy("springSecurityFilterChain"))
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
 @EnableWebSecurity
@@ -80,7 +81,8 @@ http
         .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")        
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")      
+		//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/desclasificar")).hasRole("DIRECTOR")          
     );
 
 ############################################################################################################# 
@@ -168,8 +170,24 @@ http.rememberMe(rememberMe -> rememberMe
 	.rememberMeCookieName("my-remember-me")
 	.rememberMeParameter("remember-me-param")); //remember-me	
 
+
 ############################################################################################################# 
-# 9.    Seguridad en el canal de transporte (HTTPS) - Configurar restricciones y puertos
+# 9.    Seguridad en el canal de transporte (HTTPS) - Crear conector SSL en Servidor
+#############################################################################################################	
+server.xml
+
+	<Connector SSLEnabled="true" acceptCount="100" 
+		connectionTimeout="20000" executor="tomcatThreadPool" 
+		keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore" 
+		keystorePass="changeme" 
+		maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1" 
+		redirectPort="8443" scheme="https" secure="true"/>
+	
+copiar tcserver.keystore al directorio a la configuracion de Tomcat en el workspace	
+
+
+############################################################################################################# 
+# 10.    Seguridad en el canal de transporte (HTTPS) - Configurar restricciones y puertos
 #############################################################################################################
 http.requiresChannel(channel -> channel
 	.anyRequest()
@@ -184,20 +202,25 @@ http.headers(headers -> headers
 		.maxAgeInSeconds(31536000)
 	)
 );
-	
-############################################################################################################# 
-# 10.    Seguridad en el canal de transporte (HTTPS) - Crear conector SSL en Servidor
-#############################################################################################################	
-server.xml
 
-	<Connector SSLEnabled="true" acceptCount="100" 
-		connectionTimeout="20000" executor="tomcatThreadPool" 
-		keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore" 
-		keystorePass="changeme" 
-		maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1" 
-		redirectPort="8443" scheme="https" secure="true"/>
+############################################################################################################# 
+# --.    Otros headers relacionados con la seguridad
+#############################################################################################################
+
+.frameOptions(frameOptions -> frameOptions
+	.sameOrigin()
+)
+				
+.cacheControl(cache -> cache.disable())				
 	
-copiar tcserver.keystore al directorio a la configuracion de Tomcat en el workspace	
+//Este es antiguo y ya se ignora	
+.xssProtection(xss -> xss
+	.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
+)
+				
+.contentSecurityPolicy(csp -> csp
+	.policyDirectives("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/")
+)				
 	
 ############################################################################################################# 
 # 11.    Control de la expiración de sesiones
@@ -277,7 +300,7 @@ Invocando muestros propios métodos con SpEL
 public class Seguridad {	
 	public boolean getPermiso(){	
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getAuthorities());
+		System.out.println("GET PERMISO: "+authentication.getAuthorities());
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
 		return authorities.contains(new SimpleGrantedAuthority("ROLE_AGENTE_ESPECIAL")) 
 			   || authorities.contains(new SimpleGrantedAuthority("ROLE_DIRECTOR"));

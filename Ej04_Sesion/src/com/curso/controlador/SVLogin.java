@@ -70,12 +70,10 @@ public class SVLogin extends HttpServlet {
 				//Esto para evitar session hijacking
 				//si no existe no la crea con false, devuelve null
 
-				/*
 				s = request.getSession(false);
 				if(s != null){
 					s.invalidate();
 				}
-				*/
 				
 				//Desde JEE 7:
 				/*
@@ -96,7 +94,7 @@ public class SVLogin extends HttpServlet {
 				//más comprometidos (administradores, etc)
 				/*
 				 */
-				int segundos = 240;
+				int segundos = 2240;
 				s.setMaxInactiveInterval(segundos);
 				s.setAttribute("segundos", segundos);
 				

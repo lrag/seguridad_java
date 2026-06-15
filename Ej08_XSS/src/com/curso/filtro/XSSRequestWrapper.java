@@ -64,11 +64,12 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             // Avoid anything between script tags
             Pattern scriptPattern = Pattern.compile("<script>(.*?)</script>", Pattern.CASE_INSENSITIVE);
             value = scriptPattern.matcher(value).replaceAll("");
-
-            // Avoid anything in a src='...' type of expression
+            
+            // Avoid anything in a src='...', src="...", src=... type of expression
+            scriptPattern = Pattern.compile("src\\s*=\\s*\\\"(.*?)\\\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);            
+            value = scriptPattern.matcher(value).replaceAll("");
             scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\\'(.*?)\\\'", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
-
             scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\\"(.*?)\\\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
 
@@ -99,8 +100,6 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             // Avoid onload= expressions
             scriptPattern = Pattern.compile("onload(.*?)=", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
-            
-            
             
         }
         return value;

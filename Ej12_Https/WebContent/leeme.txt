@@ -8,7 +8,7 @@ Protocolo igual que el HTTP pero que esta totoalmente encriptado, envuelto
 en un mensaje SSL (HTTP + SSL) 2:00
 Este sistema se basa en clave publica (navegadores) y clave privada (servidor)
 que sera generado en base a un certificado
-La primera petici�n que se haga a la p�gina, el servidor va a mandar la
+La primera petición que se haga a la página, el servidor va a mandar la
 clave publica al navegador (que debera ser validada por una CA)
 El primer paso es configurar el servidor para que acepte peticiones https, que
 dependerá del servidor, para tomcat son las que estan abajo y deben de ser copiadas

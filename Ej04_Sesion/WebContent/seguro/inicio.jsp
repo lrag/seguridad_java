@@ -3,7 +3,7 @@
     
 <%
 /*
-HttpSession sesion = request.getSession();
+HttpSession sesion = request.getSession(false);
 if(sesion == null || sesion.getAttribute("usuario")==null){
 	response.sendRedirect("../login.html");
 	return;

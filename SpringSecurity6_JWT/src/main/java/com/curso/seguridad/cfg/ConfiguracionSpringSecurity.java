@@ -80,6 +80,7 @@ public class ConfiguracionSpringSecurity {
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/controlAutenticacion")).permitAll()
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/peliculas**")).hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/peliculas")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/peliculas/*")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/peliculas/*")).hasAnyRole("DIRECTOR")
 				.anyRequest().authenticated());
     	

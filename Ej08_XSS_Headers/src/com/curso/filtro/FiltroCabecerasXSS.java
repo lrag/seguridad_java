@@ -28,7 +28,7 @@ public class FiltroCabecerasXSS implements Filter {
 		//X-XSS-Protection: 1
 		//X-XSS-Protection: 1; mode=block
         //response.setHeader("X-XSS-Protection", "1; mode=block");
-        
+       
         System.out.println("Cabeceras XSS");
 
         //Indicando el src por defecto para:
@@ -52,7 +52,7 @@ public class FiltroCabecerasXSS implements Filter {
         //
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
         //String nonce = UUID.randomUUID().toString();
-        String nonce = randomString(20);
+        String nonce = randomString(20); 
         rq.getSession().setAttribute("nonce", nonce);
 
         response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");

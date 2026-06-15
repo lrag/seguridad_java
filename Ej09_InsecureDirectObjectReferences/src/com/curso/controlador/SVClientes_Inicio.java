@@ -17,12 +17,12 @@ import com.curso.modelo.entidad.Cliente;
 import com.curso.modelo.negocio.GestorClientes;
 
 //@WebServlet("/SVClientes")
-public class SVClientes_Inicio extends HttpServlet {
+public class SVClientes_INICIO extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private GestorClientes gestorClientes = new GestorClientes();
 	
-    public SVClientes_Inicio() {
+    public SVClientes_INICIO() {
         super();
     }
     

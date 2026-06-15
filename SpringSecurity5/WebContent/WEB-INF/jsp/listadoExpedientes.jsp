@@ -63,20 +63,9 @@
 							<a href="<c:url value='/expedientesx/clasificar?id=${expediente.id}'/>">clasificar</a>
 							<a href="<c:url value='/expedientesx/desclasificar?id=${expediente.id}'/>">desclasificar</a>
 							-->
-							
-							<!--
+							<!--  -->
 							<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
 							<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
-							-->
-														
-							<!--sec:authorize access="hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')">-->
-							<sec:authorize access="@seguridad.getPermiso()">
-							
-								<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
-								<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
-							</sec:authorize>							
-							
-							
 						</td>
 					</tr>
 				</c:forEach>

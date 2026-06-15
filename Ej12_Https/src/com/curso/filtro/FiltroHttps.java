@@ -24,9 +24,7 @@ public class FiltroHttps implements Filter {
 		System.out.println(httpRequest.isSecure());
 		
 		System.out.println("Filtro HTTPS:" + httpRequest.getRequestURI());
-		
 		httpResponse.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-
 		
 		if(!httpRequest.isSecure()){			
 			//Esto es adecuado para un api rest: la aplicación cliente debe saber que esto es a travás de HTTPS

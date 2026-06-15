@@ -38,7 +38,7 @@ public class PeliculasRest {
 	private ServicioPeliculas servicioPeliculas;
 	
 	@PostMapping(/*path="peliculas",*/
-				 consumes=MediaType.APPLICATION_JSON_VALUE)
+				 consumes= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE } )
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
 		servicioPeliculas.insertar(peliculaDto.asPelicula());
 		return new ResponseEntity<String>("La pelicula se insertó", HttpStatus.CREATED);
@@ -49,7 +49,7 @@ public class PeliculasRest {
 		try {
 			peliculaDto.setId(id);
 			servicioPeliculas.modificar(peliculaDto.asPelicula());
-			return new ResponseEntity<String>("La pelicula se modific�", HttpStatus.CREATED);
+			return new ResponseEntity<String>("La pelicula se modificó", HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("Error al insertar:"+e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -85,9 +85,9 @@ public class PeliculasRest {
 				.collect(Collectors.toList());
 	}
 			
-	@ExceptionHandler(value= { Exception.class })
+	@ExceptionHandler(value= { Throwable.class })
 	public ResponseEntity<Object> procesarError(Exception ex, WebRequest request){
-		ResponseEntity<Object> re = new ResponseEntity<Object>("ZASCA:"+ex.getMessage(), HttpStatus.BAD_REQUEST);
+		ResponseEntity<Object> re = new ResponseEntity<Object>("ZASCA:"+ex.getMessage(), HttpStatus.I_AM_A_TEAPOT);
 		return re;
 	}
 	
