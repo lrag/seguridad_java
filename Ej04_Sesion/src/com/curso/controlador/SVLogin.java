@@ -70,10 +70,12 @@ public class SVLogin extends HttpServlet {
 				//Esto para evitar session hijacking
 				//si no existe no la crea con false, devuelve null
 
+				/*
 				s = request.getSession(false);
 				if(s != null){
 					s.invalidate();
 				}
+				*/
 				
 				//Desde JEE 7:
 				/*

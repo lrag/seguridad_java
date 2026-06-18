@@ -1,0 +1,152 @@
+
+#CA Root de los 20 duros
+#
+#Autofirmado, es un certificado con permisos para firmar a otros
+#El parámetro -x509 indica que queremos un certificado autofirmado desde cero
+#openssl al ver ese par�metro da por sentado que ser� un certificado raíz y lo genera con
+#la capacidad de firmar otros certificados.
+#
+#openssl req -x509 -sha256 -days 36500 -newkey rsa:4096 -keyout AntunezRootCA.key -out AntunezRootCA.crt
+#PEM pass phrase: antunez
+#-AntunezRootCA.crt: certificado raíz público
+#-AntunezRootCA.key: clave privada, cifrada con la contraseña "antunez"
+
+#CA Intermedia
+#
+#openssl genrsa -out AntunezIntermediateCA.key 4096
+#-AntunezIntermediateCA.key
+
+#Generar el .csr (Certificate signing Request) 
+#No utilizamos el comando -x509. Creamos una solicitud para que alguien firme el certificado 
+#
+#openssl req -new -key AntunezIntermediateCA.key -out AntunezIntermediateCA.csr
+#-AntunezIntermediateCA.csr
+
+#Fichero con extensiones
+#AntunezIntermediateCA_extensions.txt
+#
+#subjectKeyIdentifier = hash
+#authorityKeyIdentifier = keyid:always,issuer
+#basicConstraints = critical, CA:true, pathlen:0
+#keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+
+#Firmar la CA intermedia con la CA root
+#Ahora si que se creará un certificado, pero no raíz ni auto firmado: firmado por nuestra root CA
+#
+#openssl x509 -req -in AntunezIntermediateCA.csr -CA AntunezRootCA.crt -CAkey AntunezRootCA.key -CAcreateserial -out AntunezIntermediateCA.crt -days 3650 -sha256 -extfile AntunezIntermediateCA_extensions.txt
+#Pass phrase: antunez (la contraseña del root CA)
+#-AntunezIntermediateCA.crt
+#
+#Se podría borrar ya el fichero AntunezIntermediateCA.csr
+#
+#El certificado Root ya lo podemos guardar bajo 7 llaves Y OFFLINE
+#
+
+#Certificado para el servidor (localhost)
+#La clave privada. Escogemos 2048 en vez de 4096 porque este certificado caduca antes que el de la CA y con 4096 bits de clave para
+#hacer el tls handshake con los clientes tarda 5 veces m�s en calcularse la verificación del certificado que con 2096 
+#
+#openssl genrsa -out servidor_localhost.key 2048
+#-servidor_localhost.key
+
+#Creamos la solicitud para firmar el certificado del servidor por parte de la Intermediate CA
+#openssl req -new -key servidor_localhost.key -out servidor_localhost.csr -subj "/CN=localhost/O=Api de pel�culas/C=ES"
+#-servidor_localhost.csr
+
+#Creamos el fichero
+#-servidor_localhost_extensions.txt
+#
+#authorityKeyIdentifier=keyid,issuer
+#basicConstraints=CA:FALSE
+#keyUsage = critical, digitalSignature, keyEncipherment
+#subjectAltName = @alt_names
+#[alt_names]
+#DNS.1 = localhost
+#
+#No será un certificado con el que se puedan firmar otros
+#DNS.1 = localhost Este certificado es para el dominio "localhost", no se podr� utilizar en un servidor que est� en otro dominio
+
+#Firmamos el certificado del servidor con la CA intermedia y el fichero anterior
+#100 años para que no tenga que volver a crearlo para otros cursos XD
+#openssl x509 -req -in servidor_localhost.csr -CA AntunezIntermediateCA.crt -CAkey AntunezIntermediateCA.key -CAcreateserial -out servidor_localhost.crt -days 36500 -sha256 -extfile servidor_localhost_extensions.txt
+#-servidor_localhost.crt
+#
+#Ya podríamos borrar el .csr
+#Colocaremos este certificado en el tomcat
+
+#Guardar el certificado del servidor en un fichero PKCS12
+#openssl pkcs12 -export -in servidor_localhost.crt -inkey servidor_localhost.key -out servidor_localhost.p12 -name tomcat -CAfile AntunezIntermediateCA.crt -caname root
+#contrase�a: changeme
+#-servidor_localhost.p12
+
+server.ssl.key-store-type: PKCS12
+server.ssl.key-store: classpath:servidor_localhost.p12
+server.ssl.key-store-password: changeme
+server.ssl.key-alias: tomcat
+server.ssl.key-password: changeme
+server.ssl.enabled: true
+server.port: 8443
+
+#TRUSTSTORE
+#
+#keytool -importcert -file AntunezIntermediateCA.crt -alias intermediaca -keystore truststore.p12 -storetype PKCS12
+#changeme
+#-truststore.p12
+
+server.ssl.trust-store-type: PKCS12
+server.ssl.trust-store: "classpath:truststore.p12"
+server.ssl.trust-store-password: "changeme"
+server.ssl.client-auth: need # Obliga a pedir certificado
+
+#
+#Certificados de los clientes
+#
+
+#CLIENTE 1
+#
+#openssl req -new -newkey rsa:2048 -keyout cliente1.key -out cliente1.csr
+#Pass phrase: cliente1
+#Common Name (e.g. server FQDN or YOUR name) []:Harry Callahan
+#-cliente1.key
+#-cliente1.csr
+
+#Creamos cliente-extensions.txt (vale para todos los clientes)
+#	basicConstraints = CA:FALSE
+#	nsCertType = client
+#	keyUsage = critical, digitalSignature, keyEncipherment
+#	extendedKeyUsage = clientAuth
+#	subjectKeyIdentifier = hash
+#	authorityKeyIdentifier = keyid,issuer
+
+#Firmamos el certificado con la CA intermedia
+#openssl x509 -req -in cliente1.csr -CA AntunezIntermediateCA.crt -CAkey AntunezIntermediateCA.key -CAcreateserial -out cliente1.crt -days 36500 -sha256 -extfile cliente_extensions.txt
+#-cliente1.crt
+
+#Guardamos el certificado del cliente en un fichero PKCS12
+#openssl pkcs12 -export -in cliente1.crt -inkey cliente1.key -out cliente1.p12 -name "Harry Callahan"
+#clave cliente1.key: cliente1
+#export: changeme
+#-cliente1.p12
+
+#CLIENTE 2
+#(Bud Spencer)
+#
+#openssl req -new -newkey rsa:2048 -keyout cliente2.key -out cliente2.csr
+#Pass phrase: cliente2
+#Common Name (e.g. server FQDN or YOUR name) []:Bud Spencer
+#-cliente2.key
+#-cliente2.csr
+#
+#Firmamos el certificado con la CA intermedia
+#openssl x509 -req -in cliente2.csr -CA AntunezIntermediateCA.crt -CAkey AntunezIntermediateCA.key -CAcreateserial -out cliente2.crt -days 36500 -sha256 -extfile cliente_extensions.txt
+#-cliente2.crt
+#
+#Guardamos el certificado del cliente en un fichero PKCS12
+#openssl pkcs12 -export -in cliente2.crt -inkey cliente2.key -out cliente2.p12 -name "Bud Spencer"
+
+#CLIENTE 3
+#
+#El certificado del cliente 3 (Harpo) no estará firmado por la CA intermedia
+#openssl req -x509 -newkey rsa:2048 -keyout cliente3.key -out cliente3.crt -days 36500 -sha256
+#openssl pkcs12 -export -in cliente3.crt -inkey cliente3.key -out cliente3.p12 -name Harpo
+

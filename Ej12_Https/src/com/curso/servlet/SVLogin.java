@@ -19,7 +19,8 @@ public class SVLogin extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//request.isSecure();
+		
+		request.getParameter("login");
 		
 		//1997
 		response.setContentType("text/html");
