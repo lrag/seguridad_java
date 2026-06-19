@@ -34,6 +34,13 @@ public class SVAutenticacion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
+	/*
+	POST /SVAutenticacion
+	CT: form/www url encoded
+	------------------------
+	username=aa&password=bb
+	*/
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String login = request.getParameter("username");

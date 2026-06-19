@@ -3,7 +3,7 @@
 #
 #Autofirmado, es un certificado con permisos para firmar a otros
 #El parámetro -x509 indica que queremos un certificado autofirmado desde cero
-#openssl al ver ese par�metro da por sentado que ser� un certificado raíz y lo genera con
+#openssl al ver ese parámetro da por sentado que ser� un certificado raíz y lo genera con
 #la capacidad de firmar otros certificados.
 #
 #openssl req -x509 -sha256 -days 36500 -newkey rsa:4096 -keyout AntunezRootCA.key -out AntunezRootCA.crt
@@ -76,12 +76,12 @@
 
 #Guardar el certificado del servidor en un fichero PKCS12
 #openssl pkcs12 -export -in servidor_localhost.crt -inkey servidor_localhost.key -out servidor_localhost.p12 -name tomcat -CAfile AntunezIntermediateCA.crt -caname root
-#contrase�a: changeme
+#contraseña: changeme
 #-servidor_localhost.p12
 
 server.ssl.key-store-type: PKCS12
 server.ssl.key-store: classpath:servidor_localhost.p12
-server.ssl.key-store-password: changeme
+server.ssl.key-store-password: ${CLAVE_ALMACEN:changeme}
 server.ssl.key-alias: tomcat
 server.ssl.key-password: changeme
 server.ssl.enabled: true
@@ -111,12 +111,12 @@ server.ssl.client-auth: need # Obliga a pedir certificado
 #-cliente1.csr
 
 #Creamos cliente-extensions.txt (vale para todos los clientes)
-#	basicConstraints = CA:FALSE
-#	nsCertType = client
-#	keyUsage = critical, digitalSignature, keyEncipherment
-#	extendedKeyUsage = clientAuth
-#	subjectKeyIdentifier = hash
-#	authorityKeyIdentifier = keyid,issuer
+#basicConstraints = CA:FALSE
+#nsCertType = client
+#keyUsage = critical, digitalSignature, keyEncipherment
+#extendedKeyUsage = clientAuth
+#subjectKeyIdentifier = hash
+#authorityKeyIdentifier = keyid,issuer
 
 #Firmamos el certificado con la CA intermedia
 #openssl x509 -req -in cliente1.csr -CA AntunezIntermediateCA.crt -CAkey AntunezIntermediateCA.key -CAcreateserial -out cliente1.crt -days 36500 -sha256 -extfile cliente_extensions.txt

@@ -18,7 +18,9 @@ public class SVTeclas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String t = request.getParameter("t");
-		System.out.println(t);
+		String hash = request.getParameter("hash");
+		String pagina = request.getParameter("pagina");
+		System.out.println(hash+", "+pagina+", "+t);
 		
 	}
 

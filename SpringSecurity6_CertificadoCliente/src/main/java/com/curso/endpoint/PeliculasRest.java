@@ -35,7 +35,7 @@ public class PeliculasRest {
 				 consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> insertar(@RequestBody PeliculaDto peliculaDto) throws Exception{
 		gestorPeliculas.insertar(peliculaDto.asPelicula());
-		return new ResponseEntity<String>("La pelicula se insert�", HttpStatus.CREATED);
+		return new ResponseEntity<String>("La pelicula se insertó", HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path="{id}", 

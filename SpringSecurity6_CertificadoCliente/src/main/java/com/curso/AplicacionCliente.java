@@ -33,7 +33,7 @@ public class AplicacionCliente {
 		
 		//He aqui nuestro almacen decertificados en el que está nuestra clave privada y certificado digital
 		KeyStore ks = KeyStore.getInstance("PKCS12");
-		ks.load(new FileInputStream("cliente2.p12"), "changeme".toCharArray());
+		ks.load(new FileInputStream("cliente3.p12"), "changeme".toCharArray());
 		
 		//Añadimos nuestro certificado al contexto
 		SSLContext sslContext = SSLContexts.custom()

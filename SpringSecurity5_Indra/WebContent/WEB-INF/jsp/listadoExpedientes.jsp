@@ -8,21 +8,7 @@
 <title>Expedientes X</title>
 </head>
 
-<script>
-
-	function clasificar(id){
-		document.formulario.action = "../clasificar";
-		document.getElementById("id").value = id;
-		document.formulario.submit();
-	}
-
-	function desclasificar(id){
-		document.formulario.action = "../desclasificar";
-		document.getElementById("id").value = id;
-		document.formulario.submit();
-	}		
-
-</script>
+<script type="application/javascript" src="../../js/listadoExpedientes.js"></script>
 
 <body>
 
@@ -61,22 +47,14 @@
 						<td align="center"><b>${expediente.clasificado}</b></td>
 						<td>
 							<a href="<c:url value='/expedientesx/mostrar/${expediente.id}'/>">mostrar</a>
-							<!-- 
-							<a href="<c:url value='/expedientesx/clasificar?id=${expediente.id}'/>">clasificar</a>
-							<a href="<c:url value='/expedientesx/desclasificar?id=${expediente.id}'/>">desclasificar</a>
-							-->
-							<!--  
-							<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
-							<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
-							-->
-							
+
 							<!-- 
 							sec:authorize access="hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')">
 							-->
 							
 							<sec:authorize access="@seguridad.getPermiso(1234, #expediente)">
-								<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
-								<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
+								<a href="#" id="clasificar-${expediente.id}">clasificar</a>
+								<a href="#" id="desclasificar-${expediente.id}">desclasificar</a>								
 							</sec:authorize>				
 							
 						</td>

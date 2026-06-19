@@ -21,7 +21,7 @@ while(claves.hasMoreElements()){
 <link rel="stylesheet" href="<c:url value='/css/estilos.css'/>"	type="text/css" />
 </head>
 
-<body onload='document.f.j_username.focus();'>
+<body>
 
 	<img src="<c:url value='/imagenes/xfiles.jpg'/>" align="right" />
 

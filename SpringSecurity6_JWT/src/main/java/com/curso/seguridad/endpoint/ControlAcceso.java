@@ -3,6 +3,9 @@ package com.curso.seguridad.endpoint;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,14 +30,14 @@ public class ControlAcceso {
 	}
     
 	@PostMapping("/controlAutenticacion")
-    public String login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
 		
 		Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
         
 		if (!authentication.isAuthenticated()) {
-			throw new UsernameNotFoundException("El usuario no existe");
+			return new ResponseEntity<>("Credenciales incorrectas.", HttpStatus.UNAUTHORIZED);
 		}
 		
     	List<String> roles = authentication
@@ -46,7 +49,7 @@ public class ControlAcceso {
         String tk = jwtUtil.generateToken(loginRequest.getUsername(), roles);        
         System.out.println(tk);
         
-        return tk;
+        return new ResponseEntity<>(tk, HttpStatus.OK);
     }	
 	
 }

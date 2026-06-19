@@ -130,7 +130,10 @@ public class ConfiguracionSpringSecurity {
 				.preload(true)
 				.maxAgeInSeconds(31536000)
 			)
-		);		
+			.contentSecurityPolicy(csp -> csp
+				    .policyDirectives("default-src 'self'")
+			)	
+		);	
 
 		http.logout(logout -> logout
 				.logoutSuccessUrl("/paginas/desconectado.jsp")

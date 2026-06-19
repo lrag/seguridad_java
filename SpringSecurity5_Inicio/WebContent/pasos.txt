@@ -220,8 +220,10 @@ http.headers(headers -> headers
 )
 				
 .contentSecurityPolicy(csp -> csp
-	.policyDirectives("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/")
-)				
+    .policyDirectives("default-src 'self' 'nonce-{nonce}'; object-src 'none';")
+)	
+
+			
 	
 ############################################################################################################# 
 # 11.    Control de la expiración de sesiones

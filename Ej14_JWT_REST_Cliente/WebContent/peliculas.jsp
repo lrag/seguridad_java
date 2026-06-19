@@ -35,15 +35,15 @@ function listarPeliculas(){
 }
 
 function procesarError(error){
-    console.log(error);
+    console.log(error)
 }
 
 function rellenarTablaPeliculas(peliculas){
 
-	modoInsercion();
-	vaciarFormulario();
+	modoInsercion()
+	vaciarFormulario()
 	
-    $("#tablaPeliculas").html("");
+    $("#tablaPeliculas").html("")
 
     for(let a=0; a<peliculas.length; a++){
         let pelicula = peliculas[a];
@@ -56,7 +56,7 @@ function rellenarTablaPeliculas(peliculas){
 		click(function(){
 			seleccionarPelicula(pelicula.id); //<--
         }).
-        appendTo("#tablaPeliculas");    
+        appendTo("#tablaPeliculas")  
     }
 }
 
@@ -64,8 +64,8 @@ function seleccionarPelicula(id){
     $.ajax( 
         { 'url' : url+'/'+id,
           'success' : rellenarFormulario,
-  		  'headers' : headers } );
-    modoSeleccion();
+  		  'headers' : headers } )
+    modoSeleccion()
 }
 
 function rellenarFormulario(pelicula){
@@ -74,21 +74,21 @@ function rellenarFormulario(pelicula){
 	
     $("#formulario [type=text]").each(
         function(){
-            this.value = pelicula[this.id];
+            this.value = pelicula[this.id]
         }
     );
-    //$("#titulo").val(pelicula.titulo);
-    //$("#director").val(pelicula.director);
-    //$("#genero").val(pelicula.genero);
-    //$("#year").val(pelicula.year);
+    //$("#titulo").val(pelicula.titulo)
+    //$("#director").val(pelicula.director)
+    //$("#genero").val(pelicula.genero)
+    //$("#year").val(pelicula.year)
 }
 
 function insertarPelicula(){
 
     let pelicula = {};
     $("#formulario [type=text]").each(function(){
-        pelicula[this.id] = this.value;
-    });
+        pelicula[this.id] = this.value
+    })
     
     //$.post
     $.ajax( { 'url'         : url,
@@ -98,16 +98,16 @@ function insertarPelicula(){
               'type'        : 'post',
               'contentType' : 'application/json; charset=UTF-8',
               'data'        : JSON.stringify(pelicula)
-            } );
+            } )
 }
 
 function modificarPelicula(){
 
     let pelicula = {};
     $("#formulario [type=text]").each(function(){
-        pelicula[this.id] = this.value;
+        pelicula[this.id] = this.value
     });
-    pelicula.id = peliculaSel.id;
+    pelicula.id = peliculaSel.id
     
     $.ajax( { 'url'         : url+"/"+peliculaSel.id,
      		  'headers'     : headers,
@@ -116,7 +116,7 @@ function modificarPelicula(){
               'type'        : 'put',
               'contentType' : 'application/json; charset=UTF-8',
               'data'        : JSON.stringify(pelicula)
-            } );
+            } )
 }
 
 function borrarPelicula(){
@@ -125,24 +125,24 @@ function borrarPelicula(){
               'success' : listarPeliculas,
               'error'   : procesarError,
               'type'    : 'delete'
-            } );
+            } )
 }
 
 function vaciarFormulario(){
-    $("#formulario [type=text]").val("");
-    modoInsercion();	
+    $("#formulario [type=text]").val("")
+    modoInsercion()	
 }
 
 function modoInsercion(){
-    $("#btnInsertar").prop("disabled", false);
-    $("#btnModificar").prop("disabled", true);
-    $("#btnBorrar").prop("disabled", true);
+    $("#btnInsertar").prop("disabled", false)
+    $("#btnModificar").prop("disabled", true)
+    $("#btnBorrar").prop("disabled", true)
 }
 
 function modoSeleccion(){
-    $("#btnInsertar").prop("disabled", true);
-    $("#btnModificar").prop("disabled", false);
-    $("#btnBorrar").prop("disabled", false);
+    $("#btnInsertar").prop("disabled", true)
+    $("#btnModificar").prop("disabled", false)
+    $("#btnBorrar").prop("disabled", false)
 }
 
 function salir(){
@@ -153,14 +153,14 @@ function salir(){
 $(inicializar);
 
 function inicializar(){
-    $("#btnInsertar").click(insertarPelicula);
-    $("#btnModificar").click(modificarPelicula);
-    $("#btnBorrar").click(borrarPelicula);
-    $("#btnVaciar").click(vaciarFormulario);
-    $("#btnSalir").click(salir);
-    modoInsercion();
-    crearHeaders();
-    listarPeliculas(); 
+    $("#btnInsertar").click(insertarPelicula)
+    $("#btnModificar").click(modificarPelicula)
+    $("#btnBorrar").click(borrarPelicula)
+    $("#btnVaciar").click(vaciarFormulario)
+    $("#btnSalir").click(salir)
+    modoInsercion()
+    crearHeaders()
+    listarPeliculas() 
 }
 
 </script>
@@ -225,8 +225,7 @@ function inicializar(){
                         <th>Año</th>
                     </tr>
                 </thead>
-                <tbody id="tablaPeliculas">
-                </tbody>
+                <tbody id="tablaPeliculas"></tbody>
             </table>
 
         </div>

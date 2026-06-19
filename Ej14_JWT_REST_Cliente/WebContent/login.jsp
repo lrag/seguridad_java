@@ -83,11 +83,9 @@ function inicializar(){
 	            <div class="col-xs-8">
 	              <input type="button" value="Entrar" id="btnEntrar"/>
 	            </div>
-	          </div>   
-	          
+	          </div>   	          
 	        
-	          <div id="mensaje" class="alert alert-danger">Credenciales incorrectas</div>
-	        	          
+	          <div id="mensaje" class="alert alert-danger">Credenciales incorrectas</div>	        	          
         
 	        </div> <!--formulario-->
 	      </div>

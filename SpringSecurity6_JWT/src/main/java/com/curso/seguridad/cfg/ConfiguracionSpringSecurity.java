@@ -45,11 +45,11 @@ public class ConfiguracionSpringSecurity {
 	
 	@Bean
 	UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
-	  String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
-	  String authsByUserQuery = "select username, authority from authorities where username = ?";
+	  //String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
+	  //String authsByUserQuery = "select username, authority from authorities where username = ?";
 	  JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-	  userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
-	  userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
+	  //userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
+	  //userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
 	  
 	  //Este código está aqui porque la base de datos desaparece al parar la aplicación y hay que volver a insertar los usuarios 
 	  UserDetails usuario1 = User.builder().username("Fernando").password(passwordEncoder().encode("1234")).roles("AGENTE").build();
