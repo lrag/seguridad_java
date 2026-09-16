@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-public class _05_Servidor {
+public class _05_Servidor_HANDSHAKE {
 
 	private Key clavePublica;
 	private Key clavePrivada;
@@ -31,7 +31,7 @@ public class _05_Servidor {
 
 		Security.addProvider(new BouncyCastleProvider());
 		
-		_05_Servidor servidor = new _05_Servidor();
+		_05_Servidor_HANDSHAKE servidor = new _05_Servidor_HANDSHAKE();
 		servidor.inicializarRSA();
 		servidor.abrirPuerto();
 	}	
@@ -55,7 +55,7 @@ public class _05_Servidor {
 			while(true) {
 				System.out.println("Esperando conexiones...");
 				Socket sk = svSk.accept();
-				System.out.println("Conexi�n recibida");
+				System.out.println("Conexión aceptada");
 				procesarSolicitud(sk);
 			}		
 			
@@ -83,22 +83,22 @@ public class _05_Servidor {
         //Enviamos la clave pública
         Encoder encoderB64 = Base64.getEncoder();
         String clavePublicaB64 = encoderB64.encodeToString(clavePublica.getEncoded());
-        System.out.println("Enviando clave p�blica:"+clavePublicaB64);
+        System.out.println("Enviando clave pública:"+clavePublicaB64);
         out.println(clavePublicaB64);
 
-        //Recibimos la clave sim�trica encriptada con nuestra clave p�blica
+        //Recibimos la clave simétrica encriptada con nuestra clave p�blica
         String claveSimetricaB64 = sc.nextLine();
-        System.out.println("Clave sim�trica recibida (encriptada):"+claveSimetricaB64);
+        System.out.println("Clave simétrica recibida (encriptada):"+claveSimetricaB64);
 		Decoder decoderB64 = Base64.getDecoder();
 		byte[] claveSimetricaEncriptada = decoderB64.decode(claveSimetricaB64);
         
-        //Desencriptamos la clave sim�trica utilizando nuestra clave privada
+        //Desencriptamos la clave simétrica utilizando nuestra clave privada
         Cipher xCipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA1AndMGF1Padding", "BC");
         xCipher.init(Cipher.DECRYPT_MODE, clavePrivada);
         
         Object[] keyIv = unpackKeyAndIV(xCipher.doFinal(claveSimetricaEncriptada));
 
-        //Encriptamos el mensaje con la clave sim�trica recibida
+        //Encriptamos el mensaje con la clave simétrica recibida
         Cipher sCipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");	
         sCipher.init(Cipher.ENCRYPT_MODE, (Key)keyIv[0], (IvParameterSpec)keyIv[1]);
         byte[] mensajeEncriptadoBytes = sCipher.doFinal("Siete caballos vienen de Bonanza".getBytes());        

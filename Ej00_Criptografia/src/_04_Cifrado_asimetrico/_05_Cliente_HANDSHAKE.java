@@ -21,7 +21,7 @@ import javax.crypto.spec.IvParameterSpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-public class _05_Cliente {
+public class _05_Cliente_HANDSHAKE {
 
 	public static void main(String[] args) throws Exception, NoSuchProviderException {
 

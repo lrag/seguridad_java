@@ -42,6 +42,8 @@ public class SVClientes extends HttpServlet {
 		}
 		*/			
 		
+		//serivcioClientes.insertar(cliente);
+		
 	}
 
 }

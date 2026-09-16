@@ -9,13 +9,13 @@ import javax.net.ssl.HttpsURLConnection;
 public class Prueba_Inyeccion {
 
 	/*
-	 * En este ejemplo vamos a inyectar XML a nuestra petición, como las clases
+	 * En este ejemplo vamos a inyectar XML a nuestra peticiï¿½n, como las clases
 	 * proxy que se generan hacen un saneamiento de la entrada, vamos a 
-	 * usar una librería de más bajo nivel para hacer la peticion HTTP
+	 * usar una librerï¿½a de mï¿½s bajo nivel para hacer la peticion HTTP
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		//Este sería un ejemplo de la petición anterior si capturaramos
+		//Este serï¿½a un ejemplo de la peticiï¿½n anterior si capturaramos
 		//el mensaje http al enviarlo al servidor
 		/*
 		POST /Ej02_InyeccionXML_CXF/services/ServicioUsuarios HTTP/1.0
@@ -46,7 +46,7 @@ public class Prueba_Inyeccion {
 		*/
 		
 		//En este ejemplo en vez de usar el objeto proxy para conectarnos al webservice
-		//vamos a hacer una conexión lo más pura posible, creando el mensaje HTTP 
+		//vamos a hacer una conexiï¿½n lo mï¿½s pura posible, creando el mensaje HTTP 
 		//que tenemos arriba
 		//Para ello vamos a suar el objeto HttpUrlConnection y rellenarlo
 		//con todas las propiedades
@@ -55,7 +55,7 @@ public class Prueba_Inyeccion {
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
-		//Configuración de la cabecera de la petición
+		//Configuraciï¿½n de la cabecera de la peticiï¿½n
 		con.setRequestMethod("POST");
 		
 		con.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
@@ -86,10 +86,10 @@ public class Prueba_Inyeccion {
 							//Aqui esta la clave de la inyeccion, en este caso vamos a add
 							//al rol que le vamos a pasar el rol declarado arriba, por lo que vamos a 
 							//generar mas etiquetas xml de las que deberiamos, y el mensaje
-							//HTML resultante será el que tenemos al principio de la clase
-							//El objetivo final será que el servidor se quedará con el 
+							//HTML resultante serÃ¡ el que tenemos al principio de la clase
+							//El objetivo final serÃ¡ que el servidor se quedarÃ¡ con el 
 							//ultimo valor del rol, por lo que nos habran inyectado el xml	
-							//La solución vendria por cambiar el wsdl generado y restingir el max
+							//La soluciÃ³n vendria por cambiar el wsdl generado y restingir el max
 							//numero de elementos id y rol, por ejemplo
 							"<rol>"+rol+"</rol>"+
 						"</arg0>"+
@@ -97,7 +97,7 @@ public class Prueba_Inyeccion {
 				"</soapenv:Body>"+
 			"</soapenv:Envelope>";		
 
-		//Enviamos la petición
+		//Enviamos la peticiï¿½n
 		con.setDoOutput(true);
 		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 		wr.writeBytes(urlParameters);

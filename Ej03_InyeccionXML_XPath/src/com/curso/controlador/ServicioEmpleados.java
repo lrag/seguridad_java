@@ -120,7 +120,7 @@ public class ServicioEmpleados extends HttpServlet {
 				System.out.println("Inyección!!!");
 				//devolvemos un 400, problema del cliente
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST,"INYECCION!!!!");
-				// Que hacemos si detectamos una inyecci�n?
+				// Que hacemos si detectamos una inyección?
 				// ->No seguir y mandar al usuario a login.
 				//   Y escribir en un log lo que ha pasado
 				//ya que es posible que suframos m�s ataques y conviene 
@@ -170,7 +170,7 @@ public class ServicioEmpleados extends HttpServlet {
 			//
 	        //String xPathExpression = "/empleados/empleado[@id=$id]";
 	        //
-	        //Fin consultas con par�metros
+	        //Fin consultas con parámetros
 	        
 	        //compilamos la expresion
 	        XPathExpression expr = xpath.compile(xPathExpression);

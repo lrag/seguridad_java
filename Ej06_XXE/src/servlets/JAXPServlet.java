@@ -22,6 +22,13 @@ import org.xml.sax.SAXException;
 
 import entidades.Cliente;
 
+/*
+POST /clientes
+CT: app/xml
+--------------
+<cliente/>
+*/
+
 
 /**
  * https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Prevention_Cheat_Sheet#Java
