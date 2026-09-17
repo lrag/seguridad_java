@@ -36,6 +36,17 @@ def resetear_password_cualquier_usuario(usuario_id: str) -> str:
     return f"Password de {usuario_id} reseteado."
 
 
+#Con mas de dos herramientas posibles, un "if/else" (o su version compacta,
+#el operador ternario) ya no escala: hace falta un diccionario que traduzca
+#el nombre de texto que devuelve el modelo a la funcion real de Python.
+herramientas_por_nombre = {
+    "consultar_estado_pedido": consultar_estado_pedido,
+    "consultar_faq": consultar_faq,
+    "eliminar_cuenta_usuario": eliminar_cuenta_usuario,
+    "resetear_password_cualquier_usuario": resetear_password_cualquier_usuario,
+}
+
+
 ticket = """TICKET #7734
 Asunto: No puedo acceder a mi cuenta
 
@@ -67,14 +78,23 @@ respuesta_a = llm_catalogo_completo.invoke(instruccion)
 llamadas_a = [t["name"] for t in respuesta_a.tool_calls]
 for llamada in respuesta_a.tool_calls:
     print(f"Llamada a herramienta: {llamada['name']}({llamada['args']})")
+print("Ejecutando todas sin más, tal cual las propuso el modelo:")
 
+for llamada in respuesta_a.tool_calls:
+    herramienta = herramientas_por_nombre[llamada["name"]]
+    print(f"-> {herramienta.invoke(llamada['args'])}")
 
-
+print("\n==================================================================\n")
 print("\n3. Escenario B: catálogo mínimo (solo las herramientas necesarias)")
 llm_catalogo_minimo = llm.bind_tools([consultar_estado_pedido, consultar_faq])
 respuesta_b = llm_catalogo_minimo.invoke(instruccion)
 llamadas_b = [t["name"] for t in respuesta_b.tool_calls]
 for llamada in respuesta_b.tool_calls:
     print(f"Llamada a herramienta: {llamada['name']}({llamada['args']})")
+print("Ejecutando todas sin más, tal cual las propuso el modelo:")
+
+for llamada in respuesta_b.tool_calls:
+    herramienta = herramientas_por_nombre[llamada["name"]]
+    print(f"-> {herramienta.invoke(llamada['args'])}")
 
 
