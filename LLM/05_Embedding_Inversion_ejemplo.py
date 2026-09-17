@@ -51,11 +51,11 @@ print(f"Vector de {len(embedding_secreto)} dimensiones, texto NO disponible para
 print("\n2. Diccionario de frases candidatas del atacante")
 candidatos = [
     "El empleado Marcos Diaz tiene un salario anual de 54000 euros y vive en Valladolid.",
-    "Marcos Diaz cobra 54000 euros al ano y reside en Valladolid.",
+    "Marcos Diaz cobra 54000 euros al año y reside en Valladolid.",
     "El empleado Marcos Diaz gana un salario de 30000 euros y vive en Madrid.",
     "La empleada Laura Perez tiene un salario anual de 54000 euros y vive en Sevilla.",
     "El comedor de la empresa sirve gazpacho los martes.",
-    "La capital de Francia es Paris.",
+    "La capital de Portugal es Pinto.",
 ]
 for candidato in candidatos:
     print(f"- {candidato}")

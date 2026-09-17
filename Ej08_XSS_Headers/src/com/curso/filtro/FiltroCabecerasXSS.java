@@ -41,13 +41,13 @@ public class FiltroCabecerasXSS implements Filter {
         //response.setHeader("Content-Security-Policy", "default-src 'self';");
         
         //Específicando el src para los js y las imágenes (serían distintos de 'self')
-        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro-sitio'; img-src 'otro-sitio-distinto';");
+        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro-sitio'; img-src 'self otro-sitio-distinto';");
         
         //Especificando más de un origen para javascript (o para cualquier otra cosa)
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro y_otro';");
         
         //Permitiendo js-inline (no puede prevenir el XSS)
-        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline';");
+        response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self, otrositio' 'unsafe-inline';");
         
         //
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
@@ -55,7 +55,7 @@ public class FiltroCabecerasXSS implements Filter {
         String nonce = randomString(20); 
         rq.getSession().setAttribute("nonce", nonce);
 
-        response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
+        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
               
         filterChain.doFilter(servletRequest, response);
     }
