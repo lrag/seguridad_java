@@ -4,15 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.owasp.esapi.ESAPI;
-import org.owasp.esapi.errors.IntrusionException;
 
 //Esta clase extiende de HttpServletRequestWrapper que implementa
-//HttpServletRequest, 
-public class XSSRequestWrapper extends HttpServletRequestWrapper {
+//HttpServletRequest,
+public class XSSRequestWrapper_OLD extends HttpServletRequestWrapper {
 
 	//El objeto que creamos usamos el de la request para coger
 	//por defecto sus valores
-    public XSSRequestWrapper(HttpServletRequest servletRequest) {
+    public XSSRequestWrapper_OLD(HttpServletRequest servletRequest) {
         super(servletRequest);
     }
 
@@ -54,34 +53,24 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     private String stripXSS(String value) {
         if (value != null) {
-            //Si ESAPI detecta una codificacion multiple o mixta lanza
-            //IntrusionException en vez de devolver un valor. No lo dejamos
-            //propagar: seguimos con el valor original (sin canonicalizar)
-            //para que las expresiones regulares de abajo se ejecuten igual
-            //y se pueda ver como se comportan ellas solas ante la entrada
-        	//
-        	//Jamás existiría este try!!!
-        	//
-            try {
-                value = ESAPI.encoder().canonicalize(value);
-            } catch (IntrusionException e) {
-                System.out.println("ESAPI canonicalize detecto una posible evasion por codificacion: " + e.getMessage());
-            }
+            value = ESAPI.encoder().canonicalize(value);
 
-            //Este ejemplo sería otra alternativa al ESAPI para evitar el 
+            //Este ejemplo sería otra alternativa al ESAPI para evitar el
             //XSS, pasa todos los barridos necesarios para evitar la inyecccion
-            
+
             // Avoid null characters
             value = value.replaceAll("\0", "");
 
-            // Avoid anything between script tags, tolerant to attributes
-            // in the opening tag (e.g. <script type="text/javascript">)
-            Pattern scriptPattern = Pattern.compile("<script\\b[^>]*>[\\s\\S]*?</script\\s*>", Pattern.CASE_INSENSITIVE);
+            // Avoid anything between script tags
+            Pattern scriptPattern = Pattern.compile("<script>(.*?)</script>", Pattern.CASE_INSENSITIVE);
             value = scriptPattern.matcher(value).replaceAll("");
 
-            // Avoid anything in a src='...', src="...", src=..., href='...',
-            // href="...", href=... type of expression
-            scriptPattern = Pattern.compile("(src|href)\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s>]+)", Pattern.CASE_INSENSITIVE);
+            // Avoid anything in a src='...', src="...", src=... type of expression
+            scriptPattern = Pattern.compile("src\\s*=\\s*\\\"(.*?)\\\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+            value = scriptPattern.matcher(value).replaceAll("");
+            scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\\'(.*?)\\\'", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+            value = scriptPattern.matcher(value).replaceAll("");
+            scriptPattern = Pattern.compile("src[\r\n]*=[\r\n]*\\\"(.*?)\\\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
 
             // Remove any lonesome </script> tag
@@ -92,8 +81,12 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             scriptPattern = Pattern.compile("<script(.*?)>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
 
-            // Avoid eval(...), expression(...) and other common JS execution sinks
-            scriptPattern = Pattern.compile("(eval|expression|setTimeout|setInterval|Function)\\s*\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+            // Avoid eval(...) expressions
+            scriptPattern = Pattern.compile("eval\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+            value = scriptPattern.matcher(value).replaceAll("");
+
+            // Avoid expression(...) expressions
+            scriptPattern = Pattern.compile("expression\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
 
             // Avoid javascript:... expressions
@@ -107,12 +100,8 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             // Avoid onload= expressions
             scriptPattern = Pattern.compile("onload(.*?)=", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll("");
-            
+
         }
         return value;
     }
 }
-
-
-
-

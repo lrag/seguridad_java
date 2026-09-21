@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSRF</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="text-center text-success">
+	    <br/>
+	    <br/>
+	    <h1>
+			Sube tu avatar pegando una URL
+		</h1>
+	    <br/>
+	    <br/>
+	</div>
+
+	<hr/>
+
+	<br/>
+
+	<div class="row">
+		<div class="col-8 offset-2">
+			<div class="card card-primary">
+				<div class="card-header">Avatar</div>
+				<div class="card-body">
+					<form action="SVAvatar" method="get" target="previsualizacion">
+						<div class="row g-2 align-items-end">
+							<div class="col-9">
+								<label for="url" class="form-label">URL de la imagen</label>
+								<input type="text" class="form-control" name="url" id="url"/>
+							</div>
+							<div class="col-3">
+								<input type="submit" class="btn btn-primary w-100" value="Previsualizar"/>
+							</div>
+						</div>
+					</form>
+					<p class="text-muted mt-2 mb-0">http://127.0.0.1:8080/Ej15_SSRF/interno/secreto</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br/>
+
+	<div class="row">
+		<div class="col-8 offset-2">
+			<div class="card card-primary">
+				<div class="card-header">Previsualización</div>
+				<div class="card-body p-0">
+					<iframe name="previsualizacion" class="w-100" style="height:400px; border:0;"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

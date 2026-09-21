@@ -17,25 +17,35 @@ de inyeccion
 Hay dos usuarios, a:a y b:b (user:password)
 
 El segundo ejemplo muestra el mismo ejemplo, pero esta vez
-vamos a meter una librer�a que sirve para sanear o escapar
+vamos a meter una librería que sirve para sanear o escapar
  la entrada como la libreria ESAPI, debemos de descomentar
  algunas partes del codigo
-Esta soluci�n no es la mejor, pero desde luego es cuando
+Esta solución no es la mejor, pero desde luego es cuando
 no podemos tocar el codigo de la logica de negocio y queremos
 comprobar la entrada
 
-En el tercer ejemplo vemos la soluci�n ideal que ser�a
+En el tercer ejemplo vemos otra tecnica, la validacion por lista
+blanca: antes de tocar la base de datos se comprueba que login y
+pw encajan con un patron cerrado (solo letras, numeros y guion
+bajo) y si no encaja se corta la peticion ahi mismo, sin intentar
+"arreglar" la entrada como hacia el escape del ejemplo 02. Es una
+tecnica portable (no depende del motor de base de datos) pero solo
+es comoda en campos con formato cerrado; en un campo libre como una
+contraseña con simbolos exigidos por politica de seguridad ya no es
+tan sencillo aplicarla
+
+En el cuarto ejemplo vemos la solución ideal que sería
 usando un prepared statement, aqui no podriamos hacer inyeccion
 SQL, pero puede que queramos seguir saneando el codigo de entrada
 ya que puede que en vez de un select hagan un insert, y no queramos
-llenar la base de datos de datos maliciosos. Adem�s prepared stat.
+llenar la base de datos de datos maliciosos. Además prepared stat.
 proporciona otras ventajas como velocidad de consultas
 
-El ejemplo 04 es con hibernate, pero se trata de lo mismo
+El ejemplo 05 es con hibernate, pero se trata de lo mismo
 
 Puede haber inyeccion en un LDAP, tambien o XML o JavaScript como 
-veremos m�s adelante
+veremos más adelante
 Incluso puede haber inyecciones OS(comandos de sistema) si tuvieramos
-una aplicaci�n que ejecute comandos windows o linux por ejemplo
+una aplicación que ejecute comandos windows o linux por ejemplo
 
 1 hora

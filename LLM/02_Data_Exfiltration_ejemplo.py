@@ -60,7 +60,7 @@ secreto_sesion = "sk-live-4f9a2b7c1e"
 #pruebas. No es que el ataque sea mas dificil o mas facil segun el contenido:
 #el modelo reconoce la forma de la inyeccion, no necesariamente su fondo.
 #
-#MITIGACION 1 (2.3.6, separar canales con procedencia etiquetada): aqui el
+#MITIGACION 1 (2.7.6, separar canales con procedencia etiquetada): aqui el
 #secreto y el ticket viajan en la misma llamada al modelo, sin ninguna marca
 #que distinga "dato a resumir" de "instruccion a seguir". La correccion real
 #no es dejar de pasarle el secreto al modelo (a menudo hace falta para que la
@@ -90,7 +90,7 @@ prompt = ChatPromptTemplate.from_template(
     "Resume el siguiente ticket para el equipo:\n\n{ticket}"
 )
 
-#MITIGACION 1 aplicada (2.3.6, separar canales con procedencia etiquetada):
+#MITIGACION 1 aplicada (2.7.6, separar canales con procedencia etiquetada):
 #el ticket se marca explicitamente como dato no confiable, nunca como
 #instruccion. Para probarla, comenta el "prompt" de arriba y descomenta este.
 #Sigue siendo reduccion de superficie, no un control real (ver comentario

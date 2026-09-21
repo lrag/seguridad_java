@@ -1,0 +1,60 @@
+XXE - XML External Entity
+
+XML permite definir entidades propias en el DOCTYPE, como si fueran
+variables de texto que luego se usan en el documento con &nombre;
+El problema viene cuando esa entidad, en vez de ser un texto fijo,
+apunta a un recurso externo (un fichero, una URL) o se define a
+partir de otras entidades de forma anidada. Si el parser XML no lo
+impide, el atacante puede usarlo para leer ficheros del servidor,
+hacer peticiones a otras máquinas (SSRF), o tumbar el proceso
+metiendole un XML que se expanda en memoria de forma descontrolada
+
+Hay dos servlets objetivo, JAXPServlet (parseo con DOM/JAXP) y
+JAXBServlet (con JAXB/StAX), y 5 clases con un main() cada una que
+les mandan un POST con un XML distinto. Para probarlas hay que
+desplegar el war y lanzar cada _0N_Prueba_*.java contra
+localhost:8080/Ej06_XXE/...
+
+_01_Prueba_Legal    -> XML normal, sin truco, para comprobar que el
+                       flujo funciona
+_02_Prueba_JAXP     -> XXE clasico contra JAXPServlet: la entidad
+                       'xxe' apunta a file:///d:/fichero.txt y su
+                       contenido se cuela en la respuesta
+_03_Prueba_JAXB     -> el mismo payload pero contra JAXBServlet, para
+                       ver que el problema no es solo de DOM, tambien
+                       afecta a JAXB/StAX
+_04_Prueba_AtaqueDelBillonDeRisas -> Billion Laughs: entidades
+                       anidadas que se van multiplicando (10 niveles
+                       de 10 en 10) hasta expandirse en memoria de
+                       forma exponencial, denegacion de servicio
+_05_Prueba_VoladuraCuadratica     -> Quadratic Blowup: en vez de
+                       anidar, se define UNA entidad ya de por si
+                       grande y se referencia muchas veces seguidas;
+                       pensado para saltarse defensas que solo miran
+                       la profundidad de anidado, no el tamaño total
+
+La defensa principal (y la que recomienda OWASP en primer lugar) es
+deshabilitar el DOCTYPE por completo con la feature
+'disallow-doctype-decl' (comentada en JAXPServlet, hay que
+descomentarla para ver el ejemplo ya protegido). Si no se puede
+deshabilitar el DOCTYPE del todo, estan las alternativas comentadas
+debajo (external-general-entities, external-parameter-entities,
+load-external-dtd, etc)
+
+Ojo con JAXBServlet: las dos lineas de System.setProperty
+(accessExternalSchema / accessExternalDTD) estan ahi a proposito
+para REABRIR el acceso externo, porque desde hace años el propio
+JDK (7u45+) ya viene con esto restringido por defecto. Sin esas dos
+lineas, es posible que el ataque ni siquiera funcione, no porque el
+codigo lo evite, sino porque la plataforma ya trae su propia
+proteccion de serie
+
+Los ejemplos 04 y 05 conviene probarlos y ver que pasa de verdad en
+un JDK actual: desde hace bastantes versiones el JDK trae limites
+por defecto para la expansion de entidades (jdk.xml.entityExpansionLimit,
+jdk.xml.totalEntitySizeLimit...) que pueden hacer que en vez de colgarse
+el proceso, salte una excepcion del parser. Sigue siendo una demo
+valida (el parser detecta el patron raro), pero puede que el
+resultado no sea el que uno espera a la primera
+
+20 min

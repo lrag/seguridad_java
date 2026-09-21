@@ -1,0 +1,50 @@
+SSRF - Server Side Request Forgery
+
+A10:2021 del OWASP Top 10, la unica categoria totalmente nueva de la
+revision de 2021 (con poca incidencia reportada en las encuestas, pero
+metida igualmente por el impacto que puede llegar a tener)
+
+La idea: es el SERVIDOR, no el navegador del usuario, quien hace una
+peticion HTTP a una URL que en mayor o menor medida controla el
+usuario. Si no limitamos a donde puede apuntar esa URL, el servidor se
+convierte en un proxy con el que el atacante puede alcanzar recursos
+que nunca deberian ser visibles desde fuera: paneles de administracion
+internos, bases de datos sin exponer, o el tipico endpoint de metadata
+de la nube (169.254.169.254 en AWS/GCP/Azure, sin autenticacion,
+porque se asume que solo la propia maquina puede llegar hasta ahi). El
+caso real mas citado es el hackeo de Capital One en 2019: un SSRF
+contra un WAF permitio robar credenciales IAM temporales de metadata y
+acceder a mas de 100 millones de registros
+
+En este ejemplo hay dos servlets:
+- SVAvatar: simula "sube tu foto de perfil pegando una URL". El
+  servidor descarga esa URL entera y te devuelve tal cual lo que
+  responda
+- SVInterno (/interno/secreto): simula un recurso que en un despliegue
+  real jamas estaria expuesto a internet (un endpoint de metadata, un
+  panel interno...). Aqui vive en el mismo Tomcat que SVAvatar para
+  poder hacer la demo sin depender de otro proyecto desplegado
+  aparte, pero la idea es la misma: solo deberia poder alcanzarse
+  desde dentro
+
+Primero, en formularioAvatar.html, prueba una URL normal (una imagen
+cualquiera de internet), para ver que el caso de uso legitimo
+funciona. Luego prueba con
+http://127.0.0.1:8080/Ej15_SSRF/interno/secreto (ajusta el puerto si
+hace falta) y compara: el servidor te trae contenido que nunca
+deberias poder pedir tu directamente desde fuera si ese endpoint
+estuviera de verdad en una red interna
+
+SVAvatar.java tiene tres alternativas de mitigacion comentadas, de
+peor a mejor:
+1. Lista negra de texto (localhost/127.0.0.1) - facil de saltarse
+   (127.1, la IP en octal o decimal, [::1], o simplemente una
+   redireccion HTTP que apunte a donde queramos)
+2. Lista blanca de dominios externos permitidos - mejor, pero solo
+   mira el texto del host, no la IP a la que resuelve (DNS rebinding)
+3. Resolver el host a su IP real y rechazar direcciones
+   loopback/privadas/link-local (esto ultimo incluye la IP de
+   metadata de la nube), restringir el esquema a http/https, y no
+   seguir redirecciones sin revalidar cada salto
+
+20 min

@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>XSS</title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
@@ -17,7 +17,15 @@ function XSS(){
 	 document.getElementById("titulo").value = xss
 	 document.getElementById("director").value = xss
 	 document.getElementById("genero").value = xss
-	 document.getElementById("year").value = "1234"	 
+	 document.getElementById("year").value = "1234"
+}
+
+function XSSModerno(){
+	 let xss = hex2a("6A6156617343726970743A2F2A2D2F2A602F2A5C602F2A272F2A222F2A2A2F282F2A202A2F6F4E636C69436B3D616C657274282920292F2F2530442530412530642530612F2F3C2F7374596C652F3C2F7469744C652F3C2F74655874617245612F3C2F7363526970742F2D2D213E5C7833637356672F3C7356672F6F4E6C6F41643D616C65727428292F2F3E5C783365")
+	 document.getElementById("titulo").value = xss
+	 document.getElementById("director").value = xss
+	 document.getElementById("genero").value = xss
+	 document.getElementById("year").value = "1234"
 }
 
 function hex2a(hexx) {
@@ -30,6 +38,7 @@ function hex2a(hexx) {
 
 window.onload = function(){
 	document.getElementById("btnXSS").onclick = XSS
+	document.getElementById("btnXSSModerno").onclick = XSSModerno
 }
 
 </script>
@@ -60,7 +69,7 @@ window.onload = function(){
 				<div class="row">
 		
 				    <div class="col-2 mt-1">
-				        <label>Título</label>
+				        <label>TÃ­tulo</label>
 				    </div>
 				    <div class="col-10 mt-1">
 						<input type="text" name="titulo" id="titulo" class="form-control" value="${peliculaSel.titulo}"/>
@@ -74,14 +83,14 @@ window.onload = function(){
 				    </div>
 				
 				    <div class="col-2 mt-1">
-				        <label>Género</label>
+				        <label>GÃ©nero</label>
 				    </div>
 				    <div class="col-10 mt-1">
 						<input type="text" name="genero" id="genero" class="form-control" value="${peliculaSel.genero}"/>
 				    </div>
 
 				    <div class="col-2 mt-1">
-				        <label>Año</label>
+				        <label>AÃ±o</label>
 				    </div>
 				    <div class="col-10 mt-1">
 						<input type="text" name="year" id="year" class="form-control" value="${peliculaSel.year}"/>
@@ -91,6 +100,7 @@ window.onload = function(){
 				    <div class="col-10 mt-1 text-left">
 				        <input type="submit" class="btn btn-primary" value="Insertar"/>
        					<input type="button" class="btn mr-1 btn-danger" style="width:110px" id="btnXSS" value="XSS"/>
+       					<input type="button" class="btn mr-1 btn-danger" style="width:110px" id="btnXSSModerno" value="XSS 2"/>
 				    </div>
 		
 				</div>
@@ -102,7 +112,7 @@ window.onload = function(){
 	<hr/>
 	
 	<div class="text-center">
-	Este código garantiza que se va a ejecutar un alert:
+	Este cÃ³digo garantiza que se va a ejecutar un alert:
 	<br/>
 	&#x27;&#x3B;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x2E;&#x66;&#x72;&#x6F;&#x6D;&#x43;&#x68;&#x61;&#x72;&#x43;&#x6F;&#x64;&#x65;&#x28;&#x38;&#x38;&#x2C;&#x38;&#x33;&#x2C;&#x38;&#x33;&#x29;&#x29;&#x2F;&#x2F;&#x27;&#x3B;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x2E;&#x66;&#x72;&#x6F;&#x6D;&#x43;&#x68;&#x61;&#x72;&#x43;&#x6F;&#x64;&#x65;&#x28;&#x38;&#x38;&#x2C;&#x38;&#x33;&#x2C;&#x38;&#x33;&#x29;&#x29;&#x2F;&#x2F;&#x22;&#x3B;&#x0A;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x2E;&#x66;&#x72;&#x6F;&#x6D;&#x43;&#x68;&#x61;&#x72;&#x43;&#x6F;&#x64;&#x65;&#x28;&#x38;&#x38;&#x2C;&#x38;&#x33;&#x2C;&#x38;&#x33;&#x29;&#x29;&#x2F;&#x2F;&#x22;&#x3B;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x2E;&#x66;&#x72;&#x6F;&#x6D;&#x43;&#x68;&#x61;&#x72;&#x43;&#x6F;&#x64;&#x65;&#x28;&#x38;&#x38;&#x2C;&#x38;&#x33;&#x2C;&#x38;&#x33;&#x29;&#x29;&#x2F;&#x2F;&#x2D;&#x2D;&#x0A;&#x3E;&#x3C;&#x2F;&#x53;&#x43;&#x52;&#x49;&#x50;&#x54;&#x3E;&#x22;&#x3E;&#x27;&#x3E;&#x3C;&#x53;&#x43;&#x52;&#x49;&#x50;&#x54;&#x3E;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x2E;&#x66;&#x72;&#x6F;&#x6D;&#x43;&#x68;&#x61;&#x72;&#x43;&#x6F;&#x64;&#x65;&#x28;&#x38;&#x38;&#x2C;&#x38;&#x33;&#x2C;&#x38;&#x33;&#x29;&#x29;&#x3C;&#x2F;&#x53;&#x43;&#x52;&#x49;&#x50;&#x54;&#x3E;
 	</div>

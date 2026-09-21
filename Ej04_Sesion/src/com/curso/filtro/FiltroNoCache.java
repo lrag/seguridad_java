@@ -26,13 +26,15 @@ public class FiltroNoCache implements Filter {
 
 		System.out.println("Filtro no caché");
 
-		//Add todas estas cabeceras para eviar el cacheo en el navegador
-		//, algunas pueden funcionar, otras no
-		//dependiendo del navegador y su versión y el protocolo http usado
+		//Los navegadores modernos no utilizan la caché para el botón "atrás" y los siguientes valores
+		//se ignoran cuando el usuario lo pulsa:
+		//
+		//no-cache: se puede guardar en la caché, pero debe revalidarla con el servidor antes de reutilizarla. en caso de que el servidor no esté podría utilizarse la caché
+		//no-store: No guardar en la caché 
+		//must-revalidate: debe revalidarse siempre. si el servidor no está no se utiliza la caché
 		HttpServletResponse rp = (HttpServletResponse) response;
 		rp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0"); // HTTP 1.1
-		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0
-		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0
+		rp.setHeader("Pragma", "no-cache"); // HTTP 1.0, ya en desuso
 		rp.setDateHeader("Expires", 0); //esta es la mas efectiva de todas
 									    //cuando debe expirar una pagina en milisegundos
 							            //desde el 1 de 1 de 1970

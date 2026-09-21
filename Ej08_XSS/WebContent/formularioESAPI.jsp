@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>XSS</title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
@@ -20,7 +20,22 @@ function XSS(){
 	 document.getElementById("parametroUrl").value = xss 
 	 document.getElementById("url").value = xss
 	 document.getElementById("html").value = xss	 
-	 document.getElementById("javascript").value = xss	 
+	 document.getElementById("javascript").value = xss
+}
+
+//Payload polyglot mas moderno, intenta romper varios contextos a la vez
+//(atributo con/sin comillas, javascript:, </style>/</title>/</textarea>/</script>
+//ya abiertos, y un <svg onload=...> por si nada de lo anterior cuela)
+function XSSModerno(){
+	 let xss = hex2a("6A6156617343726970743A2F2A2D2F2A602F2A5C602F2A272F2A222F2A2A2F282F2A202A2F6F4E636C69436B3D616C657274282920292F2F2530442530412530642530612F2F3C2F7374596C652F3C2F7469744C652F3C2F74655874617245612F3C2F7363526970742F2D2D213E5C7833637356672F3C7356672F6F4E6C6F41643D616C65727428292F2F3E5C783365")
+
+	 document.getElementById("textoHtml").value = xss
+	 document.getElementById("atributo").value = xss
+	 document.getElementById("css").value = xss
+	 document.getElementById("parametroUrl").value = xss
+	 document.getElementById("url").value = xss
+	 document.getElementById("html").value = xss
+	 document.getElementById("javascript").value = xss
 }
 
 function hex2a(hexx) {
@@ -33,6 +48,7 @@ function hex2a(hexx) {
 
 window.onload = function(){
 	document.getElementById("btnXSS").onclick = XSS
+	document.getElementById("btnXSSModerno").onclick = XSSModerno
 }
 
 </script>
@@ -43,7 +59,7 @@ window.onload = function(){
 	    <br/>
 	    <br/>
 	    <h1>
-			Validación XSS con ESAPI	
+			ValidaciÃ³n XSS con ESAPI
 		</h1>
 	    <br/>
 	    <br/>
@@ -81,7 +97,7 @@ window.onload = function(){
 				    </div>
 
 				    <div class="col-2 mt-1">
-				        <label>Parámetro url</label>
+				        <label>ParÃ¡metro url</label>
 				    </div>
 				    <div class="col-10 mt-1">
 						<input type="text" name="parametroUrl" id="parametroUrl" class="form-control" value="VALOR"/>
@@ -112,6 +128,7 @@ window.onload = function(){
 				    <div class="col-10 mt-1 text-left">
 				        <input type="submit" class="btn btn-primary" value="Guardar"/>
        					<input type="button" class="btn mr-1 btn-danger" style="width:110px" id="btnXSS" value="XSS"/>
+       					<input type="button" class="btn mr-1 btn-danger" style="width:110px" id="btnXSSModerno" value="XSS moderno"/>
 				    </div>
 		
 				</div>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -123,7 +124,7 @@ public class ServicioEmpleados extends HttpServlet {
 				// Que hacemos si detectamos una inyección?
 				// ->No seguir y mandar al usuario a login.
 				//   Y escribir en un log lo que ha pasado
-				//ya que es posible que suframos m�s ataques y conviene 
+				//ya que es posible que suframos más ataques y conviene
 				//estar prevenidos
 				return;
 			}
@@ -226,6 +227,16 @@ public class ServicioEmpleados extends HttpServlet {
 		return isValid;
 	}
 	
+	//Lista blanca: en vez de bloquear los caracteres peligrosos, exigimos que
+	//el valor encaje con el formato esperado (aqui, un id numerico) y
+	//rechazamos cualquier otra cosa, contenga o no un caracter de la
+	//lista negra de arriba
+	private static final Pattern ID_EMPLEADO_VALIDO = Pattern.compile("^[0-9]+$");
+
+	public boolean checkValueForXpathInjectionListaBlanca(String value) {
+		return value != null && ID_EMPLEADO_VALIDO.matcher(value).matches();
+	}
+
 	public boolean validarEntrada(String valor){
 		//Este metodo le paso el valor y me lo devuelve saneado
 		String valorESAPI = ESAPI.encoder().encodeForXPath(valor);
