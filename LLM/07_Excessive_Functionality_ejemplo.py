@@ -29,7 +29,6 @@ def eliminar_cuenta_usuario(usuario_id: str) -> str:
     """Elimina permanentemente la cuenta de un usuario."""
     return f"Cuenta {usuario_id} eliminada."
 
-
 @tool
 def resetear_password_cualquier_usuario(usuario_id: str) -> str:
     """Resetea la contrasena de cualquier usuario del sistema."""
@@ -84,7 +83,9 @@ for llamada in respuesta_a.tool_calls:
     herramienta = herramientas_por_nombre[llamada["name"]]
     print(f"-> {herramienta.invoke(llamada['args'])}")
 
+print()
 print("\n==================================================================\n")
+
 print("\n3. Escenario B: catálogo mínimo (solo las herramientas necesarias)")
 llm_catalogo_minimo = llm.bind_tools([consultar_estado_pedido, consultar_faq])
 respuesta_b = llm_catalogo_minimo.invoke(instruccion)
@@ -96,5 +97,4 @@ print("Ejecutando todas sin más, tal cual las propuso el modelo:")
 for llamada in respuesta_b.tool_calls:
     herramienta = herramientas_por_nombre[llamada["name"]]
     print(f"-> {herramienta.invoke(llamada['args'])}")
-
 

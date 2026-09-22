@@ -1,4 +1,4 @@
-#Continuacion de 09_Excessive_Autonomy_ejemplo.py: alli el fallo era que el
+#Continuacion de 09_Excessive_Autonomy_ejemplo_MAL_PLANTEADO.py: alli el fallo era que el
 #modelo proponia, en su primer turno, TODAS las llamadas de golpe -incluida
 #listar_archivos- antes de que ninguna se hubiera ejecutado todavia, asi que
 #terminaba "eliminando" nombres inventados sin haber visto la lista real.

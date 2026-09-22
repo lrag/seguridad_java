@@ -50,6 +50,8 @@ try:
 except Exception as error:
     print(f"Carga bloqueada: {type(error).__name__}")
 
+print("\n==================================================================\n")
+
 print("\n5. Contraste: guardando y cargando tensores reales en formato safetensors")
 pesos_reales = {"capa1.peso": torch.rand(2, 2)}
 save_file(pesos_reales, "modelo_real.safetensors")

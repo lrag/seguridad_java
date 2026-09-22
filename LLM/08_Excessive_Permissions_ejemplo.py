@@ -46,6 +46,8 @@ respuesta_a = llm_permiso_excesivo.invoke(instruccion)
 for llamada in respuesta_a.tool_calls:
     print(f"Llamada a herramienta: {llamada['name']}({llamada['args']})")
 
+print()
+print("\n==================================================================\n")
 
 @tool
 def consultar_pedido_seguro(pedido_id: str) -> str:

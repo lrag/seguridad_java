@@ -442,7 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Formación en Seguridad IA</span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2026-09-20</span>
+<span id="revdate">2026-09-22</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Índice de Contenidos</div>
@@ -572,6 +572,73 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_aplicar_el_límite_de_tasa_por_identidad_verificable_no_por_dirección_ip">7.5.3. Aplicar el límite de tasa por identidad verificable, no por dirección IP</a></li>
 <li><a href="#_detectar_patrones_de_consulta_sistemáticos_no_solo_picos_de_volumen">7.5.4. Detectar patrones de consulta sistemáticos, no solo picos de volumen</a></li>
 <li><a href="#_cómo_se_combinan_qué_compra_cada_capa_5">7.5.5. Cómo se combinan: qué compra cada capa</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_llm072026_desinformación_misinformation">8. LLM07:2026 Desinformación (Misinformation)</a>
+<ul class="sectlevel2">
+<li><a href="#_qué_es_la_desinformación_generada_por_un_llm_y_por_qué_no_es_lo_mismo_que_mentir">8.1. Qué es la desinformación generada por un LLM y por qué no es lo mismo que mentir</a></li>
+<li><a href="#_alucinación_fáctica_hechos_fuentes_o_citas_inventadas_con_total_confianza">8.2. Alucinación fáctica: hechos, fuentes o citas inventadas con total confianza</a></li>
+<li><a href="#_alucinación_de_paquetes_y_apis_inexistentes">8.3. Alucinación de paquetes y APIs inexistentes</a></li>
+<li><a href="#_confianza_excesiva_del_usuario_y_falta_de_calibración">8.4. Confianza excesiva del usuario y falta de calibración</a></li>
+<li><a href="#_estrategias_de_mitigación_7">8.5. Estrategias de mitigación</a>
+<ul class="sectlevel3">
+<li><a href="#_fundamentar_las_respuestas_en_fuentes_verificables_no_solo_en_memoria_paramétrica">8.5.1. Fundamentar las respuestas en fuentes verificables, no solo en memoria paramétrica</a></li>
+<li><a href="#_verificar_automáticamente_cualquier_referencia_externa_antes_de_mostrarla">8.5.2. Verificar automáticamente cualquier referencia externa antes de mostrarla</a></li>
+<li><a href="#_exigir_revisión_humana_en_decisiones_de_alto_riesgo">8.5.3. Exigir revisión humana en decisiones de alto riesgo</a></li>
+<li><a href="#_medir_y_comunicar_la_tasa_de_error_real_no_la_confianza_expresada_en_el_texto">8.5.4. Medir y comunicar la tasa de error real, no la confianza expresada en el texto</a></li>
+<li><a href="#_cómo_se_combinan_qué_compra_cada_capa_6">8.5.5. Cómo se combinan: qué compra cada capa</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_llm082026_exposición_de_contexto_oculto_hidden_context_exposure">9. LLM08:2026 Exposición de Contexto Oculto (Hidden Context Exposure)</a>
+<ul class="sectlevel2">
+<li><a href="#_qué_es_la_exposición_de_contexto_oculto_y_por_qué_el_system_prompt_no_es_un_secreto_real">9.1. Qué es la exposición de contexto oculto y por qué el <strong>system prompt</strong> no es un secreto real</a></li>
+<li><a href="#_extracción_directa">9.2. Extracción directa</a></li>
+<li><a href="#_extracción_indirecta_mediante_trucos_de_formato">9.3. Extracción indirecta mediante trucos de formato</a></li>
+<li><a href="#_fuga_de_reglas_de_negocio_y_claves_de_contexto_incrustadas">9.4. Fuga de reglas de negocio y claves de contexto incrustadas</a></li>
+<li><a href="#_estrategias_de_mitigación_8">9.5. Estrategias de mitigación</a>
+<ul class="sectlevel3">
+<li><a href="#_no_poner_nunca_secretos_reales_en_el_system_prompt">9.5.1. No poner nunca secretos reales en el <strong>system prompt</strong></a></li>
+<li><a href="#_reforzar_el_system_prompt_anticipando_encuadres_conocidos_sin_depender_solo_de_eso">9.5.2. Reforzar el <strong>system prompt</strong> anticipando encuadres conocidos, sin depender solo de eso</a></li>
+<li><a href="#_filtrar_la_salida_del_modelo_buscando_el_propio_secreto">9.5.3. Filtrar la salida del modelo buscando el propio secreto</a></li>
+<li><a href="#_usar_un_modelo_con_mejor_alineamiento_sabiendo_que_reduce_probabilidad_no_la_elimina">9.5.4. Usar un modelo con mejor alineamiento, sabiendo que reduce probabilidad, no la elimina</a></li>
+<li><a href="#_cómo_se_combinan_qué_compra_cada_capa_7">9.5.5. Cómo se combinan: qué compra cada capa</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_llm092026_debilidades_en_vectores_y_embeddings_vector_and_embedding_weaknesses">10. LLM09:2026 Debilidades en Vectores y Embeddings (Vector and Embedding Weaknesses)</a>
+<ul class="sectlevel2">
+<li><a href="#_qué_son_las_bases_de_datos_vectoriales_y_qué_heredan_de_cualquier_almacén_de_datos">10.1. Qué son las bases de datos vectoriales y qué heredan de cualquier almacén de datos</a></li>
+<li><a href="#_falta_de_aislamiento_entre_tenants_en_un_índice_compartido">10.2. Falta de aislamiento entre <strong>tenants</strong> en un índice compartido</a></li>
+<li><a href="#_configuración_insegura_de_la_infraestructura_del_propio_almacén_vectorial">10.3. Configuración insegura de la infraestructura del propio almacén vectorial</a></li>
+<li><a href="#_estrategias_de_mitigación_9">10.4. Estrategias de mitigación</a>
+<ul class="sectlevel3">
+<li><a href="#_aplicar_el_aislamiento_por_tenant_en_una_única_capa_de_acceso_a_datos">10.4.1. Aplicar el aislamiento por tenant en una única capa de acceso a datos</a></li>
+<li><a href="#_usar_colecciones_o_índices_separados_por_tenant_cuando_el_riesgo_lo_justifique">10.4.2. Usar colecciones o índices separados por <strong>tenant</strong> cuando el riesgo lo justifique</a></li>
+<li><a href="#_tratar_el_almacén_vectorial_como_infraestructura_crítica">10.4.3. Tratar el almacén vectorial como infraestructura crítica</a></li>
+<li><a href="#_auditar_la_propia_exposición_de_forma_proactiva">10.4.4. Auditar la propia exposición de forma proactiva</a></li>
+<li><a href="#_cómo_se_combinan_qué_compra_cada_capa_8">10.4.5. Cómo se combinan: qué compra cada capa</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_llm102026_manejo_inadecuado_de_la_salida_improper_output_handling">11. LLM10:2026 Manejo Inadecuado de la Salida (Improper Output Handling)</a>
+<ul class="sectlevel2">
+<li><a href="#_qué_es_el_manejo_inadecuado_de_la_salida_y_por_qué_es_un_problema_de_confianza_en_el_destino_no_en_el_origen">11.1. Qué es el manejo inadecuado de la salida y por qué es un problema de confianza en el destino, no en el origen</a></li>
+<li><a href="#_inyección_en_el_navegador_xss_y_renderizado_sin_sanear">11.2. Inyección en el navegador: <strong>XSS</strong> y renderizado sin sanear</a></li>
+<li><a href="#_inyección_en_comandos_de_sistema_o_intérpretes_de_código">11.3. Inyección en comandos de sistema o intérpretes de código</a></li>
+<li><a href="#_inyección_sql_a_través_de_una_consulta_generada_por_el_modelo">11.4. Inyección SQL a través de una consulta generada por el modelo</a></li>
+<li><a href="#_estrategias_de_mitigación_10">11.5. Estrategias de mitigación</a>
+<ul class="sectlevel3">
+<li><a href="#_tratar_toda_salida_del_modelo_como_entrada_no_confiable_en_el_destino">11.5.1. Tratar toda salida del modelo como entrada no confiable en el destino</a></li>
+<li><a href="#_usar_el_mecanismo_de_saneamiento_específico_de_cada_destino">11.5.2. Usar el mecanismo de saneamiento específico de cada destino</a></li>
+<li><a href="#_aplicar_mínimo_privilegio_en_el_destino_que_ejecuta_la_salida">11.5.3. Aplicar mínimo privilegio en el destino que ejecuta la salida</a></li>
+<li><a href="#_preferir_salida_estructurada_y_restringida_cuando_el_destino_lo_permita">11.5.4. Preferir salida estructurada y restringida, cuando el destino lo permita</a></li>
+<li><a href="#_cómo_se_combinan_qué_compra_cada_capa_9">11.5.5. Cómo se combinan: qué compra cada capa</a></li>
 </ul>
 </li>
 </ul>
@@ -4677,11 +4744,1264 @@ while (!tareaCompletada &amp;&amp; pasos &lt; MAX_PASOS &amp;&amp; tokensConsumi
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_llm072026_desinformación_misinformation"><a class="link" href="#_llm072026_desinformación_misinformation">8. LLM07:2026 Desinformación (Misinformation)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La <strong>Desinformación</strong> ocupa el séptimo puesto porque es el único capítulo de este documento en el que no hace falta ningún atacante para que haya daño. Los seis capítulos anteriores describen cómo alguien puede forzar un comportamiento no deseado -inyectando un <strong>prompt</strong>, concediendo de más, envenenando un dato, agotando un recurso-. Este describe un comportamiento no deseado que puede surgir solo, como efecto colateral de cómo un modelo de lenguaje genera texto, sin que nadie lo manipule, lo envenene ni le pida nada indebido.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A diferencia de un fallo de software, que se puede reproducir y corregir una vez localizado, una alucinación no es un error localizable en ningún sitio del código: es una propiedad emergente de cómo se genera el texto. Puede aparecer mañana, con la misma pregunta que hoy respondió bien, sin que nada en el sistema haya cambiado.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_qué_es_la_desinformación_generada_por_un_llm_y_por_qué_no_es_lo_mismo_que_mentir"><a class="link" href="#_qué_es_la_desinformación_generada_por_un_llm_y_por_qué_no_es_lo_mismo_que_mentir">8.1. Qué es la desinformación generada por un LLM y por qué no es lo mismo que mentir</a></h3>
+<div class="paragraph">
+<p>Mentir exige conocer la respuesta correcta y decir otra cosa a propósito. Un modelo generativo no tiene ninguna casilla interna marcada "esto lo sé con certeza" separada de "esto me parece plausible": en cada token, elige la continuación estadísticamente más probable dado el contexto, y esa continuación coincide con la verdad la mayoría de las veces, no siempre.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No hay distinción interna entre certeza y plausibilidad:</strong> a diferencia de una base de datos, que devuelve un valor o un error explícito, el modelo genera siempre una respuesta con la misma forma gramatical de confianza, tanto si el hecho es correcto como si se lo ha inventado por completo.</p>
+</li>
+<li>
+<p><strong>La invención es más probable justo donde menos se nota:</strong> un detalle muy específico -una fecha exacta, el número de un artículo de una ley, una cita textual, el nombre de una función de una librería- es precisamente el tipo de dato que el modelo tiene menos probabilidad de haber visto repetido de forma consistente durante el entrenamiento, y donde más fácil le resulta generar algo plausible pero falso.</p>
+</li>
+<li>
+<p><strong>La misma pregunta puede alucinar hoy y acertar mañana:</strong> al no existir ninguna comprobación de verdad, sino una elección probabilística en cada token, dos ejecuciones de la misma consulta -sobre todo con temperatura mayor que cero- pueden dar una respuesta correcta y otra inventada sin que nada haya cambiado en el sistema.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Mentir</th>
+<th class="tableblock halign-left valign-top">Alucinar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exige conocer la respuesta correcta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es intencionado</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Corregirlo señalando el error basta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, en principio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No necesariamente: el modelo no "sabe" que se equivocó</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> esta distinción explica el mecanismo, no cambia el daño. Para quien recibe la respuesta, una alucinación redactada con total confianza tiene exactamente el mismo efecto práctico que una mentira deliberada -y en muchos casos es más difícil de detectar, precisamente porque nadie tenía intención de engañar y el tono no delata nada raro-.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alucinación_fáctica_hechos_fuentes_o_citas_inventadas_con_total_confianza"><a class="link" href="#_alucinación_fáctica_hechos_fuentes_o_citas_inventadas_con_total_confianza">8.2. Alucinación fáctica: hechos, fuentes o citas inventadas con total confianza</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Citas y referencias bibliográficas inventadas:</strong> el modelo genera citas con un formato perfectamente correcto -autor, año, título, revista- que no corresponden a ningún trabajo real. La forma de una cita académica es fácil de imitar aunque el contenido detrás no exista.</p>
+</li>
+<li>
+<p><strong>Jurisprudencia y normativa inventada:</strong> sentencias, casos judiciales o artículos de ley que suenan plausibles y siguen el formato habitual de una referencia legal real, pero que no existen.</p>
+</li>
+<li>
+<p><strong>Detalles numéricos y estadísticas fabricadas:</strong> cifras exactas -porcentajes, fechas, cantidades- presentadas con la misma precisión aparente que un dato verificado, sin que el formato numérico en sí mismo garantice nada sobre su exactitud.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>El caso más citado de jurisprudencia inventada ocurrió en 2023 (<strong>Mata v. Avianca</strong>, Distrito Sur de Nueva York): dos abogados presentaron un escrito con varios casos judiciales que un modelo de lenguaje había fabricado por completo, con nombres, números de expediente y citas textuales que parecían perfectamente reales. El tribunal impuso sanciones económicas a los abogados por no haber verificado ninguna de las citas antes de presentarlas.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> una cita inventada no se distingue de una real por su forma, solo por su contenido -y comprobar el contenido exige localizar la fuente original y contrastarla, un paso que la mayoría de la gente no da de forma rutinaria precisamente porque la cita ya "parece" completa y correcta-.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alucinación_de_paquetes_y_apis_inexistentes"><a class="link" href="#_alucinación_de_paquetes_y_apis_inexistentes">8.3. Alucinación de paquetes y APIs inexistentes</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>El modelo inventa nombres de paquetes plausibles que no existen:</strong> al pedir código que resuelva una tarea común, puede sugerir importar una librería con un nombre que sigue perfectamente las convenciones de nombrado del ecosistema, pero que nadie ha publicado nunca.</p>
+</li>
+<li>
+<p><strong>Un atacante publica el paquete inventado, con el nombre exacto:</strong> una vez que se sabe -o se descubre por experimentación repetida- qué nombres inventa un modelo con frecuencia ante un tipo de petición, publicar un paquete malicioso bajo ese nombre exacto en un repositorio público solo exige esperar a que alguien copie y ejecute el código sugerido sin comprobar antes que el paquete es legítimo.</p>
+</li>
+<li>
+<p><strong>La repetibilidad del error lo hace explotable a escala:</strong> el mismo hueco de conocimiento tiende a producir el mismo nombre inventado ante peticiones parecidas, en sesiones y usuarios distintos, lo que convierte una alucinación individual e inofensiva en un vector de ataque dirigible y repetible, no en un accidente aislado.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># El modelo sugiere esta importacion para una tarea de validacion de JSON.
+# El paquete "fast_json_validator" no existe en el repositorio oficial de
+# paquetes -el nombre es plausible, sigue la convencion habitual, pero
+# nadie lo ha publicado nunca-.
+import fast_json_validator</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Esta técnica tiene nombre propio, <strong>slopsquatting</strong> -por analogía con el <strong>typosquatting</strong> clásico, publicar un paquete con un nombre parecido a uno popular para captar instalaciones por error-. La diferencia es que aquí no hace falta parecerse a nada que ya exista: basta con que el modelo tienda a inventar ese nombre concreto con la frecuencia suficiente.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> esto es el mismo problema de fondo de 8.2 trasladado a código: el nombre de un paquete no se distingue de uno real por su forma, solo comprobando si existe de verdad en el repositorio antes de instalarlo -paso que conecta directamente con la mitigación de fijar versión y <strong>hash</strong> de 5.4-.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_confianza_excesiva_del_usuario_y_falta_de_calibración"><a class="link" href="#_confianza_excesiva_del_usuario_y_falta_de_calibración">8.4. Confianza excesiva del usuario y falta de calibración</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Un texto redactado con seguridad se percibe como más fiable, sea correcto o no:</strong> el mismo tono asertivo y bien estructurado acompaña tanto a una respuesta acertada como a una inventada, y las personas tienden a confiar en la forma de la respuesta antes de verificar el fondo.</p>
+</li>
+<li>
+<p><strong>El modelo rara vez expresa una incertidumbre calibrada a su propia probabilidad de error:</strong> decir "no estoy seguro" exigiría que el modelo tuviera acceso a una estimación fiable de su propio margen de error, algo que no forma parte de cómo genera texto. Cuando lo dice, suele ser porque el patrón de la pregunta se parece a otras que en el entrenamiento llevaban esa coletilla, no porque haya "medido" nada.</p>
+</li>
+<li>
+<p><strong>La automatización del juicio profesional erosiona la revisión humana con el tiempo:</strong> cuantas más veces una respuesta del modelo resulta correcta, menos se revisa la siguiente.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Es la misma fatiga de aprobación ya descrita en 2.7.7, aplicada aquí a la confianza en un contenido en vez de a la autorización de una acción: cuantas más veces algo resulta fiable sin incidentes, con menos atención se revisa la siguiente vez, hasta que la revisión se vuelve un trámite formal en vez de una comprobación real.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> esto no se corrige pidiéndole al modelo que "exprese más incertidumbre" -generar la frase "no estoy completamente seguro" es tan fácil de producir, y tan poco fiable como señal real, como generar cualquier otra frase plausible-. Es un problema del lado humano del sistema, no algo que un ajuste del modelo o del <strong>prompt</strong> resuelva por sí solo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estrategias_de_mitigación_7"><a class="link" href="#_estrategias_de_mitigación_7">8.5. Estrategias de mitigación</a></h3>
+<div class="paragraph">
+<p>La conexión con la fatiga de aprobación de 2.7.7 (8.4) y con fijar versión y <strong>hash</strong> antes de instalar un paquete (5.4, en 8.3) ya han aparecido junto al problema que resuelven. Esta sección añade lo que falta.</p>
+</div>
+<div class="sect3">
+<h4 id="_fundamentar_las_respuestas_en_fuentes_verificables_no_solo_en_memoria_paramétrica"><a class="link" href="#_fundamentar_las_respuestas_en_fuentes_verificables_no_solo_en_memoria_paramétrica">8.5.1. Fundamentar las respuestas en fuentes verificables, no solo en memoria paramétrica</a></h4>
+<div class="paragraph">
+<p>Un modelo que responde solo con lo que aprendió durante el entrenamiento no tiene ninguna forma de distinguir un hecho bien memorizado de uno confabulado. Obligarlo a fundamentar la respuesta en una fuente concreta, recuperada y citada -el mismo mecanismo de RAG ya descrito en el documento- no elimina la alucinación, pero cambia su naturaleza: ahora se puede comprobar si la fuente citada existe y dice lo que se afirma que dice, en vez de tener que confiar en la memoria del modelo sin ningún punto de apoyo externo.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verificar_automáticamente_cualquier_referencia_externa_antes_de_mostrarla"><a class="link" href="#_verificar_automáticamente_cualquier_referencia_externa_antes_de_mostrarla">8.5.2. Verificar automáticamente cualquier referencia externa antes de mostrarla</a></h4>
+<div class="paragraph">
+<p>Un nombre de paquete, una cita bibliográfica o una URL que el modelo genera se puede comprobar por código antes de que nadie las vea: contra un índice de paquetes real, contra una base de datos bibliográfica, contra un servicio de resolución de <strong>DOI</strong>. Esa verificación automática, hecha una sola vez en el <strong>pipeline</strong>, evita que la comprobación dependa de que cada usuario individual se acuerde de hacerla.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>El caso más habitual de esta misma mitigación, sin ningún <strong>pipeline</strong> automático de por medio, es revisar el código que genera un asistente de programación antes de ejecutarlo o integrarlo. Un fragmento de código con buen aspecto -bien formateado, con nombres sensatos, aparentemente funcional- puede tener exactamente el mismo problema que una cita con formato perfecto (8.2): importar un paquete que no existe (8.3) o implementar una lógica sutilmente equivocada. "Código generado por IA es código sin revisar" es la misma disciplina de este apartado, aplicada por la persona en vez de por un <strong>pipeline</strong>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exigir_revisión_humana_en_decisiones_de_alto_riesgo"><a class="link" href="#_exigir_revisión_humana_en_decisiones_de_alto_riesgo">8.5.3. Exigir revisión humana en decisiones de alto riesgo</a></h4>
+<div class="paragraph">
+<p>Para decisiones con consecuencias reales -médicas, legales, financieras- la revisión humana antes de actuar tiene que seguir siendo obligatoria, con independencia de lo segura que suene la respuesta del modelo. Es la misma clasificación de riesgo de 2.7.7 aplicada aquí al contenido de una respuesta, no a la ejecución de una acción.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_medir_y_comunicar_la_tasa_de_error_real_no_la_confianza_expresada_en_el_texto"><a class="link" href="#_medir_y_comunicar_la_tasa_de_error_real_no_la_confianza_expresada_en_el_texto">8.5.4. Medir y comunicar la tasa de error real, no la confianza expresada en el texto</a></h4>
+<div class="paragraph">
+<p>Ya que la incertidumbre que el modelo expresa en el propio texto no está calibrada (8.4), la única señal fiable es una medida externa: evaluar el sistema contra un conjunto de preguntas con respuesta conocida, calcular su tasa de acierto real, y comunicar esa cifra -no una frase de cortesía dentro de la respuesta- a quien vaya a confiar en el sistema.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cómo_se_combinan_qué_compra_cada_capa_6"><a class="link" href="#_cómo_se_combinan_qué_compra_cada_capa_6">8.5.5. Cómo se combinan: qué compra cada capa</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mitigación</th>
+<th class="tableblock halign-left valign-top">Función</th>
+<th class="tableblock halign-left valign-top">¿Es frontera de seguridad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fundamentar en fuentes verificables (RAG)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reducción de superficie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No, cambia la naturaleza del error, no lo elimina</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verificación automática de referencias externas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, si se aplica antes de mostrar la respuesta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Revisión humana en decisiones de alto riesgo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, si el proceso la exige de verdad</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medir y comunicar la tasa de error real</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Ninguna mitigación de este capítulo hace que el modelo deje de confabular: eso es una propiedad de cómo genera texto, no un error que se pueda parchear. Lo que sí se puede hacer es no depender de que el modelo "sepa" cuándo se ha equivocado, y poner en su lugar comprobaciones externas -una fuente, un registro, una persona- exactamente en los puntos donde el coste de una alucinación no detectada sería inaceptable.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note normativas">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Normativas</div>
+<div class="paragraph">
+<p>EU AI Act, Art. 15 (Precisión, solidez y ciberseguridad): además de exigir resiliencia frente a manipulación (4.6) y disponibilidad (7.5), este mismo artículo obliga a declarar y documentar técnicamente las métricas de precisión del sistema. Medir y comunicar la tasa de error real (8.5.4) no es una buena práctica opcional: es la forma concreta de cumplir esa obligación de trazabilidad y métricas para un sistema de alto riesgo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_llm082026_exposición_de_contexto_oculto_hidden_context_exposure"><a class="link" href="#_llm082026_exposición_de_contexto_oculto_hidden_context_exposure">9. LLM08:2026 Exposición de Contexto Oculto (Hidden Context Exposure)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La <strong>Exposición de Contexto Oculto</strong> ocupa el octavo puesto porque ataca una suposición de diseño muy extendida: que lo que se escribe en el <strong>system prompt</strong> -las instrucciones del desarrollador, las reglas de negocio, a veces hasta credenciales- está oculto para quien conversa con el modelo. No lo está. El <strong>system prompt</strong> no es más que texto que entra en el mismo contexto que la conversación del usuario, y nada en la arquitectura del modelo distingue "esto es una instrucción que debo obedecer y ocultar" de "esto es información que puedo repetir si me lo piden bien".</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Una clave de cifrado o una contraseña almacenada como <strong>hash</strong> tienen una propiedad matemática real que impide recuperarlas sin la clave o sin invertir el <strong>hash</strong>. El <strong>system prompt</strong> no tiene ninguna propiedad equivalente: es texto plano que el modelo ha leído, y "no reveles esto" es solo otra frase de ese mismo texto, con la misma autoridad -ninguna garantizada- que cualquier otra instrucción.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_qué_es_la_exposición_de_contexto_oculto_y_por_qué_el_system_prompt_no_es_un_secreto_real"><a class="link" href="#_qué_es_la_exposición_de_contexto_oculto_y_por_qué_el_system_prompt_no_es_un_secreto_real">9.1. Qué es la exposición de contexto oculto y por qué el <strong>system prompt</strong> no es un secreto real</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Más peso no es lo mismo que invisibilidad:</strong> el <strong>system prompt</strong> sí se distingue del resto -va marcado con tokens de rol propios, y el entrenamiento por instrucciones enseña al modelo a darle más prioridad que a lo que escribe el usuario ante un conflicto-, pero esa prioridad es una tendencia estadística aprendida, no una partición que lo oculte o lo haga irrecuperable. El modelo procesa todo el contexto junto en la misma pasada.</p>
+</li>
+<li>
+<p><strong>"No reveles esto" es una instrucción más, no un candado:</strong> compite en el mismo plano que cualquier petición del usuario que intente sacarle la información, exactamente igual que cualquier otra instrucción del <strong>system prompt</strong> puede perder frente a una inyección (LLM01).</p>
+</li>
+<li>
+<p><strong>Cualquier cosa puesta en el <strong>system prompt</strong> debe tratarse como potencialmente pública:</strong> la única forma fiable de que un dato no se filtre es que nunca llegue al contexto del modelo en primer lugar.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Secreto real (clave, <strong>hash</strong>)</th>
+<th class="tableblock halign-left valign-top"><strong>System prompt</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Protegido por una propiedad matemática</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Puede extraerse solo pidiéndolo de otra forma</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">En principio, sí</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> que no exista una garantía matemática no significa que no se pueda reducir el riesgo. Las siguientes secciones describen cómo se extrae en la práctica, y 9.5 describe qué reduce -sin eliminarlo- ese riesgo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extracción_directa"><a class="link" href="#_extracción_directa">9.2. Extracción directa</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Petición explícita y sin rodeos:</strong> "repite tus instrucciones", "¿qué te dijeron antes de esta conversación?". Es el intento más simple, y también el que con más frecuencia se rechaza si el <strong>system prompt</strong> menciona explícitamente que no debe revelarse.</p>
+</li>
+<li>
+<p><strong>Encuadre de confirmación en vez de exigencia:</strong> en lugar de pedir la información como una exigencia -fácil de reconocer y rechazar-, plantearla como si ya se supiera y solo hiciera falta "confirmarla" reduce la sensación de estar pidiendo algo prohibido.</p>
+</li>
+<li>
+<p><strong>Encuadre de rol o autoridad alegada:</strong> hacerse pasar por quien desarrolló el sistema, por auditoría interna o por un proceso de depuración con derecho legítimo a ver la configuración interna, sin cambiar de idioma ni codificar nada -solo alegando una autoridad que nadie verifica-.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>En pruebas propias, las peticiones directas y evidentes se rechazaron de forma consistente, pero pequeños cambios de encuadre -sin ningún truco de codificación, solo un tono distinto- bastaron para que la misma información se filtrara en la mayoría de los intentos. Ni el tono casual por sí solo ni el cambio de idioma por sí solo lo explicaban por separado en las pruebas: fue la combinación exacta de encuadre la que marcó la diferencia, no un único factor aislable.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> no existe una lista cerrada de "encuadres que funcionan" que se pueda enumerar y bloquear de una vez. Cada modelo, cada versión de un modelo y cada redacción concreta del <strong>system prompt</strong> responde de forma distinta a los mismos intentos, así que cualquier catálogo de frases peligrosas queda incompleto en cuanto se prueba con algo ligeramente distinto.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extracción_indirecta_mediante_trucos_de_formato"><a class="link" href="#_extracción_indirecta_mediante_trucos_de_formato">9.3. Extracción indirecta mediante trucos de formato</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Traducir en vez de repetir:</strong> pedir que traduzca sus instrucciones a otro idioma, o que las resuma, en vez de "repetirlas" literalmente, puede evitar el patrón exacto que el modelo ha aprendido a rechazar sin evitar la fuga de la información.</p>
+</li>
+<li>
+<p><strong>Codificar la salida:</strong> pedir la respuesta en base64, deletreada letra por letra o en verso cambia la forma de la salida sin cambiar la información que contiene; un filtro que busque el texto exacto del secreto no lo reconocería en su forma codificada.</p>
+</li>
+<li>
+<p><strong>Reconstrucción parcial, pista a pista:</strong> en vez de pedir el secreto entero de una vez, pedir un fragmento cada vez -"¿cuál es el primer carácter?", "¿y el segundo?"- permite reconstruirlo fuera del modelo, sin que ninguna petición individual contenga el secreto completo.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>La codificación y la ofuscación como técnica de evasión ya se trataron en LLM01 (2.2 y el capítulo dedicado al <strong>jailbreaking</strong>); aquí se aplican al mismo objetivo de aquellas secciones -evitar el patrón que dispara un rechazo-, pero dirigidas específicamente a extraer el contenido del <strong>system prompt</strong> en vez de a lograr una respuesta dañina.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> un <strong>system prompt</strong> reforzado que explícitamente prohíbe traducir, deletrear o dar pistas sobre el secreto (9.5) cierra estas vías concretas, pero solo las que se anticiparon al redactarlo. La reconstrucción parcial en particular es difícil de bloquear por completo: prohibir "dar el primer carácter" no cubre "decir si el primer carácter es una letra o un número", y así sucesivamente.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fuga_de_reglas_de_negocio_y_claves_de_contexto_incrustadas"><a class="link" href="#_fuga_de_reglas_de_negocio_y_claves_de_contexto_incrustadas">9.4. Fuga de reglas de negocio y claves de contexto incrustadas</a></h3>
+<div class="paragraph">
+<p>Las secciones anteriores usan una instrucción o un código como ejemplo, pero el mismo mecanismo de fuga se aplica a cualquier cosa que alguien haya puesto en el <strong>system prompt</strong> pensando que ahí quedaba oculta.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Credenciales puestas directamente en el <strong>system prompt</strong>:</strong> una clave de API real, de un servicio de terceros o de una base de datos, incluida en las instrucciones para que el modelo la use, viaja igual que cualquier otro texto del contexto y hereda toda la exposición ya descrita en 9.1-9.3.</p>
+</li>
+<li>
+<p><strong>Reglas de negocio sensibles incrustadas como texto:</strong> umbrales de descuento, criterios de aprobación de crédito, lógica de precios diferenciados por segmento de cliente -información que la empresa no querría que un cliente viera, protegida solo por la misma instrucción de "no lo reveles" que ya se ha demostrado insuficiente-.</p>
+</li>
+<li>
+<p><strong>La existencia de una regla puede ser sensible aunque su valor no se filtre:</strong> confirmar que "existe un criterio interno para X" ya revela información de proceso o competitiva, incluso si el valor exacto queda protegido -la misma fuga parcial ya observada al confirmar que un código tenía un formato concreto, sin dar el valor exacto-.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Esto conecta directamente con LLM02 (divulgación de información sensible) y con la mitigación 2.7.4 de LLM01 ("mantener credenciales y capacidad de cambio de estado en el código de aplicación"): una credencial nunca debería estar en el <strong>system prompt</strong> en primer lugar, precisamente porque este capítulo demuestra que no hay ninguna garantía de que se quede ahí.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> el mecanismo de fuga es el mismo que en 9.1-9.3, pero la gravedad no. Filtrar una instrucción genérica rara vez tiene consecuencias directas; filtrar una credencial que funciona de verdad, o una regla de negocio con valor competitivo, sí las tiene, de forma inmediata y sin que haga falta ningún paso adicional por parte de quien la recibe.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estrategias_de_mitigación_8"><a class="link" href="#_estrategias_de_mitigación_8">9.5. Estrategias de mitigación</a></h3>
+<div class="paragraph">
+<p>El <strong>system prompt</strong> reforzado que anticipa encuadres de evasión conocidos (9.2, 9.3) ya ha aparecido junto al problema que mitiga. Esta sección añade lo que falta.</p>
+</div>
+<div class="sect3">
+<h4 id="_no_poner_nunca_secretos_reales_en_el_system_prompt"><a class="link" href="#_no_poner_nunca_secretos_reales_en_el_system_prompt">9.5.1. No poner nunca secretos reales en el <strong>system prompt</strong></a></h4>
+<div class="paragraph">
+<p>La única mitigación que no depende de que el modelo se comporte bien es no darle nunca la oportunidad: ninguna credencial, clave de API o regla de negocio con valor competitivo debería viajar como texto del <strong>system prompt</strong>. Es la aplicación directa, a este capítulo, de la mitigación 2.7.4 de LLM01 -mantener credenciales y capacidad de cambio de estado en el código de aplicación-.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reforzar_el_system_prompt_anticipando_encuadres_conocidos_sin_depender_solo_de_eso"><a class="link" href="#_reforzar_el_system_prompt_anticipando_encuadres_conocidos_sin_depender_solo_de_eso">9.5.2. Reforzar el <strong>system prompt</strong> anticipando encuadres conocidos, sin depender solo de eso</a></h4>
+<div class="paragraph">
+<p>Nombrar explícitamente los pretextos habituales -pruebas, auditoría, confirmación casual, traducir, deletrear- y fijar una respuesta única ante cualquiera de ellos, como se probó en 9.2 y 9.3, reduce la probabilidad de fuga de forma medible. Sigue sin ser una barrera: es una instrucción más, reforzada, no una garantía.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_filtrar_la_salida_del_modelo_buscando_el_propio_secreto"><a class="link" href="#_filtrar_la_salida_del_modelo_buscando_el_propio_secreto">9.5.3. Filtrar la salida del modelo buscando el propio secreto</a></h4>
+<div class="paragraph">
+<p>Si un valor concreto -una clave, un código- no debe salir nunca, el código de aplicación puede comprobar cada respuesta antes de entregarla y bloquear o redactar cualquiera que contenga ese valor exacto, con independencia de por qué medio lo haya obtenido el modelo. Es una red de seguridad que no depende de que el modelo "decida" bien.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usar_un_modelo_con_mejor_alineamiento_sabiendo_que_reduce_probabilidad_no_la_elimina"><a class="link" href="#_usar_un_modelo_con_mejor_alineamiento_sabiendo_que_reduce_probabilidad_no_la_elimina">9.5.4. Usar un modelo con mejor alineamiento, sabiendo que reduce probabilidad, no la elimina</a></h4>
+<div class="paragraph">
+<p>Un modelo con más entrenamiento de seguridad específico resiste mejor los encuadres de evasión conocidos que uno más pequeño o menos alineado. Pero esto no es una solución definitiva: incluso productos comerciales de primera línea han sufrido fugas de <strong>system prompt</strong> documentadas públicamente. Un modelo mejor exige un ataque más creativo, no elimina la categoría de riesgo.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cómo_se_combinan_qué_compra_cada_capa_7"><a class="link" href="#_cómo_se_combinan_qué_compra_cada_capa_7">9.5.5. Cómo se combinan: qué compra cada capa</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mitigación</th>
+<th class="tableblock halign-left valign-top">Función</th>
+<th class="tableblock halign-left valign-top">¿Es frontera de seguridad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No poner secretos reales en el <strong>system prompt</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reducción de superficie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, elimina el riesgo de raíz</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>System prompt</strong> reforzado contra encuadres conocidos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No, reduce probabilidad</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtrar la salida buscando el secreto exacto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, si se aplica antes de entregar la respuesta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modelo con mejor alineamiento</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No, reduce probabilidad</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>De las cuatro mitigaciones de este capítulo, solo una es una frontera de seguridad real: no poner el secreto donde se pueda filtrar. Las otras tres reducen la probabilidad de fuga, cada una desde un ángulo distinto, pero ninguna la elimina. Si algo no puede permitirse que se filtre, la única garantía es que nunca llegue al contexto del modelo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note normativas">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Normativas</div>
+<div class="paragraph">
+<p>RGPD, Art. 32 (Seguridad del tratamiento): exige medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo, incluyendo la capacidad de garantizar la confidencialidad de los sistemas de tratamiento. Guardar una credencial o una regla de negocio sensible en un <strong>system prompt</strong> -un texto que este capítulo entero demuestra que no está protegido- es precisamente el tipo de medida inadecuada que este artículo exige evitar.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_llm092026_debilidades_en_vectores_y_embeddings_vector_and_embedding_weaknesses"><a class="link" href="#_llm092026_debilidades_en_vectores_y_embeddings_vector_and_embedding_weaknesses">10. LLM09:2026 Debilidades en Vectores y Embeddings (Vector and Embedding Weaknesses)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Las <strong>Debilidades en Vectores y Embeddings</strong> ocupan el noveno puesto porque no describen un vector de ataque nuevo, sino la infraestructura de almacenamiento sobre la que ya se han apoyado dos capítulos anteriores. Una base de datos vectorial es, ante todo, una base de datos: hereda todos los problemas clásicos de control de acceso, aislamiento y configuración de cualquier almacén de datos, además de los propios de guardar embeddings en vez de filas y columnas.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Dos de los tres problemas que nombra este capítulo ya se han desarrollado en profundidad en capítulos anteriores -la inversión de embeddings en LLM02 y el envenenamiento del índice en LLM05-. Este capítulo no los repite: los sitúa en su sitio dentro de la infraestructura vectorial y desarrolla en profundidad lo que ninguno de los dos cubre, el aislamiento entre <strong>tenants</strong> y la configuración segura del propio almacén.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_qué_son_las_bases_de_datos_vectoriales_y_qué_heredan_de_cualquier_almacén_de_datos"><a class="link" href="#_qué_son_las_bases_de_datos_vectoriales_y_qué_heredan_de_cualquier_almacén_de_datos">10.1. Qué son las bases de datos vectoriales y qué heredan de cualquier almacén de datos</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Siguen siendo una base de datos:</strong> control de acceso, cifrado, auditoría y copias de seguridad no dejan de hacer falta porque el contenido esté indexado por similitud en vez de por clave primaria.</p>
+</li>
+<li>
+<p><strong>El contenido que guardan no es solo el vector:</strong> casi todos los sistemas de RAG guardan también el texto original y sus metadatos junto al <strong>embedding</strong>, así que un fallo de control de acceso en el almacén vectorial expone el mismo tipo de datos sensibles que expondría cualquier otra base de datos.</p>
+</li>
+<li>
+<p><strong>Además heredan riesgos propios de representar el contenido como vectores:</strong> el propio vector puede usarse para reconstruir aproximadamente el texto original, y el proceso de indexado puede ser el punto de entrada de contenido malicioso persistente.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Problema</th>
+<th class="tableblock halign-left valign-top">Dónde se trata en profundidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inversión de <strong>embeddings</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LLM02, 3.x</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Envenenamiento del índice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LLM05, 6.4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aislamiento entre <strong>tenants</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Este capítulo, 10.2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuración de la infraestructura</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Este capítulo, 10.3</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> tratar una base de datos vectorial como una categoría de infraestructura fundamentalmente distinta -en vez de como una base de datos más, con una forma de indexar diferente- lleva a los equipos a olvidar la higiene básica que sí aplicarían a cualquier otra: control de acceso, parcheo, autenticación por defecto. Es el mismo patrón que ya se vio hace años con las primeras bases de datos NoSQL, publicadas en producción sin autenticación porque "eran distintas" a una base de datos relacional.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_falta_de_aislamiento_entre_tenants_en_un_índice_compartido"><a class="link" href="#_falta_de_aislamiento_entre_tenants_en_un_índice_compartido">10.2. Falta de aislamiento entre <strong>tenants</strong> en un índice compartido</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Una sola colección compartida para todos los usuarios o clientes:</strong> por simplicidad, muchas implementaciones guardan los documentos de todos los <strong>tenants</strong> en el mismo índice, confiando en que la búsqueda por similitud no cruce por casualidad el contenido de uno con las consultas de otro.</p>
+</li>
+<li>
+<p><strong>El filtrado por <strong>tenant</strong> es opcional, no estructural:</strong> si restringir la búsqueda al <strong>tenant</strong> correcto es un parámetro que hay que acordarse de aplicar en cada consulta, en vez de una restricción que la propia base de datos imponga, basta un descuido -una consulta sin el filtro, una ruta de código nueva que se olvida- para que un usuario reciba resultados de otro.</p>
+</li>
+<li>
+<p><strong>La similitud semántica no respeta fronteras organizativas:</strong> dos documentos de dos empresas distintas sobre el mismo tema pueden ser vecinos muy cercanos en el espacio de <strong>embeddings</strong>, así que basta con preguntar sobre ese tema para que el resultado del otro <strong>tenant</strong> aparezca entre los más relevantes, sin que haga falta ningún ataque dirigido.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># INCORRECTO: la consulta busca en toda la coleccion, sin restringir por tenant
+resultados = coleccion.similarity_search(pregunta, k=3)
+
+# CORRECTO: el filtro por tenant es obligatorio, no opcional, y se deriva
+# de la sesion autenticada, nunca de un parametro que envie el cliente
+resultados = coleccion.similarity_search(
+    pregunta, k=3, filter={"tenant_id": tenant_id_de_la_sesion_autenticada}
+)</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> un filtro por <strong>tenant</strong> que se puede pasar como parámetro es tan fuerte como quien lo rellena. Si el valor de <code>tenant_id</code> viaja desde el cliente en vez de derivarse del lado del servidor a partir de la sesión autenticada, cualquiera puede escribir el identificador de otro <strong>tenant</strong> y saltarse el filtro sin necesidad de ningún ataque sofisticado.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuración_insegura_de_la_infraestructura_del_propio_almacén_vectorial"><a class="link" href="#_configuración_insegura_de_la_infraestructura_del_propio_almacén_vectorial">10.3. Configuración insegura de la infraestructura del propio almacén vectorial</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Instancias expuestas a internet sin autenticación por defecto:</strong> muchos motores de bases de datos vectoriales, igual que las primeras versiones de MongoDB o Elasticsearch, no exigen autenticación en su configuración de fábrica; quien los despliega sin cambiar esa configuración deja el índice completo -documentos, metadatos y <strong>embeddings</strong>- accesible a cualquiera que conozca la dirección.</p>
+</li>
+<li>
+<p><strong>Descubribles por escaneo masivo, no por ataque dirigido:</strong> herramientas de escaneo público de internet permiten localizar instancias con el puerto por defecto abierto sin dirigir el ataque a ninguna organización en concreto; basta con que la instancia exista y no esté protegida.</p>
+</li>
+<li>
+<p><strong>El panel de administración o la API de gestión, no solo los datos, puede quedar expuesto:</strong> además de consultar el contenido, una instancia mal configurada puede permitir crear, modificar o borrar colecciones enteras sin ninguna credencial, convirtiendo un problema de confidencialidad en uno de integridad y disponibilidad también.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Este patrón no es hipotético: en 2017 se encontraron decenas de miles de instancias de MongoDB expuestas sin autenticación mediante escaneo masivo, muchas de ellas vaciadas y sustituidas por notas de rescate. Investigadores de seguridad han reportado hallazgos equivalentes contra motores de bases de datos vectoriales concretos en los últimos años: el patrón se repite cada vez que aparece una tecnología de almacenamiento nueva y su configuración por defecto no exige autenticación.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> usar un servicio de base de datos vectorial gestionado por un tercero no resuelve esto por sí solo. Si las reglas de red o los permisos de acceso del propio servicio se configuran de forma demasiado permisiva, el resultado es el mismo: una instancia técnicamente "gestionada" pero igual de expuesta que una autoalojada con la configuración de fábrica.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estrategias_de_mitigación_9"><a class="link" href="#_estrategias_de_mitigación_9">10.4. Estrategias de mitigación</a></h3>
+<div class="paragraph">
+<p>El filtro de <strong>tenant</strong> derivado de la sesión autenticada, nunca del cliente (10.2), ya ha aparecido junto al problema que resuelve. Esta sección añade lo que falta.</p>
+</div>
+<div class="sect3">
+<h4 id="_aplicar_el_aislamiento_por_tenant_en_una_única_capa_de_acceso_a_datos"><a class="link" href="#_aplicar_el_aislamiento_por_tenant_en_una_única_capa_de_acceso_a_datos">10.4.1. Aplicar el aislamiento por tenant en una única capa de acceso a datos</a></h4>
+<div class="paragraph">
+<p>Confiar en que cada consulta, en cada punto del código, se acuerde de añadir el filtro de <strong>tenant</strong> es una apuesta perdida a largo plazo. Centralizar el acceso a la base de datos vectorial en una única capa -una función o clase por la que todo el mundo tenga que pasar obligatoriamente- convierte "olvidarse del filtro" en un error de una sola línea que corregir, en vez de en una auditoría de cada consulta dispersa por el código.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usar_colecciones_o_índices_separados_por_tenant_cuando_el_riesgo_lo_justifique"><a class="link" href="#_usar_colecciones_o_índices_separados_por_tenant_cuando_el_riesgo_lo_justifique">10.4.2. Usar colecciones o índices separados por <strong>tenant</strong> cuando el riesgo lo justifique</a></h4>
+<div class="paragraph">
+<p>El filtrado por metadatos es más barato de operar, pero sigue siendo una restricción lógica sobre un mismo almacén físico. Cuando el coste de una fuga entre <strong>tenants</strong> es alto -datos de clientes distintos con obligaciones contractuales o regulatorias distintas-, una colección o incluso una instancia separada por <strong>tenant</strong> cambia el aislamiento de "una condición que hay que evaluar bien" a "los datos de otro <strong>tenant</strong> no están en el mismo sitio para empezar".</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tratar_el_almacén_vectorial_como_infraestructura_crítica"><a class="link" href="#_tratar_el_almacén_vectorial_como_infraestructura_crítica">10.4.3. Tratar el almacén vectorial como infraestructura crítica</a></h4>
+<div class="paragraph">
+<p>Autenticación obligatoria, cifrado en tránsito y en reposo, red restringida -nunca expuesto directamente a internet sin pasar por una capa intermedia controlada- y el mismo calendario de parcheo que cualquier otro almacén de datos de la organización. Ninguna de estas medidas es específica de las bases de datos vectoriales; son la higiene básica que esta tecnología, por ser nueva, tiende a saltarse.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_auditar_la_propia_exposición_de_forma_proactiva"><a class="link" href="#_auditar_la_propia_exposición_de_forma_proactiva">10.4.4. Auditar la propia exposición de forma proactiva</a></h4>
+<div class="paragraph">
+<p>Las mismas herramientas de escaneo que usaría un atacante para encontrar instancias expuestas se pueden usar en sentido defensivo, contra el propio inventario de infraestructura, antes de que lo haga alguien más. Descubrir la propia exposición en una auditoría interna es barato; descubrirla porque alguien ya ha copiado los datos, no.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cómo_se_combinan_qué_compra_cada_capa_8"><a class="link" href="#_cómo_se_combinan_qué_compra_cada_capa_8">10.4.5. Cómo se combinan: qué compra cada capa</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mitigación</th>
+<th class="tableblock halign-left valign-top">Función</th>
+<th class="tableblock halign-left valign-top">¿Es frontera de seguridad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filtro de <strong>tenant</strong> en una única capa de acceso</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, si esa capa es realmente obligatoria</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Colecciones separadas por <strong>tenant</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reducción de superficie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, elimina el riesgo de raíz para ese vector</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autenticación, cifrado y red restringida</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reducción de superficie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auditoría proactiva de la propia exposición</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Nada de lo específico de este capítulo importa si se olvida lo más básico: una base de datos vectorial sin autenticar hace irrelevante cualquier filtro de <strong>tenant</strong> bien diseñado, porque cualquiera puede saltarse la aplicación entera y hablar directamente con el almacén. La higiene de infraestructura va primero; el diseño de aislamiento lógico, después.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note normativas">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Normativas</div>
+<div class="paragraph">
+<p>RGPD, Art. 32 (Seguridad del tratamiento): la misma obligación de garantizar confidencialidad, integridad y disponibilidad citada en 9.5, aplicada aquí a la infraestructura de almacenamiento en vez de al contenido del <strong>system prompt</strong>. Una base de datos vectorial compartida entre clientes sin aislamiento, o expuesta sin autenticación, incumple este artículo con independencia de que el resto de la aplicación esté bien diseñada.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_llm102026_manejo_inadecuado_de_la_salida_improper_output_handling"><a class="link" href="#_llm102026_manejo_inadecuado_de_la_salida_improper_output_handling">11. LLM10:2026 Manejo Inadecuado de la Salida (Improper Output Handling)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>El <strong>Manejo Inadecuado de la Salida</strong> cierra el Top 10 porque es, en cierto sentido, el espejo del primero. LLM01 trata la entrada al modelo como el punto de partida de la manipulación; este capítulo trata la salida del modelo como el punto de partida de un problema distinto, mucho más antiguo que los LLM: el de confiar en un dato sin comprobarlo antes de dárselo a un sistema que va a actuar sobre él.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>El <strong>XSS</strong>, la inyección SQL y la inyección de comandos no son ideas nuevas: son categorías clásicas del OWASP Top 10 de aplicaciones web de siempre. Lo único que cambia aquí es la fuente del dato sin sanear: antes era un campo de formulario rellenado por un usuario; ahora es el texto que genera un modelo, que muchos equipos tratan como intrínsecamente más fiable por no venir directamente de un usuario externo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_qué_es_el_manejo_inadecuado_de_la_salida_y_por_qué_es_un_problema_de_confianza_en_el_destino_no_en_el_origen"><a class="link" href="#_qué_es_el_manejo_inadecuado_de_la_salida_y_por_qué_es_un_problema_de_confianza_en_el_destino_no_en_el_origen">11.1. Qué es el manejo inadecuado de la salida y por qué es un problema de confianza en el destino, no en el origen</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>La salida del modelo no es más fiable que cualquier otra entrada externa a un sistema:</strong> puede contener HTML o JavaScript ejecutable, un fragmento de SQL, un comando de sistema, o simplemente un error factual, según de dónde haya sacado el patrón que reprodujo -no importa si la causa fue una inyección de <strong>prompt</strong>, una alucinación, o simplemente el contenido que se le pidió que generara-.</p>
+</li>
+<li>
+<p><strong>El origen del problema no determina si hay que sanear la salida:</strong> da igual que la salida sea "correcta" según lo que el modelo pretendía generar; lo que importa es qué hace con ella el sistema que la recibe después.</p>
+</li>
+<li>
+<p><strong>La confianza se traslada, no desaparece:</strong> muchos sistemas ya saneaban la entrada del usuario antes de que hubiera un LLM de por medio. En cuanto se introduce un modelo entre la entrada y la salida, es fácil olvidar que la salida sigue necesitando exactamente la misma desconfianza que antes se aplicaba a la entrada.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Sección</th>
+<th class="tableblock halign-left valign-top">Vulnerabilidad clásica equivalente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>XSS</strong> (inyección en el navegador)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inyección de comandos y ejecución de código arbitrario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inyección SQL</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> sanear bien la entrada al modelo (LLM01) no exime de sanear la salida. Una alucinación (LLM07), sin ningún atacante de por medio, puede producir el mismo HTML ejecutable, el mismo fragmento de SQL malformado o el mismo comando peligroso que produciría una inyección deliberada. El manejo de la salida hace falta siempre, con independencia de si hubo intención de dañar en algún punto de la cadena.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inyección_en_el_navegador_xss_y_renderizado_sin_sanear"><a class="link" href="#_inyección_en_el_navegador_xss_y_renderizado_sin_sanear">11.2. Inyección en el navegador: <strong>XSS</strong> y renderizado sin sanear</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Renderizar <strong>markdown</strong> u HTML generado por el modelo como si fuera de confianza:</strong> muchas interfaces de chat convierten automáticamente la salida en HTML renderizado -enlaces clicables, imágenes que cargan solas, formato enriquecido-, sin comprobar antes qué contiene exactamente ese texto.</p>
+</li>
+<li>
+<p><strong>Scripts embebidos si el destino permite HTML sin restricción:</strong> si el renderizador acepta etiquetas HTML además de <strong>markdown</strong>, un <code>&lt;script&gt;</code> o un manejador de evento en la salida del modelo se ejecuta en el navegador de quien lo lee, con el mismo alcance que cualquier <strong>XSS</strong> clásico -robar cookies de sesión, actuar en nombre del usuario-.</p>
+</li>
+<li>
+<p><strong>El destino decide el impacto, no el modelo:</strong> la misma salida es inofensiva si se muestra como texto plano y peligrosa si se renderiza como HTML; el modelo no tiene forma de saber, ni control sobre, cómo va a interpretar el destino lo que genera.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Esto es la otra mitad del ataque ya descrito en 2.4 (<strong>data exfiltration</strong> mediante <strong>prompts</strong>): allí se explica cómo un atacante consigue que la salida contenga una imagen apuntando a un servidor externo con datos confidenciales en la URL; aquí se explica por qué ese ataque funciona en primer lugar -porque el cliente ejecuta la petición de carga de imagen sin comprobar nada-. Sanear o restringir el renderizado (11.5) rompe ese ataque aunque la inyección de 2.4 tenga éxito.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> saber que hay que sanear la salida no dice cómo hacerlo sin romper la funcionalidad legítima. Un cliente de chat sin ningún formato enriquecido es más seguro pero peor experiencia de usuario; permitir <strong>markdown</strong> completo sin restricción es mejor experiencia pero reintroduce el riesgo. El punto de equilibrio depende de cuánto formato hace falta de verdad, no hay una respuesta universal.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inyección_en_comandos_de_sistema_o_intérpretes_de_código"><a class="link" href="#_inyección_en_comandos_de_sistema_o_intérpretes_de_código">11.3. Inyección en comandos de sistema o intérpretes de código</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pasar la salida del modelo directamente a una <strong>shell</strong> del sistema:</strong> un asistente que, para automatizar tareas, ejecuta con <code>os.system</code> o similar el texto que genera el modelo, sin ninguna restricción, convierte cualquier alucinación o inyección en ejecución real de comandos con los mismos privilegios que el propio proceso.</p>
+</li>
+<li>
+<p><strong>Ejecutar código generado como si fuera de confianza:</strong> un agente que genera y ejecuta código -Python, SQL, cualquier lenguaje interpretado- sin aislamiento hereda el mismo problema: el código puede hacer cualquier cosa que el proceso que lo ejecuta pueda hacer, no solo lo que la tarea pedía.</p>
+</li>
+<li>
+<p><strong>El aislamiento es la excepción, no la costumbre:</strong> muchas implementaciones de "agentes que escriben y ejecutan código" se construyen primero sin <strong>sandbox</strong> -para simplificar el desarrollo inicial-, con la intención de añadirlo más adelante. Ese "más adelante" con frecuencia no llega antes de que el sistema entre en producción.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># INCORRECTO: la salida del modelo se ejecuta directamente en el sistema
+import os
+os.system(salida_del_modelo)
+
+# CORRECTO: el codigo generado se ejecuta en un entorno aislado, sin acceso
+# a la red ni al sistema de archivos real, con un limite de tiempo y de
+# recursos que corta la ejecucion si se sale de madre
+resultado = entorno_aislado.ejecutar(
+    salida_del_modelo, red=False, sistema_archivos="solo_lectura", timeout_segundos=5
+)</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Esto es un caso concreto de la funcionalidad excesiva ya descrita en 4.2 de LLM03: la capacidad de ejecutar código o comandos de sistema es, en sí misma, una función que rara vez hace falta conceder sin muchísimas restricciones alrededor. La diferencia aquí es el ángulo: 4.2 pregunta si esa capacidad debería estar en el catálogo del agente; esta sección asume que sí está, y se ocupa de qué pasa con lo que el modelo genera una vez que existe.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> un <strong>sandbox</strong> mal configurado no es un <strong>sandbox</strong>. Un contenedor con acceso de red sin restricción, un directorio sensible montado dentro por comodidad, o un usuario con más privilegios de los necesarios convierten el aislamiento en una capa decorativa que da una falsa sensación de seguridad sin aportar la contención real que se supone que ofrece.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inyección_sql_a_través_de_una_consulta_generada_por_el_modelo"><a class="link" href="#_inyección_sql_a_través_de_una_consulta_generada_por_el_modelo">11.4. Inyección SQL a través de una consulta generada por el modelo</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Concatenar la salida del modelo directamente en una consulta SQL:</strong> un asistente que traduce lenguaje natural a SQL, y ejecuta el resultado sin ninguna validación, hereda el mismo riesgo que una aplicación tradicional que concatena la entrada de un formulario en una consulta.</p>
+</li>
+<li>
+<p><strong>El origen de la parte peligrosa puede ser una inyección o una simple alucinación:</strong> un dato incrustado en el contenido que el modelo procesa puede acabar formando parte de la consulta generada, pero también puede bastar con que el propio modelo "decida" incluir una condición, una subconsulta o una sentencia que nadie pidió.</p>
+</li>
+<li>
+<p><strong>Un asistente de "texto a SQL" es, en la práctica, un generador de consultas con los mismos privilegios que la conexión que las ejecuta:</strong> si esa conexión tiene permisos de escritura o de administración, cualquier consulta que el modelo decida generar hereda ese alcance, sin que la tarea original -"responde esta pregunta sobre los datos"- lo justificara.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># INCORRECTO: la consulta generada se ejecuta tal cual, con una conexion
+# que tiene permisos de escritura sobre toda la base de datos
+cursor.execute(consulta_generada_por_el_modelo)
+
+# CORRECTO: conexion de solo lectura y con alcance minimo, y la consulta
+# se valida antes de ejecutarla -solo se permite un SELECT, sin sentencias
+# encadenadas ni palabras clave de escritura-
+if es_un_select_seguro(consulta_generada_por_el_modelo):
+    cursor_solo_lectura.execute(consulta_generada_por_el_modelo)
+else:
+    raise ConsultaRechazada("La consulta generada no paso la validacion")</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>La conexión de solo lectura y alcance mínimo es la mitigación 4.3 de LLM03 (permisos excesivos) aplicada a este caso concreto: la credencial que usa el generador de SQL no debería poder hacer nada que la tarea -consultar datos- no necesite, con independencia de lo que el modelo decida generar.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Limitación:</strong> validar que una consulta "es un SELECT seguro" es más difícil de lo que parece. Subconsultas que llaman a funciones con efectos secundarios, uniones con tablas no previstas, o simplemente una consulta extremadamente cara de ejecutar -conectando con el consumo descontrolado de LLM06- pueden pasar un filtro que solo comprueba la primera palabra de la sentencia.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estrategias_de_mitigación_10"><a class="link" href="#_estrategias_de_mitigación_10">11.5. Estrategias de mitigación</a></h3>
+<div class="paragraph">
+<p>El aislamiento de la ejecución de código (11.3) y la conexión de solo lectura con alcance mínimo (11.4) ya han aparecido junto al problema que resuelven. Esta sección añade lo que falta y cierra el capítulo.</p>
+</div>
+<div class="sect3">
+<h4 id="_tratar_toda_salida_del_modelo_como_entrada_no_confiable_en_el_destino"><a class="link" href="#_tratar_toda_salida_del_modelo_como_entrada_no_confiable_en_el_destino">11.5.1. Tratar toda salida del modelo como entrada no confiable en el destino</a></h4>
+<div class="paragraph">
+<p>Es la idea que recorre todo este capítulo, expresada como regla de diseño: cualquier sistema que reciba texto generado por un modelo -un navegador, una <strong>shell</strong>, una base de datos- debe aplicarle la misma desconfianza por defecto que ya aplicaría a una entrada de usuario sin verificar. El origen del texto -modelo o persona- no debería cambiar el tratamiento que recibe en el destino.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_usar_el_mecanismo_de_saneamiento_específico_de_cada_destino"><a class="link" href="#_usar_el_mecanismo_de_saneamiento_específico_de_cada_destino">11.5.2. Usar el mecanismo de saneamiento específico de cada destino</a></h4>
+<div class="paragraph">
+<p>No existe un único "saneamiento universal". Escapar HTML (11.2), aislar la ejecución de código (11.3) y parametrizar o restringir SQL (11.4) son mecanismos distintos, cada uno probado durante años contra su propia categoría de ataque. Intentar resolver los tres con una única función de "limpieza" genérica es, en la práctica, no resolver ninguno del todo.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aplicar_mínimo_privilegio_en_el_destino_que_ejecuta_la_salida"><a class="link" href="#_aplicar_mínimo_privilegio_en_el_destino_que_ejecuta_la_salida">11.5.3. Aplicar mínimo privilegio en el destino que ejecuta la salida</a></h4>
+<div class="paragraph">
+<p>El mismo principio ya aplicado a credenciales (4.3) y a servidores MCP (2.7.10) vale igual para cualquier sistema que ejecute lo que un modelo genera: si algo sale mal -por inyección o por alucinación-, el alcance del daño está acotado por los privilegios del destino, no por la buena voluntad del modelo.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_preferir_salida_estructurada_y_restringida_cuando_el_destino_lo_permita"><a class="link" href="#_preferir_salida_estructurada_y_restringida_cuando_el_destino_lo_permita">11.5.4. Preferir salida estructurada y restringida, cuando el destino lo permita</a></h4>
+<div class="paragraph">
+<p>Un esquema de salida estricto (2.7.2) elimina por construcción clases enteras de ataque que, con texto libre, habría que detectar caso por caso. Un generador de SQL que solo puede elegir entre un conjunto cerrado de consultas parametrizadas ya construidas, en vez de escribir SQL arbitrario, no necesita ningún filtro que adivine qué sentencias son peligrosas: las peligrosas simplemente no están entre las opciones.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cómo_se_combinan_qué_compra_cada_capa_9"><a class="link" href="#_cómo_se_combinan_qué_compra_cada_capa_9">11.5.5. Cómo se combinan: qué compra cada capa</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Mitigación</th>
+<th class="tableblock halign-left valign-top">Función</th>
+<th class="tableblock halign-left valign-top">¿Es frontera de seguridad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tratar la salida como entrada no confiable (regla general)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arquitectura</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, es la decisión de diseño</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Saneamiento específico por destino (11.2, 11.3, 11.4)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, si se aplica en cada destino</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mínimo privilegio en el destino</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contención</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, acota el daño si algo falla</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salida estructurada y restringida</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reducción de superficie</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí, elimina la clase de ataque</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Este capítulo cierra el documento donde el primero lo abrió: LLM01 trataba la entrada al modelo como un dato que hay que desconfiar antes de dejarlo influir en el comportamiento del sistema. LLM10 trata la salida del modelo exactamente igual, en el otro extremo de la misma tubería. Ninguno de los dos problemas se resuelve confiando en que el modelo, en algún punto intermedio, se comporte bien.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note normativas">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Normativas</div>
+<div class="paragraph">
+<p>EU AI Act, Art. 15 (Precisión, solidez y ciberseguridad): el mismo artículo que abrió este documento en el capítulo 1, citado ya para la resiliencia frente a manipulación (4.6), la disponibilidad (7.5) y la precisión (8.5), exige también protección frente a "la explotación de vulnerabilidades en el contexto" -que es, en la práctica, saneamiento de entrada y de salida por igual-. El Top 10 entero, de principio a fin, es la forma técnica de cumplir ese único artículo.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2026-09-20 23:19:34 +0200
+Last updated 2026-09-22 15:31:51 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

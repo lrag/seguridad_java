@@ -1,4 +1,4 @@
-#Continuacion de 09_Bis_Excessive_Autonomy_ejemplo.py: con nombres de archivo
+#Continuacion de 09_Excessive_Autonomy_ejemplo_PROBLEMA.py: con nombres de archivo
 #ambiguos, el modelo unas veces borra hasta la copia de seguridad y otras
 #borra directamente todo lo que hay en la carpeta, informe firmado incluido,
 #declarando siempre la tarea "terminada con exito". Ni el ritmo de una
@@ -7,12 +7,12 @@
 #modelo solo, y ese criterio no es de fiar.
 #
 #Este script no intenta mejorar ese criterio -seria pedirle prompts cada vez
-#mas detallados, sin garantia real, igual que en 09_Bis-. En su lugar,
+#mas detallados, sin garantia real, igual que en el script anterior-. En su lugar,
 #EL CODIGO exige confirmacion humana explicita antes de ejecutar cualquier
 #eliminar_archivo, sea cual sea el archivo. listar_archivos, al ser de solo
 #lectura, se sigue ejecutando sin preguntar.
 #
-#Esto es distinto del Escenario B de 09_Excessive_Autonomy_ejemplo.py, que
+#Esto es distinto del Escenario B de 09_Excessive_Autonomy_ejemplo_MAL_PLANTEADO.py, que
 #paraba el bucle entero en cuanto aparecia la primera peticion de borrado.
 #Aqui se pregunta accion irreversible por accion irreversible: el usuario
 #puede aprobar el borrado de la basura real y negar el de la copia de
@@ -49,7 +49,6 @@ def eliminar_archivo(nombre: str) -> str:
         del archivos[nombre]
         return f"Archivo {nombre} eliminado."
     return f"Archivo {nombre} no encontrado."
-
 
 herramientas_por_nombre = {
     "listar_archivos": listar_archivos,

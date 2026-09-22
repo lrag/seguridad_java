@@ -31,6 +31,11 @@ from langchain_core.messages import HumanMessage, ToolMessage
 
 MAX_PASOS = 6
 
+#
+# ESTE EJEMPLO ESTÁ MAL:
+# No le entregamos al modelo la respuesta a su primira sugerencia de invocación de herramienta
+# Nos da el plan entero sin saber cuáles son los ficheros del directorio
+#
 
 @tool
 def listar_archivos() -> str:
