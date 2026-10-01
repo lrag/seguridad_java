@@ -1,16 +1,25 @@
 package com.curso.modelo.negocio;
 
+import com.curso.configuracion.ConfiguracionSpringSecurity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.curso.modelo.entidad.Pelicula;
+import com.curso.modelo.entidad.Usuario;
 
 @Service
-public class GestorPeliculas {
+public class ServicioPeliculas {
 
+	private final ConfiguracionSpringSecurity configuracionSpringSecurity;
 	private static List<Pelicula> peliculas;
+
+	ServicioPeliculas(ConfiguracionSpringSecurity configuracionSpringSecurity) {
+		this.configuracionSpringSecurity = configuracionSpringSecurity;
+	}
 
 	static{
 		peliculas = new ArrayList<>();
@@ -29,6 +38,12 @@ public class GestorPeliculas {
 	}
 
 	public List<Pelicula> listar(){
+		
+		System.out.println("==================================================================");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Usuario usuario = (Usuario) authentication.getPrincipal();
+		System.out.println("Usuario en listar: "+usuario);
+		
 		return peliculas;
 	}
 

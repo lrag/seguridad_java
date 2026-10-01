@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Certificados" id="cert-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="SpringSecurity6_CertificadoCliente - TLS mutuo (mTLS) con Spring Security x509" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="620" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rootCA" value="&lt;b&gt;CA Raiz&lt;/b&gt;&lt;br&gt;AntunezRootCA&lt;br&gt;&lt;i&gt;autofirmada&lt;/i&gt;&lt;br&gt;AntunezRootCA.key / .crt&lt;br&gt;pass: antunez" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="60" width="260" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="intCA" value="&lt;b&gt;CA Intermedia&lt;/b&gt;&lt;br&gt;AntunezIntermediateCA&lt;br&gt;firmada por la CA raiz&lt;br&gt;AntunezIntermediateCA.key / .crt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="210" width="260" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="server" value="&lt;b&gt;Servidor (Tomcat embebido)&lt;/b&gt;&lt;br&gt;CN=localhost, puerto 8443&lt;br&gt;Keystore: servidor_localhost.p12&lt;br&gt;Truststore: truststore.p12&lt;br&gt;(solo contiene la CA intermedia)&lt;br&gt;server.ssl.client-auth: need" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="430" y="370" width="300" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cliente1" value="&lt;b&gt;Cliente 1&lt;/b&gt;&lt;br&gt;CN=Harry Callahan&lt;br&gt;cliente1.p12&lt;br&gt;firmado por la CA intermedia&lt;br&gt;UserDetailsService -&amp;gt; ROLE_USER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="260" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cliente2" value="&lt;b&gt;Cliente 2&lt;/b&gt;&lt;br&gt;CN=Bud Spencer&lt;br&gt;cliente2.p12&lt;br&gt;firmado por la CA intermedia&lt;br&gt;UserDetailsService -&amp;gt; ROLE_USER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="450" y="600" width="260" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="cliente3" value="&lt;b&gt;Cliente 3&lt;/b&gt;&lt;br&gt;CN=Harpo&lt;br&gt;cliente3.p12&lt;br&gt;&lt;b&gt;AUTOFIRMADO&lt;/b&gt; (no pasa por la CA)&lt;br&gt;UserDetailsService -&amp;gt; ROLE_ADMIN&lt;br&gt;(codigo inalcanzable: TLS lo rechaza antes)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="840" y="600" width="270" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" value="&lt;b&gt;Leyenda&lt;/b&gt;&lt;br&gt;negro: firma (jerarquia de CA)&lt;br&gt;verde: conexion TLS aceptada&lt;br&gt;rojo discontinuo: conexion TLS rechazada" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacingLeft=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="770" width="280" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" value="firma&#10;(AntunezIntermediateCA.crt)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;" edge="1" parent="1" source="rootCA" target="intCA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e2" value="firma&#10;(servidor_localhost.crt)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;" edge="1" parent="1" source="intCA" target="server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e3" value="firma&#10;(cliente1.crt)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="intCA" target="cliente1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e4" value="firma&#10;(cliente2.crt)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="intCA" target="cliente2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" value="TLS OK -&gt; 200&#10;ROLE_USER" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;strokeColor=#82b366;endArrow=block;" edge="1" parent="1" source="cliente1" target="server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e6" value="TLS OK -&gt; 200&#10;ROLE_USER" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;strokeColor=#82b366;endArrow=block;" edge="1" parent="1" source="cliente2" target="server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e7" value="Handshake TLS RECHAZADO&#10;(fuera del truststore)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;strokeColor=#b85450;dashed=1;endArrow=block;" edge="1" parent="1" source="cliente3" target="server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

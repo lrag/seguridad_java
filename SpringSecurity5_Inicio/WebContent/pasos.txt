@@ -82,8 +82,9 @@ http
         .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
         .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")      
+        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).hasRole("AGENTE_ESPECIAL")
 		//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/desclasificar")).hasRole("DIRECTOR")          
+        //.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/clasificar")).hasAnyRole("DIRECTOR", "AGENTE_ESPECIAL")          
     );
 
 ############################################################################################################# 
@@ -265,7 +266,26 @@ http.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySe
 	);
     
 ############################################################################################################# 
-# 14.	Uso de la librería de etiquetas (Spring Security Taglibs)
+# 14.	CSRF
+#############################################################################################################
+
+Comentar en ConfiguracionSpringSecurity:
+
+http.csrf().disable();
+
+Añadir un campo oculto para guardar el token en todos los formularios que utilicen el método POST:
+-nuestro-login.jsp
+-listadoExpedientes.jsp
+
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
+
+Equivalente con la librería de etiquetas:
+
+<sec:csrfInput />    
+    
+    
+############################################################################################################# 
+# 15.	Uso de la librería de etiquetas (Spring Security Taglibs)
 #############################################################################################################	  
 WEB-INF/jsp/listadoExpedientes.jsp
 
@@ -277,8 +297,9 @@ Deprecated:
 	<a href="<c:url value='/expedientesx/desclasificar?id=${expediente.id}'/>">desclasificar</a>
 </sec:authorize>
 
+
 ############################################################################################################# 
-# 15.	Uso Expresiones SpEL con etiquetas Security Taglib
+# 16.	Uso Expresiones SpEL con etiquetas Security Taglib
 #############################################################################################################
 WEB-INF/jsp/listadoExpedientes.jsp
 
@@ -293,7 +314,6 @@ permitAll
 denyAll
 isAnonymous()
 isAuthenticated()
-
 
 Invocando muestros propios métodos con SpEL
 
@@ -319,24 +339,6 @@ authentication, principal
 	<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
 	<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
 </sec:authorize>
-
-############################################################################################################# 
-# 16.	CSRF
-#############################################################################################################
-
-Comentar en ConfiguracionSpringSecurity:
-
-http.csrf().disable();
-
-Añadir un campo oculto para guardar el token en todos los formularios que utilicen el método POST:
--nuestro-login.jsp
--listadoExpedientes.jsp
-
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
-
-Equivalente con la librería de etiquetas:
-
-<sec:csrfInput />
 
 
 ############################################################################################################# 

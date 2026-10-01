@@ -8,7 +8,33 @@
 <title>Expedientes X</title>
 </head>
 
+<!--
 <script type="application/javascript" src="../../js/listadoExpedientes.js"></script>
+-->
+
+<script>
+
+	function clasificar(id){
+		document.formulario.action = "../clasificar";
+		document.getElementById("id").value = id;
+		document.formulario.submit();
+	}
+
+	function desclasificar(id){
+		document.formulario.action = "../desclasificar";
+		document.getElementById("id").value = id;
+		document.formulario.submit();
+	}
+	
+	window.onload = function(){
+		enlacesClasificar = document.querySelectorAll('[id^="clasificar-"]')
+		enlacesClasificar.forEach( enlace => enlace.onclick = () => clasificar(enlace.id.substring(11)))
+		
+		enlacesDesclasificar = document.querySelectorAll('[id^="desclasificar-"]')
+		enlacesDesclasificar.forEach( enlace => enlace.onclick = () => desclasificar(enlace.id.substring(14)))
+	}
+
+</script>
 
 <body>
 
@@ -47,16 +73,14 @@
 						<td align="center"><b>${expediente.clasificado}</b></td>
 						<td>
 							<a href="<c:url value='/expedientesx/mostrar/${expediente.id}'/>">mostrar</a>
-
-							<!-- 
-							sec:authorize access="hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')">
-							-->
+							
+							<!--sec:authorize access="hasAnyRole('ROLE_AGENTE_ESPECIAL','ROLE_DIRECTOR')">-->
 							
 							<sec:authorize access="@seguridad.getPermiso(1234, #expediente)">
-								<a href="#" id="clasificar-${expediente.id}">clasificar</a>
-								<a href="#" id="desclasificar-${expediente.id}">desclasificar</a>								
-							</sec:authorize>				
-							
+								<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
+								<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
+							</sec:authorize>							
+
 						</td>
 					</tr>
 				</c:forEach>

@@ -5,6 +5,7 @@ import javax.security.auth.x500.X500Principal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,11 +15,19 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.preauth.x509.SubjectX500PrincipalExtractor;
 import org.springframework.security.web.authentication.preauth.x509.X509PrincipalExtractor;
 
+import com.curso.modelo.entidad.Usuario;
+
 @Configuration
 public class ConfiguracionSpringSecurity {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
+    	http.sessionManagement(sess -> sess
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS) 
+			);
+	
+		http.csrf(csrf -> csrf.disable());		
 		
 		//Se buscará en el certificado el CN (Common Name) para utilizarlo como USERNAME
         SubjectX500PrincipalExtractor principalExtractor = new SubjectX500PrincipalExtractor();
@@ -52,6 +61,7 @@ public class ConfiguracionSpringSecurity {
         http.authorizeHttpRequests(auth -> auth
                 .anyRequest().authenticated()
             );
+        
         http.x509(x509 -> x509
                 .x509PrincipalExtractor(principalExtractor)
                 .userDetailsService(userDetailsService())
@@ -81,11 +91,12 @@ public class ConfiguracionSpringSecurity {
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				System.out.println("USERNAME: " + username);
 				if (username.equals("Harry Callahan")) {
-					return new User(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+					return new Usuario(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"), "APLICACIÓN 1", "adminApp1@b.c", "");
 				} else if (username.equals("Bud Spencer")) {
-					return new User(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+					return new Usuario(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"), "APLICACIÓN 2", "adminApp2@b.c", "");
 				} else if (username.equals("Harpo")) {
-					return new User(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
+					//El certificado de Harpo no está firmado, nunca se ejecutará este if
+					return new Usuario(username, "", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"), "APLICACIÓN 3", "adminApp3@b.c", "");
 				}
 				throw new UsernameNotFoundException("User not found!");
 			}

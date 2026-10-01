@@ -24,8 +24,11 @@ import jakarta.servlet.http.HttpServletResponse;
 //OncePerRequestFilter se ejecutará una única vez aunque haya forwards
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
+
+    public JwtAuthFilter(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
 
     /*
     GET /peliculas
@@ -40,17 +43,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         //Si viene el token se examina
         //Si todo es correcto se añade el usuario al security context holder
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7);
+            token = authHeader.substring(7); //Rastrero
             
             Claims claims = jwtUtil.extractAllClaims(token);
             
             String username = claims.getSubject();
+            
+            
+            
             List<String> rol = claims.get("rol", ArrayList.class);
             
             UserDetails userDetails = User
             	.withUsername(username)
             	.password("[PROTECTED]")
-            	.roles(rol.toArray(new String[0]))
+            	.roles(rol.toArray(new String[0])) //En esta aplicación los usuarios solo pueden tener un rol
             	.build();
             
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

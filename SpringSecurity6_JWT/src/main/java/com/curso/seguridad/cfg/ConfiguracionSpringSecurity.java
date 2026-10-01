@@ -26,8 +26,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class ConfiguracionSpringSecurity {
 	
-    @Autowired
-    private JwtAuthFilter jwtAuthFilter;	
+    private final JwtAuthFilter jwtAuthFilter;
+
+	ConfiguracionSpringSecurity(JwtAuthFilter jwtAuthFilter) {
+		this.jwtAuthFilter = jwtAuthFilter;
+	}	
     
 	@Bean
 	PasswordEncoder passwordEncoder(){
@@ -75,14 +78,27 @@ public class ConfiguracionSpringSecurity {
     	http    		
             .csrf(csrf -> csrf.disable());
     	
+    	/*
     	http
 			.authorizeHttpRequests( auth -> auth
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/controlAutenticacion")).permitAll()
+				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/cliente/**")).permitAll()
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/peliculas**")).hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/peliculas")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/peliculas/*")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/peliculas/*")).hasAnyRole("DIRECTOR")
 				.anyRequest().authenticated());
+		*/
+    	
+    	http
+	        .authorizeHttpRequests( auth -> auth
+	            .requestMatchers(HttpMethod.POST, "/controlAutenticacion").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/cliente/**").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/peliculas**").hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.POST, "/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.PUT, "/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.DELETE, "/peliculas/*").hasAnyRole("DIRECTOR")
+	            .anyRequest().authenticated());    	
     	
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 
 

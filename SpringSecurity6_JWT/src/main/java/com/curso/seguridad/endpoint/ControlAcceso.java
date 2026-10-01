@@ -29,6 +29,15 @@ public class ControlAcceso {
 		this.jwtUtil = jwtUtil;
 	}
     
+    /*
+    POST /controlAutenticacion
+    ContentType: application/json
+    -----------------------------
+    {
+    	"username" : "aaa",
+    	"password" : "bbb"
+    }    
+    */
 	@PostMapping("/controlAutenticacion")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
 		
@@ -39,8 +48,8 @@ public class ControlAcceso {
 		if (!authentication.isAuthenticated()) {
 			return new ResponseEntity<>("Credenciales incorrectas.", HttpStatus.UNAUTHORIZED);
 		}
-		
-    	List<String> roles = authentication
+
+		List<String> roles = authentication
     		.getAuthorities()
     		.stream()
     		.map( a -> a.getAuthority().replaceAll("ROLE_", ""))

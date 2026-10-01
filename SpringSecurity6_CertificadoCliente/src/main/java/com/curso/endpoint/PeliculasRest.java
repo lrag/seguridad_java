@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +21,18 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.curso.endpoint.dto.PeliculaDto;
 import com.curso.modelo.entidad.Pelicula;
-import com.curso.modelo.negocio.GestorPeliculas;
+import com.curso.modelo.negocio.ServicioPeliculas;
 
 @RestController
 //Singleton
 @RequestMapping(path="peliculas")
 public class PeliculasRest {
 
-	@Autowired
-	private GestorPeliculas gestorPeliculas;
-	
+	private final ServicioPeliculas gestorPeliculas;
+
+	PeliculasRest(ServicioPeliculas gestorPeliculas) {
+		this.gestorPeliculas = gestorPeliculas;
+	}
 	
 	@PostMapping(/*path="peliculas",*/
 				 consumes=MediaType.APPLICATION_JSON_VALUE)

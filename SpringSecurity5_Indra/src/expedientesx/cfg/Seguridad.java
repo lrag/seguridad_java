@@ -1,4 +1,4 @@
-package expedientesx.util;
+package expedientesx.cfg;
 
 import java.util.Collection;
 
@@ -10,14 +10,17 @@ import org.springframework.stereotype.Component;
 import expedientesx.modelo.entidad.Expediente;
 
 @Component
-public class Seguridad {	
+public class Seguridad {
 	
-	public boolean getPermiso(Integer dato, Expediente expediente){	
+	public boolean getPermiso(Integer dato, Expediente expediente){		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("GET PERMISO: "+authentication.getAuthorities()+", "+dato+", "+expediente.getTitulo());
+		
+		System.out.println("================================================");
+		System.out.println("Dato: "+dato+", Expediente: "+expediente.getTitulo());
+		System.out.println("GET PERMISO: "+authentication.getAuthorities());
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
 		return authorities.contains(new SimpleGrantedAuthority("ROLE_AGENTE_ESPECIAL")) 
 			   || authorities.contains(new SimpleGrantedAuthority("ROLE_DIRECTOR"));
-	}
-		
+	}	
+	
 }

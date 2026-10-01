@@ -5,7 +5,6 @@ import java.util.Collection;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -26,7 +25,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = { "expedientesx.util" })
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled=true, prePostEnabled=true)
 public class ConfiguracionSpringSecurity {
 	
@@ -37,7 +35,7 @@ public class ConfiguracionSpringSecurity {
 			.addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
 			.build();
 	}
-
+	
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -62,34 +60,7 @@ public class ConfiguracionSpringSecurity {
 		userDetailsManager.createUser(usuario4);
 		  
 		return userDetailsManager;
-	}	
-	
-	
-	/*	
-	GET
-	POST
-	PUT
-	PATCH
-	DELETE
-	------------
-	HEAD
-	OPTIONS
-	
-	/recursos
-	 	rec1
-	 	rec2
-	 	rec3
-	 	/movidas
-	 		movida1
-	 		movida2
-	 		movida3
-	 
-	GET /recursos/movidas/movida2
-	GET /recursos/movidas
-	
-	/recursos/*
-	/recursos/**
-	*/
+	}
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
@@ -99,10 +70,9 @@ public class ConfiguracionSpringSecurity {
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
-	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated()   
-			//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/clasificar")).hasRole("DIRECTOR")   
-			//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/mostrar/*")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")   
-			
+	        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).authenticated() //hasRole("AGENTE_ESPECIAL")      
+			//.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/desclasificar")).hasRole("DIRECTOR")          
+	        //.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/clasificar")).hasAnyRole("DIRECTOR", "AGENTE_ESPECIAL")          
 	    );
 
 		http.formLogin(form -> form
@@ -115,9 +85,8 @@ public class ConfiguracionSpringSecurity {
 				.key("estoEsUnSecreto")
 				.tokenValiditySeconds(86400)
 				.rememberMeCookieName("my-remember-me")
-				.rememberMeParameter("remember-me-param")); //remember-me			
-	
-
+				.rememberMeParameter("remember-me-param")); //remember-me		
+		
 		http.requiresChannel(channel -> channel
 				.anyRequest()
 				.requiresSecure()
@@ -130,14 +99,10 @@ public class ConfiguracionSpringSecurity {
 				.preload(true)
 				.maxAgeInSeconds(31536000)
 			)
-			.contentSecurityPolicy(csp -> csp
-				    .policyDirectives("default-src 'self'")
-			)	
-		);	
-
+		);		
+		
 		http.logout(logout -> logout
 				.logoutSuccessUrl("/paginas/desconectado.jsp")
-				.logoutUrl("/logout")
 				.deleteCookies("JSESSIONID")
 			);
 
@@ -146,43 +111,63 @@ public class ConfiguracionSpringSecurity {
 		        .maximumSessions(1)
 		        .maxSessionsPreventsLogin(false) //false por defecto
 		    );			
-	
+		
 		//http.csrf().disable();
 		
 		http.exceptionHandling(handling -> handling
 		    	.accessDeniedPage("/paginas/acceso-denegado.jsp")
-			);			
-		
-	    return http.build();
+			);	
+	
+		return http.build();
 	}
     
 }
 
-class CustomUserDetailsService implements UserDetailsService {
+class CustomPasswordEncoder implements PasswordEncoder {
+
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		//CONSULTA A UNA BB:DD: MongoDB
-		CustomUserDetails usuario = new CustomUserDetails();
-		return usuario;
+	public String encode(CharSequence rawPassword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+		// TODO Auto-generated method stub
+		return false;
+	}	
+	
 }
 
-class CustomUserDetails implements UserDetails {
 
-	//Campos "oficiales"
-	private Collection<GrantedAuthority> authorities;
-	private String password;
-	private String userName;
-	private boolean enabled;
-	//resto de campos "oficiales"
+class CustomUserDetailsService implements UserDetailsService {
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
+	}
 	
-	//Lo nuestro
-	private String preferencias;
+}
+
+class CustomUser implements UserDetails {
+
+	//Movidas nuestras:
+	//fechaUltimoAcceso
+	//preferencias
+	//...
 	
+	//username
+	//password
+	//isAccountNonExpired
+	//isAccountNonLocked
+	//isCredentialsNonExpired
+	//isEnabled
+	//
+	//Collection<GrantedAuthority>
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+		return null;
 	}
 
 	@Override
@@ -217,19 +202,14 @@ class CustomUserDetails implements UserDetails {
 	
 }
 
-class CustomPasswordEncoder implements PasswordEncoder {
 
-	@Override
-	public String encode(CharSequence rawPassword) {
-		return null;
-	}
 
-	@Override
-	public boolean matches(CharSequence rawPassword, String encodedPassword) {
-		return false;
-	}
-	
-}
+
+
+
+
+
+
 
 
 

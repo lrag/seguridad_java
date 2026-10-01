@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-//@ControllerAdvice
+@ControllerAdvice
 //@ControllerAdvice(basePackages = "com.curso")
 public class ControladorErrores {
 

@@ -67,6 +67,7 @@ http.formLogin(form -> form
 	.failureUrl("/paginas/nuestro-login.jsp?login_error"));
 
 http.logout(logout -> logout
+		.logoutUrl("/logout")
 		.logoutSuccessUrl("/paginas/desconectado.jsp"));
 
 http.csrf().disable();
@@ -219,8 +220,10 @@ http.headers(headers -> headers
 )
 				
 .contentSecurityPolicy(csp -> csp
-	.policyDirectives("script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/")
-)				
+    .policyDirectives("default-src 'self' 'nonce-{nonce}'; object-src 'none';")
+)	
+
+			
 	
 ############################################################################################################# 
 # 11.    Control de la expiración de sesiones
@@ -298,7 +301,7 @@ Invocando muestros propios métodos con SpEL
 
 @Component
 public class Seguridad {	
-	public boolean getPermiso(){	
+	public boolean getPermiso(Integer dato, Expediente expediente){		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("GET PERMISO: "+authentication.getAuthorities());
 		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
@@ -307,7 +310,12 @@ public class Seguridad {
 	}		
 }
 
-<sec:authorize access="@seguridad.getPermiso()">
+Como objetos implícitos tenemos el 
+
+authentication, principal
+#request, #session, #pageScope, #param
+
+<sec:authorize access="@seguridad.getPermiso(1234, #expediente)">
 	<a href="#" onclick="clasificar(${expediente.id})">clasificar</a>
 	<a href="#" onclick="desclasificar(${expediente.id})">desclasificar</a>
 </sec:authorize>

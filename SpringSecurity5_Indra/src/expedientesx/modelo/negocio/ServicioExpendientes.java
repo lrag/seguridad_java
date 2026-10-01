@@ -10,7 +10,7 @@ import expedientesx.modelo.entidad.Expediente;
 
 public interface ServicioExpendientes {
 	
-	//@Secured("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
+	//@Secured("ROLE_DIRECTOR")
 	@PreAuthorize("hasRole('ROLE_DIRECTOR')")
 	void clasificar(Expediente expediente);
 

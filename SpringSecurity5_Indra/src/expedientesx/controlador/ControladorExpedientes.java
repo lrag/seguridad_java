@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import expedientesx.modelo.entidad.Expediente;
-import expedientesx.modelo.negocio.ServicioExpedientesImpl;
 import expedientesx.modelo.negocio.ServicioExpendientes;
 
 @Controller
@@ -32,7 +31,7 @@ public class ControladorExpedientes {
 		mav.addObject("expedientes", servicioExpendientes.listarTodos());
 		return mav;
 	}
-
+	
 	@GetMapping("/mostrar/{id}")
 	public ModelAndView mostrar(@PathVariable() Long id) {
 		System.out.println("Peticion Mostrar Expediente Recibida");
