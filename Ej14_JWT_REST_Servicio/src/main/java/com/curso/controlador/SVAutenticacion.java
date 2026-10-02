@@ -22,7 +22,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 
-//http://localhost:8080/Ej14_JWTR_REST_Servicio/SVAutenticacion
+//http://localhost:8080/Ej14_JWT_REST_Servicio/SVAutenticacion
 @WebServlet("/SVAutenticacion")
 public class SVAutenticacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;

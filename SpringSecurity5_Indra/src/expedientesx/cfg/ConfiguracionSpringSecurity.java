@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -43,27 +47,48 @@ public class ConfiguracionSpringSecurity {
 	}	
 
 	@Bean
+	UserDetailsService inMemoryUserDetailsService() {
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		manager.createUser(User.builder().username("Fernando!").password(passwordEncoder().encode("1234")).roles("AGENTE").build());
+		return manager;
+	}
+
+	@Bean
 	UserDetailsService jdbcUserDetailsService(DataSource dataSource) {
 		String usersByUsernameQuery = "select username, password, enabled from users where username = ?";
 		String authsByUserQuery = "select username, authority from authorities where username = ?";
 		JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
 		userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
 		userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
-		  
-		UserDetails usuario1 = User.builder().username("Fernando").password(passwordEncoder().encode("1234")).roles("AGENTE").build();
+
 		UserDetails usuario2 = User.builder().username("Mulder").password(passwordEncoder().encode("fox")).roles("AGENTE_ESPECIAL").build();
 		UserDetails usuario3 = User.builder().username("Scully").password(passwordEncoder().encode("dana")).roles("AGENTE_ESPECIAL").build();
 		UserDetails usuario4 = User.builder().username("Skinner").password(passwordEncoder().encode("walter")).roles("DIRECTOR").build();
-		userDetailsManager.createUser(usuario1);
 		userDetailsManager.createUser(usuario2);
 		userDetailsManager.createUser(usuario3);
 		userDetailsManager.createUser(usuario4);
-		  
+
 		return userDetailsManager;
 	}
 	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
+	AuthenticationManager authenticationManager(UserDetailsService inMemoryUserDetailsService, UserDetailsService jdbcUserDetailsService) {
+		DaoAuthenticationProvider proveedorMemoria = new DaoAuthenticationProvider();
+		proveedorMemoria.setUserDetailsService(inMemoryUserDetailsService);
+		proveedorMemoria.setPasswordEncoder(passwordEncoder());
+
+		DaoAuthenticationProvider proveedorBD = new DaoAuthenticationProvider();
+		proveedorBD.setUserDetailsService(jdbcUserDetailsService);
+		proveedorBD.setPasswordEncoder(passwordEncoder());
+
+		return new ProviderManager(proveedorMemoria, proveedorBD);
+	}
+	
+	
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http,
+			UserDetailsService inMemoryUserDetailsService,
+			UserDetailsService jdbcUserDetailsService) throws Exception {	
 		
 		http.authorizeHttpRequests( auth -> auth
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
@@ -80,16 +105,21 @@ public class ConfiguracionSpringSecurity {
 			//.passwordParameter("pw")
 			.failureUrl("/paginas/nuestro-login.jsp?login_error"));
 		
+		UserDetailsService userDetailsServiceCombinado = username -> {
+			try {
+				return inMemoryUserDetailsService.loadUserByUsername(username);
+			} catch (UsernameNotFoundException ex) {
+				return jdbcUserDetailsService.loadUserByUsername(username);
+			}
+		};
+
 		http.rememberMe(rememberMe -> rememberMe
+				.userDetailsService(userDetailsServiceCombinado)
 				.key("estoEsUnSecreto")
 				.tokenValiditySeconds(86400)
 				.rememberMeCookieName("my-remember-me")
-				.rememberMeParameter("remember-me-param")); //remember-me		
-		
-		http.requiresChannel(channel -> channel
-				.anyRequest()
-				.requiresSecure()
-			);
+				.rememberMeParameter("remember-me-param"));		
+
 
 		//Activo por defecto
 		http.headers(headers -> headers

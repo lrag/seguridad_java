@@ -210,6 +210,29 @@ AuthenticationManager authenticationManager(UserDetailsService inMemoryUserDetai
 	return new ProviderManager(proveedorMemoria, proveedorBD);
 }
 
+//Surge un problema con el RememberMe, que necesita que le inyectten un userDetailsService y ahora hay dos candidatos
+
+@Bean
+SecurityFilterChain filterChain(HttpSecurity http,
+		UserDetailsService inMemoryUserDetailsService,
+		UserDetailsService jdbcUserDetailsService) throws Exception {
+
+	UserDetailsService combinado = username -> {
+		try {
+			return inMemoryUserDetailsService.loadUserByUsername(username);
+		} catch (UsernameNotFoundException ex) {
+			return jdbcUserDetailsService.loadUserByUsername(username);
+		}
+	};
+
+	http.rememberMe(rememberMe -> rememberMe
+			.userDetailsService(combinado)
+			.key("estoEsUnSecreto")
+			.tokenValiditySeconds(86400)
+			.rememberMeCookieName("my-remember-me")
+			.rememberMeParameter("remember-me-param"));
+}
+
 
 #############################################################################################################
 # 8.    Añadir funcionalidad "Remember Me"

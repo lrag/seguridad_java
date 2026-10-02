@@ -106,7 +106,8 @@ public class ConfiguracionSpringSecurity {
 	            .anyRequest().authenticated());
     	
     	//Añade un filtro al Spring Security Filter Chain
-    	http.cors(cors -> cors.configurationSource(corsConfigurationSource()));    	
+    	http
+    		.cors(cors -> cors.configurationSource(corsConfigurationSource()));    	
     	
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 
 

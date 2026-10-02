@@ -73,19 +73,23 @@ public class ConfiguracionSpringSecurity {
 
     	http
 	        .authorizeHttpRequests( auth -> auth
-	            .requestMatchers(HttpMethod.GET, "/cliente/**").permitAll()
-	            .requestMatchers(HttpMethod.GET, "/peliculas**").hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.GET,  "/cliente/**").permitAll()
+	            .requestMatchers(HttpMethod.GET,  "/peliculas").hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.GET,  "/peliculas/*").hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
 	            .requestMatchers(HttpMethod.POST, "/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
-	            .requestMatchers(HttpMethod.PUT, "/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
+	            .requestMatchers(HttpMethod.PUT,  "/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 	            .requestMatchers(HttpMethod.DELETE, "/peliculas/*").hasAnyRole("DIRECTOR")
+	            .requestMatchers("/**").hasAnyRole("DIRECTOR") //Para que pueda verse prueba.html
 	            .anyRequest().authenticated());
 
+    	//Esta es la configuración para cuando no tenemos pantalla de login
+    	//La pone el navegador
         //http.httpBasic(Customizer.withDefaults());
         
         http.httpBasic(basic -> basic
         	    .authenticationEntryPoint((request, response, authException) ->
         	        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
-        	);        
+        	);
 
         return http.build();
     }

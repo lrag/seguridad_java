@@ -60,7 +60,7 @@ public class CORSFilter implements Filter {
         List<String> origenesPermitidos = new ArrayList<>();
         origenesPermitidos.add("http://localhost:8081");
         origenesPermitidos.add("http://www.nosequé.es");
-        origenesPermitidos.add("http://www.nosecuántos.es");
+        origenesPermitidos.add("http://www.nosecuántos.tal");
         
         System.out.println(origenesPermitidos.contains(origin));
         if(origenesPermitidos.contains(origin)) {
