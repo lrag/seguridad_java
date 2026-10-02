@@ -91,13 +91,20 @@ $(function () {
 	});
 
 	$('#tablaPeliculas').on('click', '.btnEditar', function () {
-		var fila = $(this).closest('tr');
-		$('#id').val(fila.data('id'));
-		$('#titulo').val(fila.find('td').eq(1).text());
-		$('#director').val(fila.find('td').eq(2).text());
-		$('#genero').val(fila.find('td').eq(3).text());
-		$('#year').val(fila.find('td').eq(4).text());
-		$('#tituloFormulario').text('Editar película #' + fila.data('id'));
+		var id = $(this).closest('tr').data('id');
+		ocultarMensaje();
+		$.ajax({
+			url: '/peliculas/' + id,
+			method: 'GET',
+			headers: cabeceraAutenticacion()
+		}).done(function (pelicula) {
+			$('#id').val(pelicula.id);
+			$('#titulo').val(pelicula.titulo);
+			$('#director').val(pelicula.director);
+			$('#genero').val(pelicula.genero);
+			$('#year').val(pelicula.year);
+			$('#tituloFormulario').text('Editar película #' + pelicula.id);
+		}).fail(manejarError);
 	});
 
 	$('#tablaPeliculas').on('click', '.btnBorrar', function () {

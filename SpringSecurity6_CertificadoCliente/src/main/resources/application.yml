@@ -80,6 +80,7 @@
 #contraseña: changeme
 #-servidor_localhost.p12
 
+#Este bloque es para que el tomcat tenga el certificado
 server.ssl.key-store-type: PKCS12
 server.ssl.key-store: classpath:servidor_localhost.p12
 server.ssl.key-store-password: ${CLAVE_ALMACEN:changeme}
@@ -94,6 +95,7 @@ server.port: 8443
 #changeme
 #-truststore.p12
 
+#Este bloque es para que el tomcat tenga el trust store
 server.ssl.trust-store-type: PKCS12
 server.ssl.trust-store: "classpath:truststore.p12"
 server.ssl.trust-store-password: "changeme"

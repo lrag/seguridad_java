@@ -1,8 +1,9 @@
 package com.curso.seguridad.cfg;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,7 +22,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class ConfiguracionSpringSecurity {
@@ -66,7 +69,21 @@ public class ConfiguracionSpringSecurity {
 	  
 	  return userDetailsManager;
 	}		
-        
+      
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(List.of("http://localhost:8081"));
+		configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+		configuration.setAllowedHeaders(List.of("*"));
+		configuration.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}	
+	
+	
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    	
@@ -78,18 +95,6 @@ public class ConfiguracionSpringSecurity {
     	http    		
             .csrf(csrf -> csrf.disable());
     	
-    	/*
-    	http
-			.authorizeHttpRequests( auth -> auth
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/controlAutenticacion")).permitAll()
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/cliente/**")).permitAll()
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/peliculas**")).hasAnyRole("AGENTE", "AGENTE_ESPECIAL", "DIRECTOR")
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/peliculas")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.PUT, "/peliculas/*")).hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
-				.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.DELETE, "/peliculas/*")).hasAnyRole("DIRECTOR")
-				.anyRequest().authenticated());
-		*/
-    	
     	http
 	        .authorizeHttpRequests( auth -> auth
 	            .requestMatchers(HttpMethod.POST, "/controlAutenticacion").permitAll()
@@ -98,7 +103,10 @@ public class ConfiguracionSpringSecurity {
 	            .requestMatchers(HttpMethod.POST, "/peliculas").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 	            .requestMatchers(HttpMethod.PUT, "/peliculas/*").hasAnyRole("AGENTE_ESPECIAL", "DIRECTOR")
 	            .requestMatchers(HttpMethod.DELETE, "/peliculas/*").hasAnyRole("DIRECTOR")
-	            .anyRequest().authenticated());    	
+	            .anyRequest().authenticated());
+    	
+    	//Añade un filtro al Spring Security Filter Chain
+    	http.cors(cors -> cors.configurationSource(corsConfigurationSource()));    	
     	
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); 
 

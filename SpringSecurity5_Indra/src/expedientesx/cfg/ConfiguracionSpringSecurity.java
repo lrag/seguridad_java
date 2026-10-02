@@ -65,8 +65,7 @@ public class ConfiguracionSpringSecurity {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    	
 		
-		http
-	    .authorizeHttpRequests( auth -> auth
+		http.authorizeHttpRequests( auth -> auth
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/paginas/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/css/*")).permitAll()
 	        .requestMatchers(AntPathRequestMatcher.antMatcher("/imagenes/*")).permitAll()
@@ -149,12 +148,12 @@ class CustomUserDetailsService implements UserDetailsService {
 	
 }
 
-class CustomUser implements UserDetails {
+class CustomUserDetails implements UserDetails {
 
 	//Movidas nuestras:
 	//fechaUltimoAcceso
 	//preferencias
-	//...
+	//horarioLaboral
 	
 	//username
 	//password

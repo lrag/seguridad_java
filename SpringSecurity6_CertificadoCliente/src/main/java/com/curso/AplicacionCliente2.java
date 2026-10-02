@@ -29,7 +29,7 @@ public class AplicacionCliente2 {
 
 		//He aqui nuestro almacen de certificados en el que está nuestra clave privada y certificado digital
 		KeyStore ks = KeyStore.getInstance("PKCS12");
-		ks.load(new FileInputStream("cliente2.p12"), "changeme".toCharArray());
+		ks.load(new FileInputStream("cliente3.p12"), "changeme".toCharArray());
 
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 		kmf.init(ks, "changeme".toCharArray());
@@ -63,7 +63,8 @@ public class AplicacionCliente2 {
 				.baseUrl("https://localhost:8443")
 				.build();
 
-		String body = restClient.get()
+		String body = restClient
+				.get()
 				.uri("/peliculas")
 				.retrieve()
 				.body(String.class);
