@@ -49,7 +49,7 @@ public class ConfiguracionSpringSecurity {
         	//Los datos de identidad certificado
             X500Principal principal = clientCert.getSubjectX500Principal();
             //dn ya es un string con el formato marcado por RFC2253
-            //EMAILADDRESS=juanGomez@georgeforeman.com,CN=Juan Gómez,OU=Departamento,O=Empresa,C=ES
+            //EMAILADDRESS=juan.gomez@georgeforeman.com,CN=Juan Gómez,OU=Departamento,O=Empresa,C=ES
             String dn = principal.getName(X500Principal.RFC2253);
             //Buscamos lo que sea
             if (dn.contains("EMAILADDRESS=")) {
@@ -100,7 +100,7 @@ class CustomX509PrincipalExtractor implements X509PrincipalExtractor {
     	//Los datos de identidad certificado
         X500Principal principal = clientCert.getSubjectX500Principal();
         //dn ya es un string con el formato marcado por RFC2253
-        //EMAILADDRESS=juanGomez@georgeforeman.com,CN=Juan Gómez,OU=Departamento,O=Empresa,C=ES
+        //EMAILADDRESS=juan.gomez@georgeforeman.com,CN=Juan Gómez,OU=Departamento,O=Empresa,C=ES
         String dn = principal.getName(X500Principal.RFC2253);
         //Buscamos lo que sea
         if (dn.contains("EMAILADDRESS=")) {
