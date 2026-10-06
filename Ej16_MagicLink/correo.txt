@@ -1,0 +1,5 @@
+Para: a@a.a
+Asunto: Tu enlace de acceso
+
+Pulsa este enlace para entrar (caduca en 10 minutos):
+http://localhost:8080/magic-link/verificar?token=Y_aekXlV0WGsnqvNvNcZshUt2O1Ut06oWnHrBs9wHDk

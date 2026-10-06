@@ -6,17 +6,19 @@ public class Usuario {
 	private String nombre;
 	private String login;
 	private String pw;
+	private String rol;
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String login, String pw) {
+	public Usuario(int id, String nombre, String login, String pw, String rol) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.login = login;
 		this.pw = pw;
+		this.rol = rol;
 	}
 
 	public int getId() {
@@ -51,9 +53,17 @@ public class Usuario {
 		this.pw = pw;
 	}
 
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", login=" + login + ", pw=" + pw + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", login=" + login + ", pw=" + pw + ", rol=" + rol + "]";
 	}
 	
 }

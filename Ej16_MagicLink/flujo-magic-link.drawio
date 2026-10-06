@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Flujo Magic Link" id="flujo-magic-link">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="titulo" value="Ej16_MagicLink - Flujo de autenticación con magic link" style="text;html=1;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="300" y="0" width="700" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Participantes -->
+        <mxCell id="p_usuario" value="&lt;b&gt;Usuario&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p_nav" value="&lt;b&gt;Navegador&lt;/b&gt;&lt;br&gt;HTML + jQuery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p_serv" value="&lt;b&gt;Servidor&lt;/b&gt;&lt;br&gt;Spring Boot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="530" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p_bd" value="&lt;b&gt;Base de datos&lt;/b&gt;&lt;br&gt;H2 (tokens_magic_link)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="790" y="40" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p_correo" value="&lt;b&gt;correo.txt&lt;/b&gt;&lt;br&gt;(correo simulado)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Lineas de vida -->
+        <mxCell id="l_usuario" style="endArrow=none;dashed=1;html=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="100" y="90" as="sourcePoint" /><mxPoint x="100" y="1080" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="l_nav" style="endArrow=none;dashed=1;html=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="90" as="sourcePoint" /><mxPoint x="330" y="1080" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="l_serv" style="endArrow=none;dashed=1;html=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="90" as="sourcePoint" /><mxPoint x="600" y="1080" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="l_bd" style="endArrow=none;dashed=1;html=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="870" y="90" as="sourcePoint" /><mxPoint x="870" y="1080" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="l_correo" style="endArrow=none;dashed=1;html=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1090" y="90" as="sourcePoint" /><mxPoint x="1090" y="1080" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <!-- FASE 1: pedir el enlace -->
+        <mxCell id="fase1" value="1. Pedir el enlace" style="text;html=1;fontStyle=1;fontColor=#b85450;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="110" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="escribe su correo y pulsa «Pedir enlace mágico»" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="100" y="150" as="sourcePoint" /><mxPoint x="330" y="150" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s2" value="POST /magic-link/solicitar  (correo)" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="200" as="sourcePoint" /><mxPoint x="600" y="200" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s3" value="buscar Usuario por correoE" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="250" as="sourcePoint" /><mxPoint x="870" y="250" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s4" value="guardar token T1 (opaco, aleatorio, 10 min, utilizado=false)" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="300" as="sourcePoint" /><mxPoint x="870" y="300" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s5" value="escribe el «correo» con el enlace ...?token=T1" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="350" as="sourcePoint" /><mxPoint x="1090" y="350" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s6" value="302 → revisa-tu-correo.html" style="endArrow=block;html=1;dashed=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="400" as="sourcePoint" /><mxPoint x="330" y="400" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <!-- FASE 2: seguir el enlace -->
+        <mxCell id="fase2" value="2. Seguir el enlace del correo" style="text;html=1;fontStyle=1;fontColor=#b85450;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="430" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" value="lee el enlace en correo.txt" style="endArrow=block;html=1;dashed=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1090" y="470" as="sourcePoint" /><mxPoint x="100" y="470" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s8" value="pega el enlace en el navegador" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="100" y="520" as="sourcePoint" /><mxPoint x="330" y="520" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s9" value="GET /magic-link/verificar?token=T1" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="570" as="sourcePoint" /><mxPoint x="600" y="570" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s10" value="buscar T1 · comprobar caducidad · marcar utilizado (UPDATE atómico)" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="620" as="sourcePoint" /><mxPoint x="870" y="620" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s11" value="guardar token temporal T2 (60 s)" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="670" as="sourcePoint" /><mxPoint x="870" y="670" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s12" value="302 → /cliente/index.html?codigo=T2" style="endArrow=block;html=1;dashed=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="720" as="sourcePoint" /><mxPoint x="330" y="720" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <!-- FASE 3: canjear por el JWT -->
+        <mxCell id="fase3" value="3. Canjear el código por el JWT" style="text;html=1;fontStyle=1;fontColor=#b85450;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="750" width="250" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="s13" value="POST /magic-link/token  (codigo=T2)  [$.ajax de cliente.js]" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="330" y="800" as="sourcePoint" /><mxPoint x="600" y="800" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="s14" value="buscar T2 · comprobar caducidad · marcar utilizado" style="endArrow=block;html=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="850" as="sourcePoint" /><mxPoint x="870" y="850" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="n_jwt" value="genera el JWT (HS256)&#xa;sub, nombre, correoE, rol&#xa;caduca en 30 min" style="shape=note;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="880" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s15" value="200  {&quot;token&quot;: JWT}" style="endArrow=block;html=1;dashed=1;labelBackgroundColor=#ffffff;fontSize=11;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="600" y="970" as="sourcePoint" /><mxPoint x="330" y="970" as="targetPoint" /></mxGeometry>
+        </mxCell>
+        <mxCell id="n_session" value="sessionStorage.setItem('jwt', token)&#xa;history.replaceState(...)  → quita el código de la URL" style="shape=note;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="190" y="990" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Errores -->
+        <mxCell id="n_err" value="&lt;b&gt;Casos de error&lt;/b&gt;&lt;br&gt;T1 inexistente / caducado / ya usado → 302 /enlace-invalido.html&lt;br&gt;T2 inexistente / caducado / ya usado → 401&lt;br&gt;Correo que no existe → misma respuesta, no se escribe nada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="880" width="380" height="110" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

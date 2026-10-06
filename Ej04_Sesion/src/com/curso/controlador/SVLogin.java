@@ -106,7 +106,7 @@ public class SVLogin extends HttpServlet {
 						rs.getInt("id"),
 						rs.getString("nombre"),
 						rs.getString("login"),
-						//rs.getString("ROLES"),
+						"ADMIN", //rs.getString("ROLES"),
 						null //rs.getString("pw") //Debemos olvidarnos del password
 					); 
 				s.setAttribute("usuario",usr);
