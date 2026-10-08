@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class FiltroHttps implements Filter {
 	
 	public void destroy() {
@@ -22,8 +22,8 @@ public class FiltroHttps implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		System.out.println(httpRequest.isSecure());
-		
-		//System.out.println("Filtro HTTPS:" + httpRequest.getRequestURI());
+
+		//Como tenemos un certificado autofirmado el navegador lo ignora
 		httpResponse.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 		
 		if(!httpRequest.isSecure()){			

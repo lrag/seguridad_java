@@ -17,7 +17,13 @@
 		alert("Mensaje")
 	}
 	
-	saludar()
+	
+	window.onload = function(){
+		//
+		//document.getElementById("btnDale").onclick = saludar
+		//
+		saludar()
+	}
 
 </script>
 
@@ -41,7 +47,7 @@
 			Introduzca un criterio de búsqueda 
 			<input type="text" name="criterio"/>
 			<input type="submit" value="Buscar"/>
-			<input type="button" value="Dale" onclick="saludar()"/>
+			<input type="button" value="Dale" id="btnDale" onclick="saludar()"/>
 		</p>
 	</form>
 	

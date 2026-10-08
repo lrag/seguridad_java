@@ -24,7 +24,7 @@ public class CORSFilter implements Filter {
             throws IOException, ServletException {
  
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
+        //System.out.println("CORSFilter HTTP Request: " + request.getMethod());
  
         // Autorizamos a cualquier dominio a consumir nuestros recursos        
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
@@ -33,14 +33,14 @@ public class CORSFilter implements Filter {
  
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
  
-        //Si la petición ha sido un OPTIONS respondemos con el status code 'ACCEPTED'
+        //Si la peticiï¿½n ha sido un OPTIONS respondemos con el status code 'ACCEPTED'
         //como se espera en el 'cors handsake'
         if (request.getMethod().equals("OPTIONS")) {
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
             return;
         }
  
-        //Si no ha sido un options continuamos procesando la petición en el siguiente filtro/controlador
+        //Si no ha sido un options continuamos procesando la peticiï¿½n en el siguiente filtro/controlador
         chain.doFilter(request, servletResponse);
     }
  

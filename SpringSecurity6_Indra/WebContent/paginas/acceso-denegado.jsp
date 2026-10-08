@@ -5,17 +5,23 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<c:url value='/css/estilos.css'/>"	type="text/css" />
-<title>Inactividad de Sesiï¿½n</title>
+<link rel="stylesheet" href="<c:url value='/css/estilos.css'/>"
+	type="text/css" />
+<title>Acceso Denegado</title>
 </head>
 <body>
 	<div id="content">
 		<img src="<c:url value='/imagenes/xfiles.jpg'/>" align="right" />
-		<h2>Sesión no válida</h2>
+		<h2>Acceso Denegado</h2>
 
 		<p>
-			La sesión ha expirado. Por favor, 
-			<a href="<c:url value='/'/>">vuelva	a empezar</a>.
+			No tiene privilegios suficientes. Por favor, 
+			<a href="<c:url value='/'/>">vuelva a empezar</a> ï¿½ 
+			<a href="<c:url value='/expedientesx/mostrar/todos'/>">
+				volver al listado
+			</a>
+			<br>
+			<br>.
 		</p>
 	</div>
 </body>

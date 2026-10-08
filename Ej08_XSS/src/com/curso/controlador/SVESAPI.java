@@ -109,7 +109,6 @@ public class SVESAPI extends HttpServlet {
 			System.out.println("url:\n" + url);
 			System.out.println("javascript:\n" + javascript);
 			
-			
 			HttpSession sesion = request.getSession(true);
 			sesion.setAttribute("textoHtml",nodoDeTexto);
 			sesion.setAttribute("atributo",atributo);

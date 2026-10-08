@@ -29,8 +29,8 @@ public class JAXBServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			
-		System.setProperty("javax.xml.accessExternalSchema", "file, http");
 		System.setProperty("javax.xml.accessExternalDTD", "file, http");		
+		System.setProperty("javax.xml.accessExternalSchema", "file, http");
 		
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance( Cliente.class );

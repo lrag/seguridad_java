@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.curso.modelo.negocio.ServicioMagicLink;
 
+
+
 @Controller
 public class ControladorMagicLink {
 

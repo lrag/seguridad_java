@@ -19,6 +19,10 @@ public class SVLogin extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Esta se va al filtro
+		//if(request.isSecure() == false) {
+			//trhow new Exception("SOLO HTTPS");
+		//}
 		
 		request.getParameter("login");
 		

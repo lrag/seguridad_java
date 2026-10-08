@@ -47,7 +47,7 @@ public class FiltroCabecerasXSS implements Filter {
         //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self otro y_otro';");
         
         //Permitiendo js-inline (no puede prevenir el XSS)
-        response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self, otrositio' 'unsafe-inline';");
+        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self, otrositio' 'unsafe-inline';");
         
         //
         HttpServletRequest rq = (HttpServletRequest) servletRequest;
@@ -55,7 +55,7 @@ public class FiltroCabecerasXSS implements Filter {
         String nonce = randomString(20); 
         rq.getSession().setAttribute("nonce", nonce);
 
-        //response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
+        response.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'nonce-"+nonce+"';");
               
         filterChain.doFilter(servletRequest, response);
     }

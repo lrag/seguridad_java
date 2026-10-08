@@ -103,7 +103,7 @@ public class SVAvatar extends HttpServlet {
 		
 		//LA SOLUCIÓN REAL:
 		//
-		//No haceptar nunca jamás urls del cliente
+		//No haceptar nunca jamás jamás nunca urls del cliente y seguirlas
 
 		HttpURLConnection cx = null;
 		try {

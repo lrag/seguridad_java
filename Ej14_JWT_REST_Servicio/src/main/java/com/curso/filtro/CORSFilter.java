@@ -31,15 +31,15 @@ public class CORSFilter implements Filter {
 
         //Los headers para el CORS hay que colocarlos en todas las respuestas, no solo tras una petición OPTIONS
         
-        //Los navegadores no siempre hacen el preflight y en esas ocasiones esperan a la respuesta para aceptarla o no dependiendo de
-        //los headers recibidos
+        //Los navegadores no siempre hacen el preflight y en esas ocasiones esperan a la respuesta para aceptarla o no 
+        //dependiendo de los headers recibidos
         //
         //Esas peticiones sin preflight son:
         //-Peticiones con los métodos:
         //	GET, HEAD y POST
         //-Que incluyan solo los headers:
-        //	User-Agent, Accept, Accept-Language, Content-Language
-        //  Content-Type
+        //	User-Agent, Accept, Accept-Language, 
+        //  Content-Language,  Content-Type
         //-Y además para content type solo con los valores
 	    //  application/x-www-form-urlencoded
 	    //  multipart/form-data
@@ -49,7 +49,7 @@ public class CORSFilter implements Filter {
         //Colocar '*' solo en apis públicas 
         //respuesta.addHeader("Access-Control-Allow-Origin", "*");
 
-        //Si admitimos peticiones de solo un origen lo a�adimos con protocolo://IP:puerto
+        //Si admitimos peticiones de solo un origen lo añadimos con protocolo://IP:puerto
         //respuesta.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
         
         //Si admitimos peticiones de más de un origen debemos comprobar si el origen de la petición está

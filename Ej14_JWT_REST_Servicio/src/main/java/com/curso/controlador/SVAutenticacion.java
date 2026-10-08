@@ -36,7 +36,7 @@ public class SVAutenticacion extends HttpServlet {
 
 	/*
 	POST /SVAutenticacion
-	CT: form/www url encoded
+	CT: form/www-url-encoded
 	------------------------
 	username=aa&password=bb
 	*/
