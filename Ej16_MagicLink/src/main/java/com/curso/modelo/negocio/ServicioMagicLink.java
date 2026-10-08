@@ -55,13 +55,11 @@ public class ServicioMagicLink {
 		}
 
 		String token = generarToken();
-		TokenMagicLink tokenMagicLink = new TokenMagicLink(usuario, token,
-				LocalDateTime.now().plusMinutes(MINUTOS_CADUCIDAD));
+		TokenMagicLink tokenMagicLink = new TokenMagicLink(usuario, token, LocalDateTime.now().plusMinutes(MINUTOS_CADUCIDAD));
 		tokenMagicLinkDao.guardar(tokenMagicLink);
 
 		String enlace = baseUrl + "/magic-link/verificar?token=" + token;
-		String cuerpo = "Pulsa este enlace para entrar (caduca en %d minutos):\n%s"
-				.formatted(MINUTOS_CADUCIDAD, enlace);
+		String cuerpo = "Pulsa este enlace para entrar (caduca en %d minutos):\n%s".formatted(MINUTOS_CADUCIDAD, enlace);
 		emisorCorreo.enviar(usuario.getCorreoE(), "Tu enlace de acceso", cuerpo);
 	}
 

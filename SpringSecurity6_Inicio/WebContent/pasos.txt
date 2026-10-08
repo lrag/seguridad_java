@@ -247,14 +247,21 @@ http.rememberMe(rememberMe -> rememberMe
 #############################################################################################################
 # 9.    Seguridad en el canal de transporte (HTTPS) - Crear conector SSL en Servidor
 #############################################################################################################
-server.xml
+server.xml (Tomcat 10)
 
-	<Connector SSLEnabled="true" acceptCount="100"
-		connectionTimeout="20000" executor="tomcatThreadPool"
-		keyAlias="tcserver" keystoreFile="${catalina.base}/conf/tcserver.keystore"
-		keystorePass="changeme"
-		maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1"
-		redirectPort="8443" scheme="https" secure="true"/>
+<Connector SSLEnabled="true" acceptCount="100"
+	connectionTimeout="20000" executor="tomcatThreadPool"
+	maxKeepAliveRequests="15" port="8443" protocol="HTTP/1.1"
+	redirectPort="8443" scheme="https" secure="true">
+	<SSLHostConfig>
+		<Certificate certificateKeyAlias="tcserver"
+			certificateKeystoreFile="${catalina.base}/conf/tcserver.keystore"
+			certificateKeystorePassword="changeme"
+			certificateKeystoreType="JKS"
+			type="RSA" />
+	</SSLHostConfig>
+</Connector>		
+		
 
 copiar tcserver.keystore al directorio a la configuracion de Tomcat en el workspace
 

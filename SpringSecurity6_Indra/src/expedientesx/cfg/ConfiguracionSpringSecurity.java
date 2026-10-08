@@ -87,8 +87,6 @@ public class ConfiguracionSpringSecurity {
 			//.passwordParameter("pw")
 			.failureUrl("/paginas/nuestro-login.jsp?login_error"));
 	
-	
-		/*
 		http.requiresChannel(channel -> channel
 				.anyRequest()
 				.requiresSecure()
@@ -101,8 +99,7 @@ public class ConfiguracionSpringSecurity {
 				.preload(true)
 				.maxAgeInSeconds(31536000)
 			)
-		);	
-		*/
+		);
 		
 		http.logout(logout -> logout
 				.logoutSuccessUrl("/paginas/desconectado.jsp")
