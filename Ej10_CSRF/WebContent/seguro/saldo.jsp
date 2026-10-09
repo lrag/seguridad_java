@@ -24,6 +24,10 @@
 	<h2 align="center">
 		SALDO	
 	</h2>
+	
+	<div align="center">
+		<input type="button" value="volver" class="btn btn-primary" onclick="document.location='inicio.jsp'"/>
+	</div>
 
 	<br/>
 	
