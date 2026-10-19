@@ -1,0 +1,6 @@
+/.metadata/
+
+# Ficheros que genera Eclipse en cada proyecto
+.classpath
+.project
+.settings/
