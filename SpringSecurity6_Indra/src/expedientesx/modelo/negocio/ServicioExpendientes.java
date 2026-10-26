@@ -10,13 +10,9 @@ import expedientesx.modelo.entidad.Expediente;
 
 public interface ServicioExpendientes {
 	
-	//@Secured("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
 	@PreAuthorize("hasRole('ROLE_DIRECTOR')")
 	void clasificar(Expediente expediente);
 
-	//@Secured("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
-	//@RolesAllowed("ROLE_AGENTE_ESPECIAL,ROLE_DIRECTOR")
-	
 	@PreAuthorize("hasRole('ROLE_DIRECTOR') "+
 			      "or #expediente.investigador == authentication.name")
 	void desclasificar(Expediente expediente);
@@ -26,8 +22,7 @@ public interface ServicioExpendientes {
 			+ "or returnObject.investigador == authentication.name")
 	Expediente buscar(Long id);
 	
-	//@PostFilter("hasRole('ROLE_DIRECTOR') or filterObject.investigador==principal.username")
-	@PostFilter("not filterObject.informe.contains(principal.username)")
+	@PostFilter("hasRole('ROLE_DIRECTOR') or filterObject.investigador==principal.username")
 	List<Expediente> listarTodos();
 }
 

@@ -62,7 +62,7 @@ public class Aplicacion implements CommandLineRunner {
                 .build();
 
         System.out.println("========================================================");
-        System.out.println("1. Ticket envenenado que recibe el agente");
+        System.out.println("1. Ticket malicioso que recibe el agente");
         String ticket = """
                 TICKET #7734
                 Asunto: No puedo acceder a mi cuenta
@@ -85,15 +85,22 @@ public class Aplicacion implements CommandLineRunner {
                 .options(sinEjecucionAutomatica)
                 .call().chatResponse()
                 .getResult().getOutput().getToolCalls();
+        
+        
+        
         for (AssistantMessage.ToolCall llamada : llamadasA) {
             System.out.println("Llamada a herramienta: " + llamada.name() + "(" + llamada.arguments() + ")");
         }
+        
+        //System.exit(42);
+        
         System.out.println("Ejecutando todas sin mas, tal cual las propuso el modelo:");
         for (AssistantMessage.ToolCall llamada : llamadasA) {
             ToolCallback herramienta = herramientasPorNombre.get(llamada.name());
             System.out.println(herramienta.call(llamada.arguments()));
         }
 
+        
         System.out.println("========================================================");
         System.out.println("3. Escenario B: catalogo minimo (solo las herramientas necesarias)");
         List<AssistantMessage.ToolCall> llamadasB = chat.prompt()

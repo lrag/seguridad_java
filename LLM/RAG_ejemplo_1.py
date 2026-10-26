@@ -41,8 +41,8 @@ vectorstore = Chroma.from_texts(
 #pregunta = "¿Qué hay de primer plato en el comedor y cuál es el postre?"
 #pregunta = "¿hoy hay gazpacho?"
 #pregunta = "Hoy me apetece algo dulce"
-#pregunta = "¿dónde está un pueblo llamado la cistérniga?"
-pregunta = "¿en qué país está Alicante?"
+pregunta = "¿dónde está un pueblo llamado la cistérniga?"
+#pregunta = "¿en qué país está Alicante?"
 print(f"\nPregunta del usuario: '{pregunta}'")
 #k=1: queremos solo un resultado
 docs_recuperados = vectorstore.similarity_search(pregunta, k=1)

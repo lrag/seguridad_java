@@ -42,6 +42,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //    vector al texto aproximado, sin necesitar un diccionario de candidatas.
 //
 // El modelo de embeddings (nomic-embed-text) esta en application.properties.
+
+//
+//E(rey) - E(hombre) + E(mujer) ~= E(reina)
+//
+
+
 @SpringBootApplication
 public class Aplicacion implements CommandLineRunner {
 
@@ -112,3 +118,5 @@ public class Aplicacion implements CommandLineRunner {
         return productoPunto / (Math.sqrt(normaA) * Math.sqrt(normaB));
     }
 }
+
+

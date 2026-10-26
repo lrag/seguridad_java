@@ -7,9 +7,12 @@ import org.springframework.ai.tool.annotation.Tool;
 // modelo, y el modelo puede estar leyendo un ticket envenenado.
 public class HerramientaPedidoPermisoExcesivo {
 
-    @Tool(name = "consultar_pedido",
-            description = "Consulta el estado de un pedido de un usuario, dado su usuario_id y pedido_id.")
+    @Tool(
+    	name = "consultar_pedido",
+        description = "Consulta el estado de un pedido de un usuario, dado su usuario_id y pedido_id."
+    )
     public String consultarPedido(String usuarioId, String pedidoId) {
+    	System.out.println("consultarPedido");
         return "Pedido " + pedidoId + " del usuario " + usuarioId + ": en transito.";
     }
 }

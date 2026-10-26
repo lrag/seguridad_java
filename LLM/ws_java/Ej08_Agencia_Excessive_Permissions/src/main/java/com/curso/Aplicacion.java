@@ -87,6 +87,10 @@ public class Aplicacion implements CommandLineRunner {
         }
         System.out.println("Ejecutando las llamadas:");
         ejecutar(llamadasA, herramientasA);
+        
+        System.exit(42);
+        
+        
 
         System.out.println("========================================================");
         System.out.println("3. Escenario B: permiso minimo (usuario fijado por la sesion, no expuesto al modelo)");

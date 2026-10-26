@@ -20,13 +20,13 @@ documentos = [
 vectorstore = Chroma.from_texts(texts=documentos, embedding=embeddings)
 
 # 3. Pregunta y búsqueda de contexto
-pregunta = "¿Qué hay de primer plato en el comedor y cuál es el postre?"
-# pregunta = "Puedo reservar mesa con antelación"
-# pregunta = "Hoy me apetece algo dulce"
-# pregunta = "¿dónde está un pueblo llamado la cisterniga?"
-# pregunta = "Quiero comer a las doce"
-# pregunta = "Quiero comer a las 14:00 "
-# pregunta = "Vivo en Alicante. ¿Qué ruta debo tomar hasta el comedor?"
+#pregunta = "¿Qué hay de primer plato en el comedor y cuál es el postre?"
+#pregunta = "Puedo reservar mesa con antelación"
+#pregunta = "Hoy me apetece algo dulce"
+#pregunta = "¿dónde está un pueblo llamado la cisterniga?"
+#pregunta = "Quiero comer a las doce"
+#pregunta = "Quiero comer a las 14:00 "
+pregunta = "Vivo en Alicante. ¿Qué ruta debo tomar hasta el comedor?"
 print(f"\nPregunta del usuario: '{pregunta}'")
 
 docs_recuperados = vectorstore.similarity_search(pregunta, k=1)
@@ -38,7 +38,7 @@ print(f"-> {contexto}")
 # 4. Invocación del LLM con el contexto recuperado
 prompt = ChatPromptTemplate.from_template(
     "Responde a la pregunta del usuario utilizando ÚNICAMENTE el contexto adjunto.\n\n"
-    "Contexto:\n{context}\n\n"
+    "Contexto: {context}\n\n"
     "Pregunta: {question}"
 )
 
