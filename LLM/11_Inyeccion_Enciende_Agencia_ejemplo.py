@@ -6,10 +6,22 @@
 #herramienta exige confirmacion humana antes de ejecutarse. Reproduce la
 #tabla de progresion de la seccion del documento.
 #
-#La instruccion oculta del ticket "triunfa" igual de bien en los tres casos
-#-el modelo intenta seguir la instruccion siempre que tiene con que-, pero
-#el resultado real solo cambia por la arquitectura de permisos, nunca por
-#un filtrado de entrada mejor o peor.
+#Relacion con 07_Excessive_Functionality_ejemplo.py: el ataque es el mismo
+#-quien escribe el ticket cuela una nota falsa para que el agente borre la
+#cuenta de otro usuario- y los escenarios 1 y 3 equivalen a los dos de ese
+#script (catalogo podado frente a catalogo completo sin control). Lo que
+#añade este es el escenario 2: la herramienta de borrado esta disponible,
+#pero el codigo exige confirmacion humana antes de ejecutarla. Puestos los
+#tres juntos, se ve que el modelo propone exactamente el mismo borrado en
+#los escenarios 2 y 3, y que lo unico que cambia el daño es la confirmacion.
+#
+#La inyeccion es la misma en los tres casos y el modelo la sigue siempre que
+#tiene con que; el resultado real solo cambia por la arquitectura de
+#permisos, nunca por un filtrado de entrada mejor o peor.
+#
+#El titulo del escenario 3 habla de "credencial amplia" porque reproduce la
+#fila de la tabla del documento, pero el script no modela el alcance de la
+#credencial: entre el escenario 2 y el 3 solo cambia la confirmacion.
 #
 #Resultado observado (temperature=0, llama3.1:8b): en el escenario 1, sin la
 #herramienta de borrado, el modelo ni siquiera intenta seguir la instruccion

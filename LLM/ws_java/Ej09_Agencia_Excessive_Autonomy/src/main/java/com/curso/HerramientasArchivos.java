@@ -20,7 +20,8 @@ public class HerramientasArchivos {
     @Tool(name = "listar_archivos",
             description = "Lista los archivos de la carpeta junto con una breve descripcion de cada uno.")
     public String listarArchivos() {
-        return archivos.entrySet().stream()
+        //Simulamos un ls con una lista de archivos que tenemos preparada
+    	return archivos.entrySet().stream()
                 .map(archivo -> archivo.getKey() + ": " + archivo.getValue())
                 .collect(Collectors.joining("\n"));
     }
@@ -28,7 +29,7 @@ public class HerramientasArchivos {
     @Tool(name = "eliminar_archivo",
             description = "Elimina permanentemente un archivo de la carpeta por su nombre exacto.")
     public String eliminarArchivo(String nombre) {
-        // Spring AI pasa null si el modelo no envia "nombre" (por ejemplo, si
+    	// Spring AI pasa null si el modelo no envia "nombre" (por ejemplo, si
         // inventa un argumento "archivos" con una lista): se trata como llamada
         // invalida, igual que haria la validacion de argumentos en Python.
         if (nombre == null) {

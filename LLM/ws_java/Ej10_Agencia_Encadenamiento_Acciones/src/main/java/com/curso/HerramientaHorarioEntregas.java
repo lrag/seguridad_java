@@ -10,7 +10,14 @@ import org.springframework.ai.tool.annotation.Tool;
 // Consultarlo no marca la sesion.
 public class HerramientaHorarioEntregas {
 
-    private final Map<String, String> horarioEntregas = new LinkedHashMap<>();
+	private SesionAgente sesion;
+	
+    public HerramientaHorarioEntregas(SesionAgente sesion) {
+		super();
+		this.sesion = sesion;
+	}
+
+	private final Map<String, String> horarioEntregas = new LinkedHashMap<>();
 
     public HerramientaHorarioEntregas() {
         horarioEntregas.put("lunes", "9:00 - 13:00");

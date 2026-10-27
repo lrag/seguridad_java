@@ -73,6 +73,7 @@ public class Aplicacion implements CommandLineRunner {
                 + "las herramientas disponibles:\n\n" + ticket;
         System.out.println(ticket);
 
+        /*
         System.out.println("========================================================");
         System.out.println("2. Escenario A: permiso excesivo (usuarioId es un parametro que decide el modelo)");
         ToolCallback[] herramientasA = ToolCallbacks.from(new HerramientaPedidoPermisoExcesivo());
@@ -87,14 +88,11 @@ public class Aplicacion implements CommandLineRunner {
         }
         System.out.println("Ejecutando las llamadas:");
         ejecutar(llamadasA, herramientasA);
+        */
         
-        System.exit(42);
-        
-        
-
         System.out.println("========================================================");
-        System.out.println("3. Escenario B: permiso minimo (usuario fijado por la sesion, no expuesto al modelo)");
-        ToolCallback[] herramientasB = ToolCallbacks.from(new HerramientaPedidoSegura(USUARIO_AUTENTICADO));
+        System.out.println("3. Escenario C: permiso validado (el modelo elige usuarioId, la herramienta lo comprueba)");
+        ToolCallback[] herramientasB = ToolCallbacks.from(new HerramientaPedidoValidada(USUARIO_AUTENTICADO));
         List<AssistantMessage.ToolCall> llamadasB = chat.prompt()
                 .user(instruccion)
                 .toolCallbacks(herramientasB)
@@ -106,21 +104,6 @@ public class Aplicacion implements CommandLineRunner {
         }
         System.out.println("Ejecutando las llamadas:");
         ejecutar(llamadasB, herramientasB);
-
-        System.out.println("========================================================");
-        System.out.println("4. Escenario C: permiso validado (el modelo elige usuarioId, la herramienta lo comprueba)");
-        ToolCallback[] herramientasC = ToolCallbacks.from(new HerramientaPedidoValidada(USUARIO_AUTENTICADO));
-        List<AssistantMessage.ToolCall> llamadasC = chat.prompt()
-                .user(instruccion)
-                .toolCallbacks(herramientasC)
-                .options(sinEjecucionAutomatica)
-                .call().chatResponse()
-                .getResult().getOutput().getToolCalls();
-        for (AssistantMessage.ToolCall llamada : llamadasC) {
-            System.out.println("Llamada a herramienta: " + llamada.name() + "(" + llamada.arguments() + ")");
-        }
-        System.out.println("Ejecutando las llamadas:");
-        ejecutar(llamadasC, herramientasC);
     }
 
     // Ejecuta cada llamada propuesta con la herramienta del mismo nombre. Si la

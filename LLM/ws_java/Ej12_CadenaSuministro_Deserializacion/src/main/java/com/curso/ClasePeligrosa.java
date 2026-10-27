@@ -46,7 +46,7 @@ public class ClasePeligrosa implements Serializable {
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        System.out.println("[PAYLOAD] Esto se ha ejecutado solo por deserializar el fichero, antes de usar ningun 'modelo'.");
+        System.out.println("Este código solo se ejecuta al deserializar'.");
         repo = new Repositorio();
         repo.ejecutarQuery(query);
     }

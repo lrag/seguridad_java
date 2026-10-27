@@ -79,6 +79,33 @@ public class Aplicacion implements CommandLineRunner {
 
         System.out.println("========================================================");
         System.out.println("2. Escenario A: catalogo completo (incluye herramientas excesivas)");
+        /*
+		{
+		  "model": "claude-sonnet-5-5",
+		  "max_tokens": 1024,
+		  "messages": [
+		    { 
+		    	"role": "user", "content": "Eres el agente de soporte al cliente. Gestiona el siguiente ticket 
+                						    usando las herramientas disponibles:" + ticket" 
+            }
+		  ],
+		  "tools": [
+		    {
+		      "name": "consultar_estado_pedido",
+		      "description": "Consulta el estado de un pedido por su ID.",
+		      "input_schema": {
+		        "type": "object",
+		        "properties": {
+		          "pedidoId": {
+		            "type": "string"
+		          }
+		        },
+		        "required": ["pedidoId"]
+		      }
+		    }
+		  ]
+		}        
+        */
         List<AssistantMessage.ToolCall> llamadasA = chat.prompt()
                 .user(instruccion)
                 .toolCallbacks(herramientasCompletas)
@@ -86,13 +113,10 @@ public class Aplicacion implements CommandLineRunner {
                 .call().chatResponse()
                 .getResult().getOutput().getToolCalls();
         
-        
-        
         for (AssistantMessage.ToolCall llamada : llamadasA) {
             System.out.println("Llamada a herramienta: " + llamada.name() + "(" + llamada.arguments() + ")");
         }
         
-        //System.exit(42);
         
         System.out.println("Ejecutando todas sin mas, tal cual las propuso el modelo:");
         for (AssistantMessage.ToolCall llamada : llamadasA) {
@@ -100,6 +124,7 @@ public class Aplicacion implements CommandLineRunner {
             System.out.println(herramienta.call(llamada.arguments()));
         }
 
+        //System.exit(42);
         
         System.out.println("========================================================");
         System.out.println("3. Escenario B: catalogo minimo (solo las herramientas necesarias)");

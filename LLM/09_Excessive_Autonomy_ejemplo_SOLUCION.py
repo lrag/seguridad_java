@@ -21,6 +21,15 @@
 #Al ejecutarlo hace falta responder por teclado (s/n) a cada intento de
 #borrado; con las descripciones ambiguas del archivo puede llegar a
 #preguntar varias veces en la misma tarea.
+#
+#La instruccion aclara que eliminar_archivo solo acepta un nombre, nunca una
+#lista. Sin esa aclaracion, el modelo intentaba borrar los tres temporales en
+#un solo lote; al rechazarse, los daba por borrados sin volver a intentarlo y
+#pasaba a pedir justo los que no habia que borrar (la copia de seguridad y el
+#informe firmado). Con ella pide los archivos uno a uno, aunque su criterio
+#sigue sin ser de fiar: pide borrar tambien la copia de seguridad y el
+#informe firmado -si se aprueba todo, la carpeta queda vacia-, y por eso la
+#confirmacion humana sigue siendo necesaria.
 from langchain_ollama import ChatOllama
 from langchain_core.tools import tool
 from langchain_core.messages import HumanMessage, ToolMessage
@@ -60,7 +69,10 @@ instruccion = (
     "consulta la lista de archivos y elimina los que ya no hagan falta. Actúa "
     "de forma autónoma y termina la tarea sin pedir confirmación a nadie. "
     "Propón una única llamada a herramienta en cada respuesta: espera siempre "
-    "a que te devuelvan el resultado antes de decidir la siguiente acción."
+    "a que te devuelvan el resultado antes de decidir la siguiente acción. "
+    'La herramienta eliminar_archivo solo acepta un único argumento, "nombre", con el nombre '
+    "de UN archivo como texto; nunca acepta una lista. Para eliminar varios archivos, "
+    "llámala una vez por cada archivo."
 )
 
 llm = ChatOllama(model="llama3.1:8b", temperature=0, num_predict=300).bind_tools(
@@ -81,8 +93,23 @@ for paso in range(MAX_PASOS):
         respuesta.tool_calls = [llamada]
     mensajes.append(respuesta)
 
-    if llamada["name"] == "eliminar_archivo" and "nombre" in llamada["args"]:
-        nombre_archivo = llamada["args"]["nombre"]
+    #Falla cerrado: TODA llamada a eliminar_archivo pasa por aqui. Si los
+    #argumentos no son un unico "nombre" de texto, se rechaza sin ejecutar;
+    #nunca se deja que una llamada mal formada llegue a la herramienta sin
+    #confirmacion confiando en que su validacion la pare.
+    if llamada["name"] == "eliminar_archivo":
+        nombre_archivo = llamada["args"].get("nombre")
+        if not isinstance(nombre_archivo, str) or set(llamada["args"]) != {"nombre"}:
+            resultado = (
+                f"Llamada rechazada sin ejecutar: {llamada['args']}\n"
+                'El unico argumento valido es "nombre", con un unico valor cada vez. '
+                "Si necesitas afectar a varios archivos, invoca la herramienta una vez por archivo."
+            )
+            print(f"{llamada['name']}({llamada['args']}) ->")
+            for linea in resultado.splitlines():
+                print(f"    {linea}")
+            mensajes.append(ToolMessage(content=resultado, tool_call_id=llamada["id"]))
+            continue
         aprobado = input(f"El modelo quiere eliminar '{nombre_archivo}'. ¿Lo confirmas? (s/n): ").strip().lower()
         if aprobado != "s":
             resultado = f"Confirmación denegada por el usuario: {nombre_archivo} no se elimina."

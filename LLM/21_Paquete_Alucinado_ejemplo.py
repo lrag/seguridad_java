@@ -31,10 +31,12 @@ PREGUNTA = (
 
 
 def extraer_nombres_de_paquete(texto):
+    #De "from a.b.c import" o "import a.b" se queda con el paquete raiz (a),
+    #que es lo que se instala, y admite lineas sangradas.
     candidatos = set()
     candidatos.update(re.findall(r"pip install\s+([A-Za-z0-9_\-]+)", texto))
-    candidatos.update(re.findall(r"^import\s+([A-Za-z0-9_]+)", texto, re.MULTILINE))
-    candidatos.update(re.findall(r"^from\s+([A-Za-z0-9_]+)\s+import", texto, re.MULTILINE))
+    candidatos.update(re.findall(r"^\s*import\s+([A-Za-z0-9_]+)", texto, re.MULTILINE))
+    candidatos.update(re.findall(r"^\s*from\s+([A-Za-z0-9_]+)[\w.]*\s+import", texto, re.MULTILINE))
     return candidatos
 
 

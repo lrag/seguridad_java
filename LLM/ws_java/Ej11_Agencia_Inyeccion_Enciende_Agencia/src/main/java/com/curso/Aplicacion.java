@@ -92,7 +92,7 @@ public class Aplicacion implements CommandLineRunner {
         ToolCallback[] catalogoConConfirmacion =
                 ToolCallbacks.from(new HerramientasConsulta(), new HerramientasAdministracion());
         procesarTicket(chat, instruccion, catalogoConConfirmacion, true);
-
+        
         System.out.println("========================================================");
         System.out.println("3. Con la herramienta de borrado, credencial amplia y sin confirmacion (nada corregido)");
         ToolCallback[] catalogoSinControl =

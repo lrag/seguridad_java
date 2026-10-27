@@ -48,13 +48,19 @@ import urllib.request
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 
-def generar_raw(prompt, num_predict=30):
+#stop ".": la generacion termina al final de la primera frase, de modo que la
+#perplexity se calcula sobre una frase completa en los dos prefijos. num_predict
+#es solo un tope de seguridad: con un limite bajo (antes 30), el corte caia a
+#mitad de palabra ("corredor" llegaba como "cor") y esa palabra no coincidia
+#con la real. Limitacion: un punto de abreviatura o de decimal cortaria antes
+#de tiempo; para estas dos frases no ocurre.
+def generar_raw(prompt, num_predict=100):
     payload = {
         "model": "llama3.2",
         "prompt": prompt,
         "raw": True,
         "stream": False,
-        "options": {"num_predict": num_predict, "temperature": 0},
+        "options": {"num_predict": num_predict, "temperature": 0, "stop": ["."]},
         "logprobs": True,
     }
     peticion = urllib.request.Request(
@@ -73,7 +79,8 @@ def perplexity(logprobs):
 
 print("1. Prefijo A: inicio del Quijote (texto masivo y muy duplicado)")
 prefijo_quijote = "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo"
-continuacion_real = "que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor."
+#Sin el punto final: Ollama no incluye en la respuesta el texto de parada (".").
+continuacion_real = "que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor"
 print(f"Prefijo: {prefijo_quijote}")
 
 resultado_quijote = generar_raw(prefijo_quijote)

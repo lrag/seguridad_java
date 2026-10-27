@@ -68,7 +68,7 @@ public class _03_CasoSolucionConfirmacionHumana {
 
         for (int paso = 0; paso < MAX_PASOS; paso++) {
             AssistantMessage respuesta = chat.prompt()
-                    .messages(historial)
+            		.messages(historial)
                     .toolCallbacks(herramientas)
                     .options(sinEjecucionAutomatica)
                     .call().chatResponse()
@@ -78,8 +78,9 @@ public class _03_CasoSolucionConfirmacionHumana {
                 System.out.println("El modelo termino: " + respuesta.getText());
                 break;
             }
-            AssistantMessage.ToolCall llamada = primeraLlamada(respuesta);
-            historial.add(soloPrimeraLlamada(respuesta, llamada));
+            AssistantMessage recortada = soloLaPrimeraLlamada(respuesta);
+            historial.add(recortada);
+            AssistantMessage.ToolCall llamada = recortada.getToolCalls().get(0);
 
             // Falla cerrado: TODA llamada a eliminar_archivo pasa por aqui. Si los
             // argumentos no son un unico "nombre" de texto, se rechaza sin
@@ -111,18 +112,19 @@ public class _03_CasoSolucionConfirmacionHumana {
         System.out.println("Archivos que sobrevivieron de verdad: " + carpeta.archivosQueQuedan());
     }
 
-    private static AssistantMessage.ToolCall primeraLlamada(AssistantMessage respuesta) {
+    // El mensaje del modelo recortado a su primera llamada: es lo que se guarda
+    // en el historial y lo unico que se ejecuta. Si se dejaran las demas,
+    // quedarian llamadas que nunca reciben su resultado. Pedirlo en el prompt no
+    // basta (solo desplaza la probabilidad) y ni Ollama ni Spring AI tienen una
+    // opcion que lo imponga: la garantia es este recorte.
+    private static AssistantMessage soloLaPrimeraLlamada(AssistantMessage respuesta) {
         List<AssistantMessage.ToolCall> llamadas = respuesta.getToolCalls();
         if (llamadas.size() > 1) {
             System.out.println("El modelo propuso " + llamadas.size() + " llamadas de golpe; solo se ejecuta la primera.");
         }
-        return llamadas.get(0);
-    }
-
-    private static AssistantMessage soloPrimeraLlamada(AssistantMessage respuesta, AssistantMessage.ToolCall llamada) {
         return AssistantMessage.builder()
                 .content(respuesta.getText())
-                .toolCalls(List.of(llamada))
+                .toolCalls(List.of(llamadas.get(0)))
                 .build();
     }
 

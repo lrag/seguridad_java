@@ -8,18 +8,27 @@ import org.springframework.ai.tool.annotation.Tool;
 
 // Dato interno de la empresa. Consultarlo marca la sesion, para que
 // HerramientaEmail pueda saber que el agente ya ha tocado una fuente interna.
-public class HerramientaPreciosCompra {
+public class HerramientaPrecios {
 
     private final Map<String, String> preciosCompra = new LinkedHashMap<>();
+    private final Map<String, String> preciosVenta = new LinkedHashMap<>();
     private final SesionAgente sesion;
 
-    public HerramientaPreciosCompra(SesionAgente sesion) {
+    public HerramientaPrecios(SesionAgente sesion) {
         this.sesion = sesion;
         preciosCompra.put("proveedor_A", "12.50 EUR/unidad");
         preciosCompra.put("proveedor_B", "9.80 EUR/unidad");
         preciosCompra.put("proveedor_C", "15.20 EUR/unidad");
     }
 
+    @Tool(name = "consultar_precios_venta",
+    		description = "Consulta los precios de venta. Dato público de la empresa.")
+    public String consultarPreciosVenta() {
+    	return preciosVenta.entrySet().stream()
+    			.map(proveedor -> proveedor.getKey() + ": " + proveedor.getValue())
+    			.collect(Collectors.joining("\n"));
+    }
+    
     @Tool(name = "consultar_precios_compra",
             description = "Consulta los precios de compra negociados con cada proveedor. Dato interno de la empresa.")
     public String consultarPreciosCompra() {

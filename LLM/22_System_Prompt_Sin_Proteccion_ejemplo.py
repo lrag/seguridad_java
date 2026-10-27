@@ -1,4 +1,4 @@
-#El system prompt no es un secreto real (LLM08 9.1): tiene más peso que un
+#El system prompt no es un secreto real (LLM08 9.2): tiene más peso que un
 #mensaje de usuario -el entrenamiento por instrucciones lo prioriza-, pero
 #ninguna propiedad matemática lo hace irrecuperable. Este script prueba
 #varias formas de pedir directamente lo que el propio system prompt dice

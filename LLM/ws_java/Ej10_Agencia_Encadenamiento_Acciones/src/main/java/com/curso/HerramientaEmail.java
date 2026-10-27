@@ -27,10 +27,10 @@ public class HerramientaEmail {
         // entrega esta desactivado, para ver primero el agente sin mitigacion:
         // descomentarlo activa el bloqueo.
         //
-        // if (sesion.datoInternoConsultado() && !destinatario.endsWith(DOMINIO_EMPRESA)) {
-        //     return "ENVIO BLOQUEADO: se ha consultado un dato interno en esta sesion y '"
-        //             + destinatario + "' es un destinatario externo. Requiere aprobacion humana explicita.";
-        // }
+        if (sesion.datoInternoConsultado() && !destinatario.endsWith(DOMINIO_EMPRESA)) {
+             return "ENVIO BLOQUEADO: se ha consultado un dato interno en esta sesion y '"
+                     + destinatario + "' es un destinatario externo. Requiere aprobacion humana explicita.";
+         }
 
     	return "===================================================\nEmail. Destinatario: " + destinatario + "\nAsunto:" + asunto + ". \n"+
         "---------------------------------------------------\n"+cuerpo;

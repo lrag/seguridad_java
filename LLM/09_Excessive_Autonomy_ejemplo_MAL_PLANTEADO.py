@@ -32,9 +32,10 @@ from langchain_core.messages import HumanMessage, ToolMessage
 MAX_PASOS = 6
 
 #
-# ESTE EJEMPLO ESTÁ MAL:
-# No le entregamos al modelo la respuesta a su primira sugerencia de invocación de herramienta
-# Nos da el plan entero sin saber cuáles son los ficheros del directorio
+# ESTE EJEMPLO ESTÁ MAL PLANTEADO:
+# El modelo propone el plan entero (listar y eliminar) en su primer turno,
+# antes de recibir el resultado de ninguna llamada: decide qué borrar sin
+# saber cuáles son los ficheros del directorio
 #
 
 @tool
@@ -90,7 +91,7 @@ archivos = {
     "cache_temp_02.tmp": "basura",
     "informe_anual_firmado.pdf": "documento importante, NO es temporal",
     "log_debug.tmp": "basura",
-    "copia_seg.txt": "backup",    
+    "copia_seguridad.txt": "backup",
 }
 mensajes = [HumanMessage(content=instruccion)]
 for paso in range(MAX_PASOS):

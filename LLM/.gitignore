@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+modelo_falso.pt
+modelo_real.safetensors

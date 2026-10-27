@@ -47,13 +47,17 @@ public class Aplicacion implements CommandLineRunner {
         ChatClient chat = chatClientBuilder.build();
         Scanner teclado = new Scanner(System.in);
 
+        /*
         System.out.println("========================================================");
         System.out.println("1. MAL PLANTEADO: el modelo propone todo el plan de golpe y se ejecuta sin control");
-        //new _01_CasoMalPlanteadoSinControl().ejecutarCaso(chat);
+        new _01_CasoMalPlanteadoSinControl().ejecutarCaso(chat);
+        */
 
+        /*
         System.out.println("========================================================");
         System.out.println("2. PROBLEMA: una accion por turno, descripciones ambiguas");
-        //new _02_CasoProblemaUnaAccionPorTurno().ejecutarCaso(chat);
+        new _02_CasoProblemaUnaAccionPorTurno().ejecutarCaso(chat);
+        */
 
         System.out.println("========================================================");
         System.out.println("3. SOLUCION: confirmacion humana antes de cada eliminacion");

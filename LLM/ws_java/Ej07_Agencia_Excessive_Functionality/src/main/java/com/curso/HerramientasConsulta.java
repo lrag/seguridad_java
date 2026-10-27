@@ -14,7 +14,7 @@ public class HerramientasConsulta {
 
     @Tool(name = "consultar_faq", description = "Busca la respuesta a una pregunta frecuente.")
     public String consultarFaq(String pregunta) {
-    	System.out.println("consultarFaq");
+    	System.out.println("consultarFaq: "+pregunta);
         return "No se encontro una FAQ relacionada.";
     }
 }
